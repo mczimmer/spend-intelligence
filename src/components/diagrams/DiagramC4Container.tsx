@@ -28,10 +28,10 @@ export default function DiagramC4Container() {
   const mrX = bx + 30;
   const mrY = r2y + ch + 26;
 
-  // Row 3: Storage & Output (3 boxes) — shifted down to make room for Model Router
+  // Row 3: Storage & Output (3 boxes)
   const r3y = r2y + ch + 100;
   const r3boxes = [
-    { label: "Taxonomy Store", sub: "PostgreSQL — unified", sub2: "category hierarchy", x: bx + 30 },
+    { label: "Taxonomy Store", sub: "PostgreSQL \u2014 unified", sub2: "category hierarchy", x: bx + 30 },
     { label: "Vector DB", sub: "Embeddings for", sub2: "similarity matching", x: bx + 30 + cw + 40 },
     { label: "Reconciliation Engine", sub: "Payment / material", sub2: "code alignment", x: bx + 30 + (cw + 40) * 2 },
   ];
@@ -44,6 +44,23 @@ export default function DiagramC4Container() {
   const processingFill = "rgba(66,176,213,0.10)";
   const storageFill = "#EBF5FF";
 
+  // Computed positions for arrow routing
+  const aiRight = r2boxes[0].x + cw;       // 300
+  const csLeft = r2boxes[1].x;             // 340
+  const csRight = r2boxes[1].x + cw;       // 490
+  const csCenter = r2boxes[1].x + cw / 2;  // 415
+  const hrLeft = r2boxes[2].x;             // 530
+  const diRight = r1boxes[1].x + cw / 2;   // 505
+  const aiCenter = r2boxes[0].x + cw / 2;  // 225
+  const mrBottom = mrY + ch;               // 276
+  const tsCenter = r3boxes[0].x + cw / 2;  // 225
+  const tsRight = r3boxes[0].x + cw;       // 300
+  const vdbLeft = r3boxes[1].x;            // 340
+  const vdbRight = r3boxes[1].x + cw;      // 490
+  const reLeft = r3boxes[2].x;             // 530
+  const reCenter = r3boxes[2].x + cw / 2;  // 605
+  const reRight = r3boxes[2].x + cw;       // 680
+
   return (
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }} xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -52,6 +69,9 @@ export default function DiagramC4Container() {
         </marker>
         <marker id="arrowCCgray" viewBox="0 0 10 10" refX={9} refY={5} markerWidth={5} markerHeight={5} orient="auto-start-reverse">
           <path d="M 0 0 L 10 5 L 0 10 z" fill={C.valtechBorder} />
+        </marker>
+        <marker id="arrowCCgreen" viewBox="0 0 10 10" refX={9} refY={5} markerWidth={5} markerHeight={5} orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#bbf7d0" />
         </marker>
       </defs>
 
@@ -94,45 +114,63 @@ export default function DiagramC4Container() {
         </g>
       ))}
 
-      {/* Arrows: API Gateway → Data Ingestion */}
-      <line x1={r1boxes[0].x + cw + 2} y1={r1y + ch / 2} x2={r1boxes[1].x - 2} y2={r1y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* ── ARROWS (all orthogonal, no box crossings) ── */}
 
-      {/* Data Ingestion → AI Classifier */}
-      <line x1={r1boxes[1].x + cw / 2} y1={r1y + ch + 2} x2={r2boxes[0].x + cw / 2} y2={r2y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* 1. API Gateway → Data Ingestion (horizontal) */}
+      <path d={`M ${r1boxes[0].x + cw + 2} ${r1y + ch / 2} L ${r1boxes[1].x - 2} ${r1y + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
-      {/* AI Classifier → Confidence Scoring */}
-      <line x1={r2boxes[0].x + cw + 2} y1={r2y + ch / 2} x2={r2boxes[1].x - 2} y2={r2y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* 2. Data Ingestion → AI Classifier (L-shape: down then left) */}
+      <path d={`M ${diRight} ${r1y + ch + 2} L ${diRight} ${r1y + ch + 25} L ${aiCenter} ${r1y + ch + 25} L ${aiCenter} ${r2y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
-      {/* AI Classifier → Model Router */}
-      <line x1={mrX + cw / 2} y1={r2y + ch + 2} x2={mrX + cw / 2} y2={mrY - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <text x={mrX + cw / 2 + 10} y={r2y + ch + 14} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Classification request</text>
+      {/* 3. AI Classifier → Confidence Scoring (horizontal) */}
+      <path d={`M ${aiRight + 2} ${r2y + ch / 2} L ${csLeft - 2} ${r2y + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
-      {/* Model Router → LLM Provider (external) */}
-      <line x1={mrX - 2} y1={mrY + ch / 2} x2={bx - 2} y2={mrY + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
-      <line x1={bx - 2} y1={mrY + ch / 2} x2={extLeftX + 90 + 2} y2={extLlmY + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      {/* 4. Confidence Scoring → Human Review Queue (horizontal) */}
+      <path d={`M ${csRight + 2} ${r2y + ch / 2} L ${hrLeft - 2} ${r2y + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <text x={csRight + (hrLeft - csRight) / 2} y={r2y + ch / 2 - 8} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
+
+      {/* 5. AI Classifier → Model Router (vertical) */}
+      <path d={`M ${aiCenter} ${r2y + ch + 2} L ${aiCenter} ${mrY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <text x={aiCenter + 12} y={r2y + ch + 16} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Classification request</text>
+
+      {/* 6. Model Router → LLM Provider (horizontal through boundary) */}
+      <path d={`M ${mrX - 2} ${mrY + ch / 2} L ${extLeftX + 90 + 2} ${mrY + ch / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
       <text x={(mrX + bx) / 2} y={mrY + ch / 2 - 8} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Inference</text>
 
-      {/* Confidence Scoring → Human Review Queue (low conf) */}
-      <line x1={r2boxes[1].x + cw + 2} y1={r2y + ch / 2} x2={r2boxes[2].x - 2} y2={r2y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <text x={r2boxes[1].x + cw + (r2boxes[2].x - r2boxes[1].x - cw) / 2} y={r2y + ch / 2 - 8} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
+      {/* 7. Confidence Scoring → Taxonomy Store (L-shape: down then left, routed between Model Router and Row 3) */}
+      {(() => {
+        const midY = mrBottom + 12; // 12px below Model Router bottom
+        return (
+          <>
+            <path d={`M ${csCenter} ${r2y + ch + 2} L ${csCenter} ${midY} L ${tsCenter} ${midY} L ${tsCenter} ${r3y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+            <text x={csCenter + 10} y={(r2y + ch + midY) / 2 + 4} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
+          </>
+        );
+      })()}
 
-      {/* Confidence Scoring → Taxonomy Store (high conf) */}
-      <line x1={r2boxes[1].x + cw / 2} y1={r2y + ch + 2} x2={r3boxes[0].x + cw / 2 + 40} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <text x={(r2boxes[1].x + cw / 2 + r3boxes[0].x + cw / 2 + 40) / 2 + 20} y={(r2y + ch + r3y) / 2 + 4} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
+      {/* 8. AI Classifier ↔ Vector DB (two L-shaped paths in the gap between columns) */}
+      {/* Down: AI Classifier right → gap channel at x=310 → Vector DB left */}
+      <path d={`M ${aiRight + 2} ${r2y + 18} L ${aiRight + 12} ${r2y + 18} L ${aiRight + 12} ${r3y + 15} L ${vdbLeft - 2} ${r3y + 15}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* Up: Vector DB left → gap channel at x=320 → AI Classifier right */}
+      <path d={`M ${vdbLeft - 2} ${r3y + 35} L ${aiRight + 22} ${r3y + 35} L ${aiRight + 22} ${r2y + 38} L ${aiRight + 2} ${r2y + 38}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
-      {/* AI Classifier ↔ Vector DB */}
-      <line x1={r2boxes[0].x + cw / 2 + 40} y1={r2y + ch + 2} x2={r3boxes[1].x + cw / 2} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <line x1={r3boxes[1].x + cw / 2 - 10} y1={r3y - 2} x2={r2boxes[0].x + cw / 2 + 30} y2={r2y + ch + 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* 9. Taxonomy Store → Reconciliation Engine (U-shape routing below Vector DB) */}
+      {(() => {
+        const belowY = r3y + ch + 18; // 18px below row 3 bottom
+        return (
+          <path d={`M ${tsRight + 2} ${r3y + ch / 2 + 8} L ${tsRight + 15} ${r3y + ch / 2 + 8} L ${tsRight + 15} ${belowY} L ${reLeft - 15} ${belowY} L ${reLeft - 15} ${r3y + ch / 2 + 8} L ${reLeft - 2} ${r3y + ch / 2 + 8}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+        );
+      })()}
 
-      {/* Taxonomy Store → Reconciliation Engine */}
-      <line x1={r3boxes[0].x + cw + 2} y1={r3y + ch / 2} x2={r3boxes[2].x - 2} y2={r3y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      {/* ── EXTERNAL SYSTEMS ── */}
 
       {/* External: SAP / Oracle / Entity DBs (left, top) */}
       <rect x={extLeftX} y={extSrcY} width={90} height={48} rx={8} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1.5} />
       <text x={extLeftX + 45} y={extSrcY + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>SAP / Oracle /</text>
       <text x={extLeftX + 45} y={extSrcY + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Entity DBs</text>
       <text x={extLeftX + 45} y={extSrcY + 42} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Source systems</text>
-      <line x1={extLeftX + 90 + 2} y1={extSrcY + 24} x2={bx - 2} y2={r1y + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      {/* SAP → API Gateway (horizontal) */}
+      <path d={`M ${extLeftX + 90 + 2} ${r1y + ch / 2} L ${r1boxes[0].x - 2} ${r1y + ch / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
 
       {/* External: LLM Provider (left, lower) */}
       <rect x={extLeftX} y={extLlmY} width={90} height={48} rx={8} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1.5} />
@@ -145,7 +183,8 @@ export default function DiagramC4Container() {
       <text x={extRightX + 45} y={extSrcY + 50 + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Power BI /</text>
       <text x={extRightX + 45} y={extSrcY + 50 + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Category Tools</text>
       <text x={extRightX + 45} y={extSrcY + 50 + 42} textAnchor="middle" style={{ fontSize: 8, fill: "#15803d", fontFamily: font.sans }}>Consumers</text>
-      <line x1={bx + bw + 2} y1={r3y + ch / 2} x2={extRightX - 2} y2={extSrcY + 50 + 24} stroke="#bbf7d0" strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      {/* Reconciliation Engine → Power BI (L-shape: right then up) */}
+      <path d={`M ${reRight + 2} ${r3y + ch / 2} L ${extRightX - 15} ${r3y + ch / 2} L ${extRightX - 15} ${extSrcY + 50 + 24} L ${extRightX - 2} ${extSrcY + 50 + 24}`} fill="none" stroke="#bbf7d0" strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgreen)" />
 
       {/* Legend */}
       <g>
