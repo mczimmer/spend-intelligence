@@ -21,7 +21,7 @@ const stages = [
     num: "03",
     title: "Consolidate: Cross-entity spend visibility",
     badge: "Category Mgmt",
-    desc: "With unified categories and reconciled codes, cross-entity spend becomes visible for the first time. Category managers can see that three entities are buying the same hull coating from three different suppliers in the same port region. Consolidation opportunities are quantified by category and prioritised by spend impact. This is the visibility that has been structurally impossible since the first acquisition closed. Not because the data didn't exist, but because it was never in the same language. The output is not a report to review. It is a prioritised set of decisions: which suppliers to consolidate, which codes to standardise, which entities carry the most fragmentation. Category managers act on it directly.",
+    desc: "With unified categories and reconciled codes, cross-entity spend becomes visible for the first time. Category managers can see that three entities are buying the same hull coating from three different suppliers in the same port region. Consolidation opportunities are quantified by category and prioritised by spend impact. This is the visibility that has been structurally impossible since the first acquisition closed. Not because the data did not exist, but because it was never in the same language. Three entities buy identical hull antifouling coatings from three different suppliers in the same port region. The consolidation view shows the spend, names the suppliers, and quantifies the saving from consolidating to one. That question used to take six weeks of manual analysis. It is answered on day one. The output is not a report to review. It is a prioritised set of decisions: which suppliers to consolidate, which codes to standardise, which entities carry the most fragmentation. Category managers act on it directly.",
   },
 ];
 
@@ -63,7 +63,9 @@ export default function Solution() {
       />
 
       {/* BI differentiation */}
-      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 24px", maxWidth: 700 }}>This is not a reporting improvement. Dashboards visualise data that already exists in a unified form. At M{"\u00e6"}rsk, the underlying procurement data has never been unified across entity boundaries. This engine creates the common language that makes spend reporting meaningful for the first time.</p>
+      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px", maxWidth: 700 }}>This is not a reporting improvement. Dashboards visualise data that already exists in a unified form. At M{"\u00e6"}rsk, the underlying procurement data has never been unified across entity boundaries. This engine creates the common language that makes spend reporting meaningful for the first time.</p>
+      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px", maxWidth: 700 }}>Current harmonisation efforts produce static mappings that degrade with every new supplier, contract, and acquisition. They are accurate on the day they are delivered. The question is not whether M{"\u00e6"}rsk has tried to solve this before. The question is whether a static approach can hold against a company that acquires 1-2 businesses per year.</p>
+      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 24px", maxWidth: 700 }}>Every category manager at M{"\u00e6"}rsk today is making sourcing decisions based on incomplete data. Not because the data does not exist, but because it sits in ten different taxonomies that have never been reconciled. Those decisions are not slow. They are structurally unreliable.</p>
 
       {/* Why Now */}
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", marginBottom: 32 }}>
@@ -94,6 +96,24 @@ export default function Solution() {
             </div>
             <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: C.maerskNavy, margin: 0 }}>6 unified categories. Reconciled payment and material codes. $274K in consolidation savings surfaced from a 21-item sample.</p>
           </div>
+          <div style={{ height: 1, background: C.valtechBorder }} />
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.danger }} />
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.valtechGray, fontFamily: font.sans }}>TODAY</span>
+            </div>
+            <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: C.maerskNavy, margin: 0 }}>Each entity maintains its own taxonomy, its own reconciliation process, and its own version of what a category means.</p>
+          </div>
+          <div style={{ height: 1, background: C.valtechBorder }} />
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+              <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.success }} />
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.valtechGray, fontFamily: font.sans }}>AFTER</span>
+            </div>
+            <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: C.maerskNavy, margin: 0 }}>All entities contribute to and draw from a single shared classification layer. New acquisitions extend it. Human corrections improve it. It does not decay.</p>
+          </div>
+          <div style={{ height: 1, background: C.valtechBorder }} />
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: C.maerskNavy, margin: 0, fontWeight: 700 }}>Category managers stop reconciling spreadsheets and start making sourcing decisions. Finance stops chasing code mismatches and starts validating exceptions. The work changes from data assembly to data judgement.</p>
         </div>
       </Card>
 
@@ -119,12 +139,13 @@ export default function Solution() {
           </div>
         ))}
       </div>
-      <p style={{ fontFamily: font.sans, fontSize: 13, color: C.valtechGray, lineHeight: 1.7, margin: "0 0 32px", paddingLeft: 48 }}>These three stages form the pipeline demonstrated in the{" "}<Link href="/demo" style={{ color: C.maerskStar, textDecoration: "none" }}>interactive proof of concept</Link>, running on 21 synthetic items from 10 M{"\u00e6"}rsk entities. The proof of concept validates the method. The architecture is designed for millions of line items. Phase 1 tests accuracy on a representative real-data sample before scaling.</p>
+      <p style={{ fontFamily: font.sans, fontSize: 13, color: C.valtechGray, lineHeight: 1.7, margin: "0 0 32px", paddingLeft: 48 }}>These three stages form the pipeline demonstrated in the{" "}<Link href="/demo" style={{ color: C.maerskStar, textDecoration: "none" }}>interactive proof of concept</Link>, running on 21 synthetic items from 10 M{"\u00e6"}rsk entities. The proof of concept validates the method. The architecture is designed for millions of line items. Phase 1 tests accuracy on a representative real-data sample before scaling. Phase 1 focuses on the top categories where description quality and volume are sufficient to validate the approach. We do not claim the engine works perfectly on every data source on day one. We claim it can be validated quickly and scaled with confidence.</p>
 
       {/* Continuous Learning */}
       <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy, marginBottom: 32 }}>
         <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>A system that gets better, not one that decays</h3>
-        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>A consulting-led classification exercise produces a deliverable. This engine produces a system. The deliverable is accurate on the day it is delivered and degrades from that moment. The system improves with every human correction, every new supplier, and every new entity. When Maersk acquires the next business (as it does roughly 1-2 times per year) onboarding that entity's taxonomy is a training exercise for the AI, not a 6-month consulting project.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: "0 0 12px" }}>A consulting-led classification exercise produces a deliverable. This engine produces a system. The deliverable is accurate on the day it is delivered and degrades from that moment. The system improves with every human correction, every new supplier, and every new entity. When Maersk acquires the next business (as it does roughly 1-2 times per year) onboarding that entity's taxonomy is a training exercise for the AI, not a 6-month consulting project.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>Every company built through acquisition will need a continuously learning classification layer. The only question is whether it is built deliberately or whether it emerges as a patchwork of manual fixes that becomes unmaintainable. M{"\u00e6"}rsk's scale and acquisition cadence make this an architectural inevitability. But the cost is not future. Every quarter without a unified classification layer is a quarter where consolidation savings go uncaptured, where reconciliation consumes FTE that the efficiency programme is trying to free, and where the next acquisition adds another taxonomy to a pile that is already unmanageable.</p>
       </Card>
 
       {/* Stats bar */}
