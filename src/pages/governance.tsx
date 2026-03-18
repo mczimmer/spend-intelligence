@@ -6,7 +6,7 @@ import SectionLabel from "@/components/SectionLabel";
 import PageHeader from "@/components/PageHeader";
 
 const thStyle: React.CSSProperties = { textAlign: "left", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", color: C.valtechGray, padding: "10px 12px", borderBottom: `2px solid ${C.valtechBorder}`, fontFamily: font.sans, fontWeight: 700 };
-const tdStyle: React.CSSProperties = { padding: "10px 12px", fontSize: 13, fontFamily: font.sans, color: C.valtechGray, lineHeight: 1.6 };
+const tdStyle: React.CSSProperties = { padding: "14px 12px", fontSize: 13, fontFamily: font.sans, color: C.valtechGray, lineHeight: 1.6 };
 
 const lifecycle = [
   { phase: "Phase 1", label: "Validate", data: "Synthetic data only", env: "Valtech cloud (isolated)", retention: "Deleted after benchmark" },
@@ -124,9 +124,11 @@ export default function Governance() {
           <tbody>
             {lifecycle.map(l => (
               <tr key={l.phase} style={{ borderBottom: "1px solid #f5f5f5" }}>
-                <td style={{ ...tdStyle, padding: "10px 12px" }}>
-                  <Badge color="navy">{l.phase}</Badge>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans, marginLeft: 8 }}>{l.label}</span>
+                <td style={{ ...tdStyle, padding: "14px 12px", minWidth: 150 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <Badge color="navy">{l.phase}</Badge>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{l.label}</span>
+                  </div>
                 </td>
                 <td style={tdStyle}>{l.data}</td>
                 <td style={tdStyle}>{l.env}</td>
@@ -140,8 +142,11 @@ export default function Governance() {
 
       {/* Layer 1: Data Governance */}
       <div style={{ marginBottom: 48 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <SectionLabel text="Layer 1: Data Governance" />
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 20, height: 2, background: C.maerskStar }} />
+            <span style={{ fontFamily: font.sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.maerskStar }}>Layer 1: Data Governance</span>
+          </div>
           <Badge color="navy">CISO / Information Security</Badge>
         </div>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>Procurement data is commercially sensitive. These commitments govern where it lives, who touches it, and when it is deleted. Each commitment includes a verification mechanism.</p>
@@ -160,8 +165,11 @@ export default function Governance() {
 
       {/* Layer 2: AI Governance */}
       <div style={{ marginBottom: 48 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <SectionLabel text="Layer 2: AI Governance" />
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 20, height: 2, background: C.maerskStar }} />
+            <span style={{ fontFamily: font.sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.maerskStar }}>Layer 2: AI Governance</span>
+          </div>
           <Badge color="navy">Enterprise Architecture / Risk</Badge>
         </div>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>The mechanisms below are implemented as software components in the architecture (see <Link href="/architecture" style={{ color: C.maerskStar, textDecoration: "none" }}>Governance Layer</Link>). This section describes the operational commitments and controls around those mechanisms.</p>
@@ -184,8 +192,11 @@ export default function Governance() {
 
       {/* Layer 3: Commercial Governance */}
       <div style={{ marginBottom: 48 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <SectionLabel text="Layer 3: Commercial Governance" />
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 20, height: 2, background: C.maerskStar }} />
+            <span style={{ fontFamily: font.sans, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.maerskStar }}>Layer 3: Commercial Governance</span>
+          </div>
           <Badge color="navy">Legal / Procurement Leadership</Badge>
         </div>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>AI engagements create IP questions that traditional services do not. These commitments are explicit from day one.</p>
