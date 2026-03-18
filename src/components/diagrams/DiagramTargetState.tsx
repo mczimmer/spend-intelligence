@@ -1,43 +1,44 @@
 import { C, font } from "@/lib/constants";
 
 export default function DiagramTargetState() {
-  const W = 920, H = 600;
+  const W = 940, H = 600;
   const cw = 130, ch = 44, rx = 8;
   const processingFill = "rgba(66,176,213,0.10)";
   const storageFill = "#EBF5FF";
   const govFill = "rgba(0,36,61,0.06)";
 
-  // Boundary with generous padding
-  const bx = 30, by = 10, bw = 860;
+  // Boundary
+  const bx = 20, by = 10, bw = 900;
 
-  // Ingestion column (left side, inside boundary)
-  const ingX = bx + 24;
+  // Ingestion column
+  const ingX = bx + 30;
   const ingY = by + 40;
   const ingGap = 14;
-  const ingBoxes = [
-    { label: "Source Extract Adapter", sub: "Connects to SAP, Oracle,", sub2: "entity systems" },
-    { label: "Normalisation", sub: "Currency, encoding, units,", sub2: "naming resolution" },
-    { label: "Data Quality", sub: "Missing fields, duplicates,", sub2: "provenance tagging" },
-  ];
 
-  // Processing column (center)
-  const procX = ingX + cw + 60;
+  // Processing column
+  const procX = ingX + cw + 70;
   const procY = ingY + 10;
-  const procGap = 16;
+  const procGap = 18;
 
-  // Confidence Scoring (right of AI Classifier)
-  const csX = procX + cw + 50;
+  // Confidence Scoring
+  const csX = procX + cw + 60;
 
-  // Human Review (right of Confidence Scoring)
-  const hrX = csX + cw + 50;
+  // Human Review
+  const hrX = csX + cw + 60;
 
   // Storage row
-  const storeY = ingY + (ch + ingGap) * 2 + ch + 36;
+  const storeY = ingY + (ch + ingGap) * 2 + ch + 44;
 
   // Governance layer
-  const govY = storeY + ch + 36;
+  const govY = storeY + ch + 40;
   const govH = ch + 24;
   const bh = govY + govH - by + 16;
+
+  // Computed y positions
+  const ing1Y = ingY;
+  const ing2Y = ingY + ch + ingGap;
+  const ing3Y = ingY + (ch + ingGap) * 2;
+  const modelRouterY = procY + ch + procGap;
 
   const drawBox = (label: string, sub: string, sub2: string | undefined, x: number, y: number, fill: string, stroke: string) => (
     <g key={label + x + y}>
@@ -48,12 +49,17 @@ export default function DiagramTargetState() {
     </g>
   );
 
-  // Computed positions
-  const ing1Y = ingY;
-  const ing2Y = ingY + ch + ingGap;
-  const ing3Y = ingY + (ch + ingGap) * 2;
-  const modelRouterY = procY + ch + procGap;
-  const hrReviewY = procY + ch + procGap;
+  // Label with white background for readability
+  const arrowLabel = (text: string, x: number, y: number, anchor: "start" | "middle" | "end" = "middle", color: string = C.valtechGray) => {
+    const approxW = text.length * 4.2;
+    const lx = anchor === "start" ? x - 2 : anchor === "end" ? x - approxW : x - approxW / 2;
+    return (
+      <>
+        <rect x={lx} y={y - 8} width={approxW + 4} height={11} rx={2} fill={C.white} opacity={0.85} />
+        <text x={x} y={y} textAnchor={anchor} style={{ fontSize: 7, fill: color, fontFamily: font.sans }}>{text}</text>
+      </>
+    );
+  };
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }} xmlns="http://www.w3.org/2000/svg">
@@ -71,29 +77,27 @@ export default function DiagramTargetState() {
       <text x={bx + 16} y={by + 24} style={{ fontSize: 10, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Spend Intelligence Engine</text>
 
       {/* Ingestion column */}
-      {drawBox(ingBoxes[0].label, ingBoxes[0].sub, ingBoxes[0].sub2, ingX, ing1Y, processingFill, C.maerskStar)}
-      {drawBox(ingBoxes[1].label, ingBoxes[1].sub, ingBoxes[1].sub2, ingX, ing2Y, processingFill, C.maerskStar)}
-      {drawBox(ingBoxes[2].label, ingBoxes[2].sub, ingBoxes[2].sub2, ingX, ing3Y, processingFill, C.maerskStar)}
+      {drawBox("Source Extract Adapter", "Connects to SAP, Oracle,", "entity systems", ingX, ing1Y, processingFill, C.maerskStar)}
+      {drawBox("Normalisation", "Currency, encoding, units,", "naming resolution", ingX, ing2Y, processingFill, C.maerskStar)}
+      {drawBox("Data Quality", "Missing fields, duplicates,", "provenance tagging", ingX, ing3Y, processingFill, C.maerskStar)}
 
       {/* Ingestion vertical arrows */}
       <path d={`M ${ingX + cw / 2} ${ing1Y + ch + 2} L ${ingX + cw / 2} ${ing2Y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
       <path d={`M ${ingX + cw / 2} ${ing2Y + ch + 2} L ${ingX + cw / 2} ${ing3Y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* Data Quality -> AI Classifier (L-shape: right then up) */}
+      {/* Data Quality -> AI Classifier (L-shape) */}
       {(() => {
-        const midX = ingX + cw + 30;
+        const turnX = ingX + cw + 35;
         return (
-          <>
-            <path d={`M ${ingX + cw + 2} ${ing3Y + ch / 2} L ${midX} ${ing3Y + ch / 2} L ${midX} ${procY + ch / 2} L ${procX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-            <text x={midX + 6} y={procY + ch / 2 + 14} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Source entity + record ID</text>
-          </>
+          <path d={`M ${ingX + cw + 2} ${ing3Y + ch / 2} L ${turnX} ${ing3Y + ch / 2} L ${turnX} ${procY + ch / 2} L ${procX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
         );
       })()}
+      {arrowLabel("Source + record ID", ingX + cw + 38, ing3Y + ch / 2 - 6, "start")}
 
-      {/* Processing: AI Classifier */}
+      {/* AI Classifier */}
       {drawBox("AI Classifier", "Semantic embedding +", "taxonomy mapping", procX, procY, processingFill, C.maerskStar)}
 
-      {/* Model Router (below AI Classifier) */}
+      {/* Model Router */}
       {drawBox("Model Router", "Provider-agnostic", "inference routing", procX, modelRouterY, processingFill, C.maerskStar)}
 
       {/* AI Classifier -> Model Router */}
@@ -101,68 +105,66 @@ export default function DiagramTargetState() {
 
       {/* Model Router -> Inference (left, dashed) */}
       <path d={`M ${procX - 2} ${modelRouterY + ch / 2} L ${ingX + cw + 10} ${modelRouterY + ch / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" />
-      <text x={(procX + ingX + cw) / 2} y={modelRouterY + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Inference</text>
+      {arrowLabel("Inference", (procX + ingX + cw) / 2, modelRouterY + ch / 2 - 6)}
 
       {/* Confidence Scoring */}
       {drawBox("Confidence Scoring", "Threshold-based", "routing", csX, procY, processingFill, C.maerskStar)}
 
-      {/* AI Classifier -> Confidence Scoring (horizontal) */}
+      {/* AI Classifier -> Confidence Scoring */}
       <path d={`M ${procX + cw + 2} ${procY + ch / 2} L ${csX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
       {/* Priority Router */}
       {drawBox("Priority Router", "Routes by spend", "impact and criticality", hrX, procY, "rgba(234,179,8,0.08)", C.warning)}
 
       {/* Reviewer Workbench */}
-      {drawBox("Reviewer Workbench", "Validate, correct,", "escalate", hrX, hrReviewY, "rgba(234,179,8,0.08)", C.warning)}
+      {drawBox("Reviewer Workbench", "Validate, correct,", "escalate", hrX, procY + ch + procGap, "rgba(234,179,8,0.08)", C.warning)}
 
-      {/* Confidence Scoring -> Priority Router (horizontal) */}
+      {/* Confidence Scoring -> Priority Router */}
       <path d={`M ${csX + cw + 2} ${procY + ch / 2} L ${hrX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-      <text x={(csX + cw + hrX) / 2} y={procY + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
+      {arrowLabel("Low confidence", (csX + cw + hrX) / 2, procY + ch / 2 - 6)}
 
       {/* Priority Router -> Reviewer Workbench */}
-      <path d={`M ${hrX + cw / 2} ${procY + ch + 2} L ${hrX + cw / 2} ${hrReviewY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      <path d={`M ${hrX + cw / 2} ${procY + ch + 2} L ${hrX + cw / 2} ${procY + ch + procGap - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* Confidence Scoring -> Taxonomy Store (L-shape: down then left) */}
+      {/* Confidence Scoring -> Taxonomy Store (L-shape) */}
       {(() => {
-        const midY = storeY - 16;
-        const tsX = procX;
+        const midY = storeY - 18;
         return (
-          <>
-            <path d={`M ${csX + cw / 2} ${procY + ch + 2} L ${csX + cw / 2} ${midY} L ${tsX + cw / 2} ${midY} L ${tsX + cw / 2} ${storeY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-            <text x={csX + cw / 2 + 8} y={(procY + ch + midY) / 2} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
-          </>
+          <path d={`M ${csX + cw / 2} ${procY + ch + 2} L ${csX + cw / 2} ${midY} L ${procX + cw / 2} ${midY} L ${procX + cw / 2} ${storeY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
         );
       })()}
+      {arrowLabel("High confidence", csX + cw / 2 + 10, procY + ch + 18, "start")}
 
       {/* Reviewer Workbench -> Reconciliation Engine (L-shape: down then left) */}
       {(() => {
-        const reX = csX;
+        const rwBottom = procY + ch + procGap + ch;
         return (
-          <path d={`M ${hrX + cw / 2} ${hrReviewY + ch + 2} L ${hrX + cw / 2} ${storeY + ch / 2} L ${reX + cw + 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+          <path d={`M ${hrX + cw / 2} ${rwBottom + 2} L ${hrX + cw / 2} ${storeY + ch / 2} L ${hrX + cw + 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} />
         );
       })()}
-      <text x={hrX + cw / 2 + 8} y={hrReviewY + ch + 16} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>+ reviewer ID + reason</text>
+      {arrowLabel("+ reviewer ID + reason", hrX + cw / 2 + 10, procY + ch + procGap + ch + 16, "start")}
 
-      {/* Reviewer Workbench -> Governance (dashed, L-shape: left then down) */}
+      {/* Reviewer Workbench -> Governance (dashed L-shape) */}
       {(() => {
-        const gx = hrX - 16;
+        const rwMidY = procY + ch + procGap + ch / 2;
+        const gx = hrX - 18;
         return (
-          <path d={`M ${hrX - 2} ${hrReviewY + ch / 2} L ${gx} ${hrReviewY + ch / 2} L ${gx} ${govY + 10}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowTSg)" />
+          <path d={`M ${hrX - 2} ${rwMidY} L ${gx} ${rwMidY} L ${gx} ${govY + 8}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowTSg)" />
         );
       })()}
-      <text x={hrX - 20} y={govY} textAnchor="end" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Corrections feed calibration</text>
+      {arrowLabel("Corrections feed calibration", hrX - 22, govY - 6, "end")}
 
       {/* Storage row */}
       {drawBox("Taxonomy Store", "Unified category", "hierarchy", procX, storeY, storageFill, "#b3dce8")}
       {drawBox("Vector DB", "Embeddings for", "similarity matching", csX, storeY, storageFill, "#b3dce8")}
       {drawBox("Reconciliation Engine", "Payment / material", "code alignment", hrX, storeY, storageFill, "#b3dce8")}
 
-      {/* Taxonomy Store -> Reconciliation Engine (horizontal) */}
+      {/* Taxonomy Store -> Reconciliation Engine */}
       <path d={`M ${procX + cw + 2} ${storeY + ch / 2} L ${hrX - 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* AI Classifier <-> Vector DB (L-shape in gap between columns) */}
+      {/* AI Classifier <-> Vector DB (L-shape in gap) */}
       {(() => {
-        const chX = procX + cw + 14;
+        const chX = procX + cw + 16;
         return (
           <path d={`M ${procX + cw + 2} ${procY + ch / 2 + 10} L ${chX} ${procY + ch / 2 + 10} L ${chX} ${storeY + ch / 2 - 8} L ${csX - 2} ${storeY + ch / 2 - 8}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
         );
@@ -175,9 +177,9 @@ export default function DiagramTargetState() {
       {/* Governance boxes */}
       {[
         { label: "Taxonomy Versioning", sub: "Hierarchy changes versioned", x: bx + 24 },
-        { label: "Audit & Decision Log", sub: "All decisions with provenance", x: bx + 24 + (cw + 14) },
-        { label: "Calibration Monitor", sub: "Drift detection, validation", x: bx + 24 + (cw + 14) * 2 },
-        { label: "Override Workflow", sub: "Corrections captured, approved", x: bx + 24 + (cw + 14) * 3 },
+        { label: "Audit & Decision Log", sub: "All decisions with provenance", x: bx + 24 + (cw + 20) },
+        { label: "Calibration Monitor", sub: "Drift detection, validation", x: bx + 24 + (cw + 20) * 2 },
+        { label: "Override Workflow", sub: "Corrections captured, approved", x: bx + 24 + (cw + 20) * 3 },
       ].map(b => (
         <g key={b.label}>
           <rect x={b.x} y={govY + 20} width={cw} height={ch - 10} rx={6} fill={C.white} stroke={C.maerskNavy} strokeWidth={1} opacity={0.7} />

@@ -1,37 +1,39 @@
 import { C, font } from "@/lib/constants";
 
 export default function DiagramPhase1Flow() {
-  const W = 920, H = 240;
+  const W = 1020, H = 250;
   const bw = 120, bh = 54, rx = 8, gap = 20;
 
   const mainY = 36;
-  const splitY = mainY + bh + 50;
+  const splitY = mainY + bh + 56;
 
-  // Main flow: 4 boxes left to right
-  const x0 = 20;
+  // Main flow: 4 boxes
+  const x0 = 16;
   const boxes = [
-    { label: "Source Extracts", sub: "CSV / Excel from", sub2: "2-3 entities", x: x0, fill: C.valtechLight, stroke: C.valtechBorder },
-    { label: "Normalisation", sub: "Encoding, currency,", sub2: "units, dedup", x: x0 + bw + gap, fill: "rgba(66,176,213,0.10)", stroke: C.maerskStar },
-    { label: "AI Classifier", sub: "Semantic matching +", sub2: "UNSPSC mapping", x: x0 + (bw + gap) * 2, fill: "rgba(66,176,213,0.10)", stroke: C.maerskStar },
-    { label: "Confidence Scoring", sub: "Threshold-based", sub2: "routing", x: x0 + (bw + gap) * 3, fill: "rgba(66,176,213,0.10)", stroke: C.maerskStar },
+    { label: "Source Extracts", sub: "CSV / Excel from", sub2: "2-3 entities", x: x0 },
+    { label: "Normalisation", sub: "Encoding, currency,", sub2: "units, dedup", x: x0 + bw + gap },
+    { label: "AI Classifier", sub: "Semantic matching +", sub2: "UNSPSC mapping", x: x0 + (bw + gap) * 2 },
+    { label: "Confidence Scoring", sub: "Threshold-based", sub2: "routing", x: x0 + (bw + gap) * 3 },
   ];
 
-  // Classified Output: further right, same row
-  const classifiedX = x0 + (bw + gap) * 4 + 30;
-  // Human Review: below Confidence Scoring, shifted right
+  // Large gap before output boxes
+  const outputGap = 100;
+  const classifiedX = boxes[3].x + bw + outputGap;
   const humanX = classifiedX;
 
+  const csRight = boxes[3].x + bw;
+  const csCenterX = boxes[3].x + bw / 2;
+  const csMidY = mainY + bh / 2;
+  const labelMidX = csRight + outputGap / 2;
+
   const drawBox = (label: string, sub: string, sub2: string | undefined, bx: number, by: number, fill: string, stroke: string) => (
-    <g key={label}>
+    <g key={label + bx + by}>
       <rect x={bx} y={by} width={bw} height={bh} rx={rx} fill={fill} stroke={stroke} strokeWidth={1.5} />
       <text x={bx + bw / 2} y={by + 16} textAnchor="middle" style={{ fontSize: 10, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{label}</text>
       <text x={bx + bw / 2} y={by + 30} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>{sub}</text>
       {sub2 && <text x={bx + bw / 2} y={by + 42} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>{sub2}</text>}
     </g>
   );
-
-  const csRight = boxes[3].x + bw;
-  const csMidY = mainY + bh / 2;
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }} xmlns="http://www.w3.org/2000/svg">
@@ -47,39 +49,32 @@ export default function DiagramPhase1Flow() {
         </marker>
       </defs>
 
-      {/* Flow label */}
-      <text x={20} y={16} style={{ fontSize: 10, fontWeight: 700, fill: C.valtechGray, letterSpacing: "0.08em", fontFamily: font.sans }}>PHASE 1 FLOW</text>
+      <text x={16} y={16} style={{ fontSize: 10, fontWeight: 700, fill: C.valtechGray, letterSpacing: "0.08em", fontFamily: font.sans }}>PHASE 1 FLOW</text>
 
-      {/* Main flow boxes */}
-      {boxes.map(b => drawBox(b.label, b.sub, b.sub2, b.x, mainY, b.fill, b.stroke))}
-
-      {/* Output boxes */}
+      {/* Boxes */}
+      {boxes.map(b => drawBox(b.label, b.sub, b.sub2, b.x, mainY, b.x === x0 ? C.valtechLight : "rgba(66,176,213,0.10)", b.x === x0 ? C.valtechBorder : C.maerskStar))}
       {drawBox("Classified Output", "Unified taxonomy", "+ codes", classifiedX, mainY, "rgba(34,197,94,0.10)", C.success)}
       {drawBox("Human Review", "Priority queue,", "spend impact", humanX, splitY, "rgba(234,179,8,0.10)", C.warning)}
 
-      {/* Arrows: main flow (horizontal between first 4 boxes) */}
+      {/* Main flow arrows (horizontal) */}
       {boxes.slice(0, -1).map((b, i) => (
         <path key={i} d={`M ${b.x + bw + 2} ${csMidY} L ${boxes[i + 1].x - 2} ${csMidY}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowPh1)" />
       ))}
 
-      {/* Confidence Scoring -> Classified Output (high confidence, horizontal) */}
-      <path d={`M ${csRight + 2} ${mainY + bh / 2 - 6} L ${classifiedX - 2} ${mainY + bh / 2 - 6}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
-      <text x={(csRight + classifiedX) / 2} y={mainY + bh / 2 - 14} textAnchor="middle" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>85%+ confidence</text>
+      {/* CS -> Classified Output: "85%+ confidence" (horizontal, upper half of gap) */}
+      <path d={`M ${csRight + 2} ${csMidY - 6} L ${classifiedX - 2} ${csMidY - 6}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
+      <rect x={labelMidX - 38} y={csMidY - 22} width={76} height={12} rx={2} fill={C.white} opacity={0.9} />
+      <text x={labelMidX} y={csMidY - 13} textAnchor="middle" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>85%+ confidence</text>
 
-      {/* Confidence Scoring -> Human Review (L-shape: down then right) */}
-      {(() => {
-        const downX = csRight + 14;
-        return (
-          <>
-            <path d={`M ${downX} ${mainY + bh + 2} L ${downX} ${splitY + bh / 2} L ${humanX - 2} ${splitY + bh / 2}`} fill="none" stroke={C.warning} strokeWidth={1.5} markerEnd="url(#arrowPh1w)" />
-            <text x={downX + 8} y={mainY + bh + 18} textAnchor="start" style={{ fontSize: 8, fill: C.warning, fontFamily: font.sans }}>Below threshold</text>
-          </>
-        );
-      })()}
+      {/* CS -> Human Review: "Below threshold" (L-shape: down from CS bottom center, then right) */}
+      <path d={`M ${csCenterX} ${mainY + bh + 2} L ${csCenterX} ${splitY + bh / 2} L ${humanX - 2} ${splitY + bh / 2}`} fill="none" stroke={C.warning} strokeWidth={1.5} markerEnd="url(#arrowPh1w)" />
+      <rect x={csCenterX - 44} y={mainY + bh + 8} width={40} height={12} rx={2} fill={C.white} opacity={0.9} />
+      <text x={csCenterX - 8} y={mainY + bh + 17} textAnchor="end" style={{ fontSize: 8, fill: C.warning, fontFamily: font.sans }}>Below threshold</text>
 
-      {/* Human Review -> Classified Output (L-shape: up from left edge) */}
-      <path d={`M ${humanX - 2} ${splitY + 10} L ${humanX - 14} ${splitY + 10} L ${humanX - 14} ${mainY + bh + 6} L ${classifiedX + bw / 2} ${mainY + bh + 6} L ${classifiedX + bw / 2} ${mainY + bh + 2}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
-      <text x={(humanX - 14 + classifiedX + bw / 2) / 2} y={mainY + bh + 18} textAnchor="middle" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>Validated</text>
+      {/* Human Review -> Classified Output: "Validated" (L-shape: right from HR top, then up) */}
+      <path d={`M ${humanX + bw + 2} ${splitY + bh / 2} L ${humanX + bw + 20} ${splitY + bh / 2} L ${humanX + bw + 20} ${mainY + bh + 2}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
+      <rect x={humanX + bw + 24} y={(splitY + mainY + bh) / 2 - 4} width={42} height={12} rx={2} fill={C.white} opacity={0.9} />
+      <text x={humanX + bw + 28} y={(splitY + mainY + bh) / 2 + 5} textAnchor="start" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>Validated</text>
     </svg>
   );
 }
