@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { C, font } from "@/lib/constants";
+import { posthog } from "@/lib/posthog";
 import Card from "@/components/Card";
 import PageHeader from "@/components/PageHeader";
 
@@ -92,6 +93,16 @@ export default function Calculator() {
   const [ftes, setFtes] = useState(25);
   const [acquisitions, setAcquisitions] = useState(2);
 
+  // Debounced PostHog tracking
+  const debounceRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  const trackInput = useCallback((input: string, value: number | string) => {
+    if (typeof window === "undefined" || !posthog?.capture) return;
+    if (debounceRef.current[input]) clearTimeout(debounceRef.current[input]);
+    debounceRef.current[input] = setTimeout(() => {
+      posthog.capture("calculator_input_changed", { input, value });
+    }, 500);
+  }, []);
+
   const cfg = fragConfig[frag];
 
   // Panel 1: Consolidation Savings
@@ -148,14 +159,14 @@ export default function Calculator() {
               label="Addressable procurement spend"
               helper="Annual spend across all categories and entities eligible for classification"
               value={spend} min={100e6} max={50e9} step={100e6}
-              format={fmtSpend} onChange={setSpend}
+              format={fmtSpend} onChange={v => { setSpend(v); trackInput("addressable_spend", v); }}
             />
 
             <Slider
               label="Entities with independent procurement systems"
               helper="Acquired businesses operating separate category taxonomies"
               value={entities} min={2} max={20} step={1}
-              format={v => String(v)} onChange={setEntities}
+              format={v => String(v)} onChange={v => { setEntities(v); trackInput("entities", v); }}
             />
 
             {/* Fragmentation toggle */}
@@ -165,7 +176,7 @@ export default function Calculator() {
                 {(["low", "medium", "high"] as Frag[]).map(level => (
                   <button
                     key={level}
-                    onClick={() => setFrag(level)}
+                    onClick={() => { setFrag(level); trackInput("fragmentation", level); }}
                     style={{
                       flex: 1, padding: "10px 0", border: "none", cursor: "pointer",
                       fontFamily: font.sans, fontSize: 13,
@@ -187,14 +198,14 @@ export default function Calculator() {
               label="Reconciliation FTEs"
               helper="Finance staff doing manual payment-code and material-code matching"
               value={ftes} min={1} max={50} step={1}
-              format={v => String(v)} onChange={setFtes}
+              format={v => String(v)} onChange={v => { setFtes(v); trackInput("reconciliation_ftes", v); }}
             />
 
             <Slider
               label="Acquisitions per year"
               helper="How often new entities need taxonomy integration"
               value={acquisitions} min={0} max={4} step={1}
-              format={v => String(v)} onChange={setAcquisitions}
+              format={v => String(v)} onChange={v => { setAcquisitions(v); trackInput("acquisitions_per_year", v); }}
             />
           </Card>
         </div>

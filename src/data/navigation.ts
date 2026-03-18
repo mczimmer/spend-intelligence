@@ -8,4 +8,5 @@ export const navigation = [
   { label: "Architecture", href: "/architecture", section: "Proof of Concept" },
   { label: "Governance", href: "/governance", section: "Engagement" },
   { label: "Approach & Investment", href: "/approach", section: "Engagement" },
+  { label: "About Valtech", href: "/about-valtech", section: "Engagement" },
 ];

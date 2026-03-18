@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { C, font } from "@/lib/constants";
+import { posthog } from "@/lib/posthog";
 import Badge from "./Badge";
 import ConfBar from "./ConfBar";
 
@@ -210,7 +211,7 @@ export default function Demo() {
       {/* tabs */}
       <div style={{ display: "flex", borderBottom: `1px solid ${C.valtechBorder}` }}>
         {([["classify", "1. Categorise"], ["reconcile", "2. Reconcile"], ["consolidate", "3. Consolidate"]] as const).map(([k, l]) => (
-          <button key={k} onClick={() => { setTab(k); setExpandedRow(null); }} style={{ flex: 1, padding: "12px 0", border: "none", cursor: "pointer", fontFamily: font.sans, fontSize: 13, fontWeight: tab === k ? 700 : 500, color: tab === k ? C.maerskStar : C.valtechGray, background: tab === k ? C.maerskLight : "transparent", borderBottom: tab === k ? `2px solid ${C.maerskStar}` : "2px solid transparent", transition: "all 0.2s" }}>{l}</button>
+          <button key={k} onClick={() => { setTab(k); setExpandedRow(null); if (typeof window !== "undefined" && posthog?.capture) posthog.capture("demo_tab_switched", { tab: k }); }} style={{ flex: 1, padding: "12px 0", border: "none", cursor: "pointer", fontFamily: font.sans, fontSize: 13, fontWeight: tab === k ? 700 : 500, color: tab === k ? C.maerskStar : C.valtechGray, background: tab === k ? C.maerskLight : "transparent", borderBottom: tab === k ? `2px solid ${C.maerskStar}` : "2px solid transparent", transition: "all 0.2s" }}>{l}</button>
         ))}
       </div>
       {/* content */}
@@ -226,7 +227,7 @@ export default function Demo() {
                   const expanded = expandedRow === i;
                   return (
                     <React.Fragment key={i}>
-                      <tr onClick={() => setExpandedRow(expanded ? null : i)} style={{ borderBottom: expanded ? "none" : "1px solid #f5f5f5", cursor: "pointer" }}>
+                      <tr onClick={() => { setExpandedRow(expanded ? null : i); if (!expanded && typeof window !== "undefined" && posthog?.capture) posthog.capture("demo_row_expanded", { item_id: r.id, category: r.cat }); }} style={{ borderBottom: expanded ? "none" : "1px solid #f5f5f5", cursor: "pointer" }}>
                         <td style={{ padding: "8px 4px 8px 8px", fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>{expanded ? "\u2304" : "\u203a"}</td>
                         <td style={{ padding: "8px", fontSize: 12, maxWidth: 200, fontFamily: font.sans }}>{r.desc}</td>
                         <td style={{ padding: "8px" }}><Badge color="gray">{r.source}</Badge></td>

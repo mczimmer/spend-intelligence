@@ -21,9 +21,9 @@ export default function Shell({ children }: { children: ReactNode }) {
       {/* Branding */}
       <div style={{ padding: "0 20px", marginBottom: 8 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-          <span style={{ fontFamily: font.sans, fontWeight: 800, fontSize: 15, color: C.white }}>Maersk</span>
-          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>/</span>
-          <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 15, color: C.white }}>Valtech</span>
+          <span style={{ fontFamily: font.sans, fontWeight: 800, fontSize: 16, color: C.white, letterSpacing: "0.04em" }}>M{"\u00e6"}rsk</span>
+          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{"\u00d7"}</span>
+          <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.9)" }}>Valtech</span>
         </div>
         <div style={{ fontSize: 13, color: "rgba(255,255,255,0.9)", marginTop: 4, fontFamily: font.sans }}>Spend Intelligence</div>
       </div>
@@ -96,6 +96,16 @@ export default function Shell({ children }: { children: ReactNode }) {
         {/* Content canvas */}
         <div style={{ maxWidth: 1080, padding: "32px 40px" }}>
           {children}
+        </div>
+
+        {/* Copyright footer */}
+        <div style={{ borderTop: `1px solid ${C.valtechBorder}`, padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>
+            <span>{"\u00a9"} 2026 Valtech</span>
+            <span style={{ color: C.valtechBorder }}>{"\u00b7"}</span>
+            <span>Prepared exclusively for A.P. M{"\u00f8"}ller {"\u2013"} M{"\u00e6"}rsk A/S</span>
+          </div>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.valtechGray, fontFamily: font.sans }}>VALTECH</span>
         </div>
       </div>
 
