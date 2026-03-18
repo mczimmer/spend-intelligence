@@ -290,7 +290,7 @@ export default function Demo() {
               <div style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderLeft: `3px solid ${C.success}`, borderRadius: 10, padding: "16px 20px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
                   <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.success }} />
-                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.success, fontFamily: font.sans }}>OPPORTUNITY</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.maerskStar, fontFamily: font.sans }}>OPPORTUNITY</span>
                 </div>
                 <p style={{ fontSize: 14, color: C.maerskNavy, lineHeight: 1.6, margin: "0 0 12px", fontFamily: font.sans }}>Hull coating and antifouling services from 3 entities use 3 different suppliers for identical work. Consolidating to a preferred supplier across Maersk Supply Svc, Hamburg S{"\u00fc"}d, and Fleet Mgmt could reduce unit costs.</p>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>

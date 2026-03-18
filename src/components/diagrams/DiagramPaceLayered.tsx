@@ -12,7 +12,7 @@ export default function DiagramPaceLayered() {
       y: 10, h: 94,
       fill: "rgba(34,197,94,0.08)",
       stroke: C.success,
-      labelColor: C.success,
+      labelColor: C.maerskStar,
       boxes: [
         { text: "Continuous Learning" },
         { text: "Acquisition Auto-Onboard" },

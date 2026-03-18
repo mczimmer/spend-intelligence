@@ -5,7 +5,7 @@ export default function DiagramTimeline() {
     { label: "Phase 1", title: "Validate", weeks: "Weeks 1–3", items: ["Data sample ingestion", "Taxonomy mapping", "Accuracy benchmarking"], color: C.maerskStar },
     { label: "Phase 2", title: "Pilot", weeks: "Weeks 4–8", items: ["2 category groups live", "SAP integration", "Feedback loop tuning"], color: C.maerskBlue },
     { label: "Phase 3", title: "Scale", weeks: "Weeks 9–14", items: ["All categories live", "Multi-entity rollout", "Dashboard delivery"], color: C.maerskNavy },
-    { label: "Phase 4", title: "Embed", weeks: "Weeks 15–18", items: ["Self-service tooling", "Continuous learning", "Handover & training"], color: "#166534" },
+    { label: "Phase 4", title: "Embed", weeks: "Weeks 15–18", items: ["Self-service tooling", "Continuous learning", "Handover & training"], color: C.maerskNavy },
   ];
   const phaseW = 185, gap = 16;
   const totalW = phases.length * (phaseW + gap) - gap + 40;
