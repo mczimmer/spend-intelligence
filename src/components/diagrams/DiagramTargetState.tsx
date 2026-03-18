@@ -2,14 +2,14 @@ import { C, font } from "@/lib/constants";
 
 export default function DiagramTargetState() {
   const W = 920, H = 580;
-  const bx = 20, by = 10, bw = 880, bh = 500;
+  const bx = 10, by = 10, bw = 900, bh = 500;
   const cw = 130, ch = 44, rx = 8;
   const processingFill = "rgba(66,176,213,0.10)";
   const storageFill = "#EBF5FF";
   const govFill = "rgba(0,36,61,0.06)";
 
   // Ingestion column (left, stacked vertically)
-  const ingX = bx + 20;
+  const ingX = bx + 40;
   const ingY = by + 36;
   const ingBoxes = [
     { label: "Source Extract Adapter", sub: "Connects to SAP, Oracle,", sub2: "entity systems", y: ingY },

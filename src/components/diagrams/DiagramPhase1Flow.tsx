@@ -1,8 +1,8 @@
 import { C, font } from "@/lib/constants";
 
 export default function DiagramPhase1Flow() {
-  const W = 920, H = 220;
-  const bw = 130, bh = 52, rx = 8, gap = 28;
+  const W = 920, H = 230;
+  const bw = 134, bh = 56, rx = 8, gap = 26;
 
   // Row positions
   const mainY = 40;
