@@ -2,6 +2,7 @@ import { C, font } from "@/lib/constants";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
 import PageHeader from "@/components/PageHeader";
+import ValtechBrandmark from "@/components/ValtechBrandmark";
 
 const stats = [
   { label: "Employees", value: "6,000+" },
@@ -57,6 +58,10 @@ export default function AboutValtech() {
         subtitle="A global digital agency connecting technology, experience design, and business transformation. The team behind this workspace."
       />
 
+      <div style={{ marginTop: -20, marginBottom: 24 }}>
+        <ValtechBrandmark size={32} color={C.valtechBorder} />
+      </div>
+
       {/* Company overview */}
       <Card style={{ marginBottom: 32 }}>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Valtech is a global digital transformation agency operating across 50+ offices in 20+ countries with over 6,000 employees. We work at the intersection of experience design, technology, and business strategy, helping enterprises modernise their platforms, processes, and customer experiences. Our clients include global logistics, automotive, healthcare, pharma, FMCG, and financial services organisations navigating complex transformation programmes.</p>
@@ -67,7 +72,7 @@ export default function AboutValtech() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 24 }}>
           {stats.map(s => (
             <div key={s.label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 28, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{s.value}</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: C.valtechMoss, fontFamily: font.sans }}>{s.value}</div>
               <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 700, letterSpacing: "0.06em", marginTop: 4, fontFamily: font.sans }}>{s.label}</div>
             </div>
           ))}

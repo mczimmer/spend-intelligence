@@ -12,6 +12,7 @@ export const C = {
   warning: "#eab308",
   danger: "#ef4444",
   white: "#FFFFFF",
+  valtechMoss: "#B3FF60",
 };
 
 export const font = {

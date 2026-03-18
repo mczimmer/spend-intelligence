@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { C, font } from "@/lib/constants";
 import { navigation } from "@/data/navigation";
+import ValtechBrandmark from "./ValtechBrandmark";
 
 function getPageTitle(pathname: string): string {
   const item = navigation.find(n => n.href === pathname);
@@ -23,7 +24,10 @@ export default function Shell({ children }: { children: ReactNode }) {
         <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
           <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 16, color: C.white, letterSpacing: "0.04em" }}>M{"\u00e6"}rsk</span>
           <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{"\u00d7"}</span>
-          <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.9)" }}>Valtech</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontFamily: font.sans, fontWeight: 400, fontSize: 16, letterSpacing: "0.02em", color: "rgba(255,255,255,0.9)" }}>Valtech</span>
+            <ValtechBrandmark size={16} color="rgba(255,255,255,0.9)" />
+          </div>
         </div>
         <div style={{ fontSize: 13, color: "rgba(255,255,255,0.9)", marginTop: 4, fontFamily: font.sans }}>Spend Intelligence</div>
       </div>
@@ -105,7 +109,10 @@ export default function Shell({ children }: { children: ReactNode }) {
             <span style={{ color: C.valtechBorder }}>{"\u00b7"}</span>
             <span>Prepared exclusively for A.P. M{"\u00f8"}ller {"\u2013"} M{"\u00e6"}rsk A/S</span>
           </div>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.valtechGray, fontFamily: font.sans }}>VALTECH</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.valtechGray, fontFamily: font.sans }}>VALTECH</span>
+            <ValtechBrandmark size={12} color={C.valtechGray} />
+          </div>
         </div>
       </div>
 
