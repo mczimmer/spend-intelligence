@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { C, font } from "@/lib/constants";
 import Card from "@/components/Card";
 import PageHeader from "@/components/PageHeader";
 import Demo from "@/components/Demo";
 
 const demonstrates = [
-  { title: "Classification accuracy", desc: "Semantic AI correctly categorised 18/18 items across 6 category groups with >79% confidence on all items." },
-  { title: "Code reconciliation", desc: "Payment and material code mismatches identified across all categories with suggested corrections." },
-  { title: "Consolidation opportunity", desc: "$274K in estimated savings surfaced from 18 line items across 8 entities." },
+  { title: "Decision intelligence", desc: "AI identifies anomalies, opportunities, and patterns across 21 items from 11 entities, surfacing the insights that matter, not just the data." },
+  { title: "Explainable classification", desc: "Every category assignment includes a reasoning trace. The AI shows its work, with confidence scoring calibrated against human baselines." },
+  { title: "Actionable simulation", desc: "Vendor consolidation modelling lets you toggle scenarios and see the financial impact in real time. From insight to action in one view." },
 ];
 
 export default function DemoPage() {
@@ -16,7 +15,7 @@ export default function DemoPage() {
       <PageHeader
         label="Proof of Concept"
         title="See It Working"
-        subtitle="This interactive demo uses synthetic data modelled on Maersk's maritime logistics procurement landscape: 18 spend items across 8 acquired entities. Walk through the three-stage pipeline: categorise, reconcile, and consolidate. Each stage includes live AI analysis."
+        subtitle="This interactive demo uses synthetic data modelled on Maersk's maritime logistics procurement landscape: 21 spend items across 11 acquired entities. Start with the Overview for key insights, then explore classification, reconciliation, and consolidation detail."
       />
 
       <Demo />

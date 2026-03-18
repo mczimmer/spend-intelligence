@@ -3,30 +3,31 @@ import { C, font } from "@/lib/constants";
 import { posthog } from "@/lib/posthog";
 import Badge from "./Badge";
 import ConfBar from "./ConfBar";
+import React from "react";
 
 // ── Demo Data ──
 const SPEND = [
-  { id: "SP-001", desc: "Marine Fuel Oil HFO 380cst - Rotterdam", source: "Svitzer (DK)", amount: 284000, payCode: "PAY-4401", matCode: "MAT-7710" },
-  { id: "SP-002", desc: "Bunker fuel heavy oil vessel supply", source: "Hamburg Sud (DE)", amount: 312000, payCode: "PAY-4401", matCode: "MAT-8820" },
-  { id: "SP-003", desc: "HFO bunkering - Singapore terminal", source: "APM Terminals (SG)", amount: 198000, payCode: "PAY-4410", matCode: "MAT-7710" },
-  { id: "SP-004", desc: "Reefer container maintenance - compressor rebuild", source: "MCI (NL)", amount: 47500, payCode: "PAY-5520", matCode: "MAT-3301" },
-  { id: "SP-005", desc: "Refrigerated unit repair - scroll compressor", source: "Star Cool (DK)", amount: 52000, payCode: "PAY-5580", matCode: "MAT-3310" },
-  { id: "SP-006", desc: "Container reefer spare parts - compressor kit", source: "Sealand (US)", amount: 38000, payCode: "PAY-5520", matCode: "MAT-3399" },
-  { id: "SP-007", desc: "Port handling crane ops - Tanjung Pelepas", source: "APM Terminals (MY)", amount: 125000, payCode: "PAY-6601", matCode: "MAT-5501" },
-  { id: "SP-008", desc: "Terminal crane services and stevedoring", source: "APMT Maasvlakte (NL)", amount: 143000, payCode: "PAY-6650", matCode: "MAT-5510" },
-  { id: "SP-009", desc: "Quay crane hire + container handling labour", source: "Svitzer (AU)", amount: 98000, payCode: "PAY-6601", matCode: "MAT-5590" },
-  { id: "SP-010", desc: "Anti-fouling hull coating - drydock Busan", source: "Maersk Supply Svc (KR)", amount: 187000, payCode: "PAY-7701", matCode: "MAT-6610" },
-  { id: "SP-011", desc: "Vessel hull paint antifoul application", source: "Hamburg Sud (BR)", amount: 165000, payCode: "PAY-7790", matCode: "MAT-6699" },
-  { id: "SP-012", desc: "Marine antifouling coating service - SG yard", source: "Fleet Mgmt (SG)", amount: 201000, payCode: "PAY-7701", matCode: "MAT-6610" },
-  { id: "SP-013", desc: "Lashing rods and turnbuckles - container securing", source: "Safmarine (ZA)", amount: 23000, payCode: "PAY-8801", matCode: "MAT-4401" },
-  { id: "SP-014", desc: "Container twist locks and lashing equipment", source: "Sealand (US)", amount: 31000, payCode: "PAY-8810", matCode: "MAT-4410" },
-  { id: "SP-015", desc: "Cargo securing gear - twistlocks + rods", source: "MCC Transport (TH)", amount: 19000, payCode: "PAY-8801", matCode: "MAT-4490" },
-  { id: "SP-016", desc: "MGO low-sulphur fuel supply Algeciras", source: "Maersk Oil Trading (ES)", amount: 410000, payCode: "PAY-4450", matCode: "MAT-7750" },
-  { id: "SP-017", desc: "VLSFO compliant marine gas oil bunker", source: "Hamburg Sud (NL)", amount: 375000, payCode: "PAY-4401", matCode: "MAT-7799" },
-  { id: "SP-018", desc: "Low sulphur fuel oil - IMO2020 spec", source: "Svitzer (GB)", amount: 289000, payCode: "PAY-4460", matCode: "MAT-7750" },
-  { id: "SP-019", desc: "Container terminal gate operations - Maasvlakte", source: "APMT Maasvlakte (NL)", amount: 87000, payCode: "PAY-6601", matCode: "MAT-5501" },
-  { id: "SP-020", desc: "Terminal gate processing and truck marshalling", source: "APM Terminals (SG)", amount: 92000, payCode: "PAY-6601", matCode: "MAT-5501" },
-  { id: "SP-021", desc: "Vessel engine room lubricant supply - marine grade", source: "Maersk Line (DK)", amount: 156000, payCode: "PAY-4401", matCode: "MAT-7710" },
+  { id: "SP-001", desc: "Marine Fuel Oil HFO 380cst - Rotterdam", source: "Svitzer (DK)", amount: 284000, payCode: "PAY-4401", matCode: "MAT-7710", region: "EMEA" },
+  { id: "SP-002", desc: "Bunker fuel heavy oil vessel supply", source: "Hamburg Sud (DE)", amount: 312000, payCode: "PAY-4401", matCode: "MAT-8820", region: "EMEA" },
+  { id: "SP-003", desc: "HFO bunkering - Singapore terminal", source: "APM Terminals (SG)", amount: 198000, payCode: "PAY-4410", matCode: "MAT-7710", region: "APAC" },
+  { id: "SP-004", desc: "Reefer container maintenance - compressor rebuild", source: "MCI (NL)", amount: 47500, payCode: "PAY-5520", matCode: "MAT-3301", region: "EMEA" },
+  { id: "SP-005", desc: "Refrigerated unit repair - scroll compressor", source: "Star Cool (DK)", amount: 52000, payCode: "PAY-5580", matCode: "MAT-3310", region: "EMEA" },
+  { id: "SP-006", desc: "Container reefer spare parts - compressor kit", source: "Sealand (US)", amount: 38000, payCode: "PAY-5520", matCode: "MAT-3399", region: "Americas" },
+  { id: "SP-007", desc: "Port handling crane ops - Tanjung Pelepas", source: "APM Terminals (MY)", amount: 125000, payCode: "PAY-6601", matCode: "MAT-5501", region: "APAC" },
+  { id: "SP-008", desc: "Terminal crane services and stevedoring", source: "APMT Maasvlakte (NL)", amount: 143000, payCode: "PAY-6650", matCode: "MAT-5510", region: "EMEA" },
+  { id: "SP-009", desc: "Quay crane hire + container handling labour", source: "Svitzer (AU)", amount: 98000, payCode: "PAY-6601", matCode: "MAT-5590", region: "APAC" },
+  { id: "SP-010", desc: "Anti-fouling hull coating - drydock Busan", source: "Maersk Supply Svc (KR)", amount: 187000, payCode: "PAY-7701", matCode: "MAT-6610", region: "APAC" },
+  { id: "SP-011", desc: "Vessel hull paint antifoul application", source: "Hamburg Sud (BR)", amount: 165000, payCode: "PAY-7790", matCode: "MAT-6699", region: "Americas" },
+  { id: "SP-012", desc: "Marine antifouling coating service - SG yard", source: "Fleet Mgmt (SG)", amount: 201000, payCode: "PAY-7701", matCode: "MAT-6610", region: "APAC" },
+  { id: "SP-013", desc: "Lashing rods and turnbuckles - container securing", source: "Safmarine (ZA)", amount: 23000, payCode: "PAY-8801", matCode: "MAT-4401", region: "EMEA" },
+  { id: "SP-014", desc: "Container twist locks and lashing equipment", source: "Sealand (US)", amount: 31000, payCode: "PAY-8810", matCode: "MAT-4410", region: "Americas" },
+  { id: "SP-015", desc: "Cargo securing gear - twistlocks + rods", source: "MCC Transport (TH)", amount: 19000, payCode: "PAY-8801", matCode: "MAT-4490", region: "APAC" },
+  { id: "SP-016", desc: "MGO low-sulphur fuel supply Algeciras", source: "Maersk Oil Trading (ES)", amount: 410000, payCode: "PAY-4450", matCode: "MAT-7750", region: "EMEA" },
+  { id: "SP-017", desc: "VLSFO compliant marine gas oil bunker", source: "Hamburg Sud (NL)", amount: 375000, payCode: "PAY-4401", matCode: "MAT-7799", region: "EMEA" },
+  { id: "SP-018", desc: "Low sulphur fuel oil - IMO2020 spec", source: "Svitzer (GB)", amount: 289000, payCode: "PAY-4460", matCode: "MAT-7750", region: "EMEA" },
+  { id: "SP-019", desc: "Container terminal gate operations - Maasvlakte", source: "APMT Maasvlakte (NL)", amount: 87000, payCode: "PAY-6601", matCode: "MAT-5501", region: "EMEA" },
+  { id: "SP-020", desc: "Terminal gate processing and truck marshalling", source: "APM Terminals (SG)", amount: 92000, payCode: "PAY-6601", matCode: "MAT-5501", region: "APAC" },
+  { id: "SP-021", desc: "Vessel engine room lubricant supply - marine grade", source: "Maersk Line (DK)", amount: 156000, payCode: "PAY-4401", matCode: "MAT-7710", region: "EMEA" },
 ];
 
 function fmt(n: number) { return "$" + n.toLocaleString(); }
@@ -42,7 +43,7 @@ const UNSPSC: Record<string, { code: string; label: string }> = {
 
 function classifyItem(item: any) {
   const d = item.desc.toLowerCase();
-  const u = (cat: string) => UNSPSC[cat] || { code: "—", label: "" };
+  const u = (cat: string) => UNSPSC[cat] || { code: "\u2014", label: "" };
 
   if (d.includes("lubricant") || d.includes("lube oil")) {
     const cat = "Marine Fuels & Lubricants";
@@ -91,7 +92,6 @@ function reconcileItems(items: any[]) {
     const matCodes = [...new Set(grp.map(g => g.matCode))];
     const matched = payCodes.length === 1 && matCodes.length === 1;
     const partial = payCodes.length <= 2 && matCodes.length <= 2;
-    // Count entities per code for majority-rule suggestion
     const payCount: Record<string, number> = {};
     const matCount: Record<string, number> = {};
     grp.forEach(g => { payCount[g.payCode] = (payCount[g.payCode] || 0) + 1; matCount[g.matCode] = (matCount[g.matCode] || 0) + 1; });
@@ -99,16 +99,10 @@ function reconcileItems(items: any[]) {
     const bestMat = Object.entries(matCount).sort((a, b) => b[1] - a[1])[0];
     grp.forEach(g => {
       recon.push({
-        ...g,
-        payMismatch: payCodes.length > 1,
-        matMismatch: matCodes.length > 1,
+        ...g, payMismatch: payCodes.length > 1, matMismatch: matCodes.length > 1,
         reconStatus: matched ? "matched" : partial ? "partial" : "unmatched",
-        suggestedPayCode: bestPay[0],
-        suggestedPayCount: bestPay[1],
-        suggestedPayTotal: grp.length,
-        suggestedMatCode: bestMat[0],
-        suggestedMatCount: bestMat[1],
-        suggestedMatTotal: grp.length,
+        suggestedPayCode: bestPay[0], suggestedPayCount: bestPay[1], suggestedPayTotal: grp.length,
+        suggestedMatCode: bestMat[0], suggestedMatCount: bestMat[1], suggestedMatTotal: grp.length,
       });
     });
   });
@@ -164,7 +158,7 @@ function useCountUp(target: number, duration: number = 800) {
     function tick(now: number) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       setValue(Math.round(target * eased));
       if (progress < 1) requestAnimationFrame(tick);
     }
@@ -175,13 +169,27 @@ function useCountUp(target: number, duration: number = 800) {
 
 // ── Demo Component ──
 export default function Demo() {
-  const [tab, setTab] = useState("classify");
+  const [tab, setTab] = useState("overview");
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
   const classified = SPEND.map(i => ({ ...i, ...classifyItem(i) }));
   const reconciled = reconcileItems(classified);
   const consolidated = consolidateItems(reconciled);
   const totalSpend = SPEND.reduce((s, i) => s + i.amount, 0);
   const totalSavings = consolidated.reduce((s: number, g: any) => s + g.savingsEst, 0);
+  const entityCount = new Set(SPEND.map(d => d.source)).size;
+  const mismatchCount = reconciled.filter(r => r.payMismatch || r.matMismatch).length;
+  const catCount = new Set(classified.map(c => c.cat)).size;
+
+  // Vendor consolidation simulator state
+  const top3 = consolidated.filter((g: any) => g.savingsEst > 0).slice(0, 3);
+  const [simToggles, setSimToggles] = useState<Record<string, boolean>>(() => {
+    const init: Record<string, boolean> = {};
+    top3.forEach((g: any) => { init[g.cat + "|" + g.sub] = true; });
+    return init;
+  });
+  const simSavings = top3.reduce((s: number, g: any) => s + (simToggles[g.cat + "|" + g.sub] ? g.savingsEst : 0), 0);
+  const simCount = top3.filter((g: any) => simToggles[g.cat + "|" + g.sub]).length;
+  const simSpend = top3.reduce((s: number, g: any) => s + (simToggles[g.cat + "|" + g.sub] ? g.totalSpend : 0), 0);
 
   // Animated header stats
   const animItems = useCountUp(SPEND.length);
@@ -192,30 +200,130 @@ export default function Demo() {
   const isEdgeCase = (r: any) => r.desc.toLowerCase().includes("vlsfo") && r.sub === "Heavy Fuel Oil (HFO)";
   const edgeCaseCount = classified.filter(isEdgeCase).length;
 
+  // Computed insight data
+  const fuelSpend = classified.filter(c => c.cat === "Marine Fuels & Lubricants").reduce((s, c) => s + c.amount, 0);
+  const hullSavings = consolidated.find((g: any) => g.sub === "Hull Coating & Antifouling")?.savingsEst || 0;
+
+  const switchTab = (t: string) => {
+    setTab(t);
+    setExpandedRow(null);
+    if (typeof window !== "undefined" && posthog?.capture) posthog.capture("demo_tab_switched", { tab: t });
+  };
+
   const thStyle: React.CSSProperties = { textAlign: "left", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", color: C.valtechGray, padding: "8px 8px", borderBottom: `2px solid ${C.valtechBorder}`, fontFamily: font.sans, fontWeight: 700 };
+
+  const tabs = [
+    ["overview", "Overview"],
+    ["classify", "Classify"],
+    ["reconcile", "Reconcile"],
+    ["consolidate", "Consolidate"],
+  ];
 
   return (
     <div style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderRadius: 14, overflow: "hidden" }}>
-      {/* demo header */}
+      {/* Data provenance strip */}
+      <div style={{ background: C.valtechLight, borderBottom: `1px solid ${C.valtechBorder}`, padding: "6px 24px" }}>
+        <span style={{ fontSize: 11, color: C.valtechGray, fontFamily: font.mono }}>
+          Data aggregated from {entityCount} entity procurement systems {"\u00b7"} UNSPSC-aligned taxonomy {"\u00b7"} Vendor normalisation applied {"\u00b7"} <span style={{ fontStyle: "italic", opacity: 0.8 }}>Synthetic sample, no live M{"\u00e6"}rsk data</span>
+        </span>
+      </div>
+
+      {/* Demo header */}
       <div style={{ background: C.maerskNavy, padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.maerskStar, fontFamily: font.sans }}>INTERACTIVE PROOF OF CONCEPT</div>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.white, fontFamily: font.sans, marginTop: 2 }}>Spend Intelligence Engine</div>
         </div>
-        <div style={{ display: "flex", gap: 20 }}>
+        <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>SOURCES</div><div style={{ fontSize: 18, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{entityCount}</div></div>
           <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>ITEMS</div><div style={{ fontSize: 18, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{animItems}</div></div>
           <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>SPEND</div><div style={{ fontSize: 18, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{fmt(animSpend)}</div></div>
           <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>EST. SAVINGS</div><div style={{ fontSize: 18, fontWeight: 700, color: C.success, fontFamily: font.sans }}>{fmt(animSavings)}</div></div>
         </div>
       </div>
-      {/* tabs */}
-      <div style={{ display: "flex", borderBottom: `1px solid ${C.valtechBorder}` }}>
-        {([["classify", "1. Categorise"], ["reconcile", "2. Reconcile"], ["consolidate", "3. Consolidate"]] as const).map(([k, l]) => (
-          <button key={k} onClick={() => { setTab(k); setExpandedRow(null); if (typeof window !== "undefined" && posthog?.capture) posthog.capture("demo_tab_switched", { tab: k }); }} style={{ flex: 1, padding: "12px 0", border: "none", cursor: "pointer", fontFamily: font.sans, fontSize: 13, fontWeight: tab === k ? 700 : 500, color: tab === k ? C.maerskStar : C.valtechGray, background: tab === k ? C.maerskLight : "transparent", borderBottom: tab === k ? `2px solid ${C.maerskStar}` : "2px solid transparent", transition: "all 0.2s" }}>{l}</button>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", borderBottom: `1px solid ${C.valtechBorder}`, overflowX: "auto" }}>
+        {tabs.map(([k, l]) => (
+          <button key={k} onClick={() => switchTab(k)} style={{ flex: 1, padding: "12px 0", border: "none", cursor: "pointer", fontFamily: font.sans, fontSize: 13, fontWeight: tab === k ? 700 : 400, color: tab === k ? C.maerskStar : C.valtechGray, background: tab === k ? C.maerskLight : "transparent", borderBottom: tab === k ? `2px solid ${C.maerskStar}` : "2px solid transparent", transition: "all 0.2s", whiteSpace: "nowrap", minWidth: 0 }}>{l}</button>
         ))}
       </div>
-      {/* content */}
+
+      {/* Content */}
       <div style={{ padding: "20px 24px", overflowX: "auto" }}>
+
+        {/* ── OVERVIEW TAB ── */}
+        {tab === "overview" && (
+          <>
+            {/* Spend summary bar */}
+            <div style={{ background: C.maerskNavy, borderRadius: 10, padding: "16px 20px", marginBottom: 20, display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 16 }}>
+              {[
+                { label: "Total spend analysed", value: fmt(totalSpend), sub: `${SPEND.length} items across ${entityCount} entities` },
+                { label: "Categories identified", value: String(catCount), sub: `From ${SPEND.length} unique descriptions` },
+                { label: "Code mismatches found", value: String(mismatchCount), sub: "Payment and material codes" },
+                { label: "Consolidation savings", value: fmt(totalSavings), sub: `${(totalSavings / totalSpend * 100).toFixed(1)}% of addressable spend` },
+              ].map(s => (
+                <div key={s.label}>
+                  <div style={{ fontSize: 9, color: C.maerskStar, fontWeight: 700, letterSpacing: "0.06em", fontFamily: font.sans, marginBottom: 4 }}>{s.label.toUpperCase()}</div>
+                  <div style={{ fontSize: 20, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{s.value}</div>
+                  <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontFamily: font.sans, marginTop: 2 }}>{s.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Decision insight cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 20 }}>
+              {/* Anomaly */}
+              <div style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderLeft: `3px solid ${C.danger}`, borderRadius: 10, padding: "16px 20px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.danger }} />
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.danger, fontFamily: font.sans }}>ANOMALY</span>
+                </div>
+                <p style={{ fontSize: 14, color: C.maerskNavy, lineHeight: 1.6, margin: "0 0 12px", fontFamily: font.sans }}>Marine fuel spend (HFO + VLSFO) is split across 3 payment codes and 4 material codes despite being the same commodity. This fragmentation obscures {fmt(fuelSpend)} in fuel spend across {classified.filter(c => c.cat === "Marine Fuels & Lubricants").length} items.</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                  <span style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans }}>Impact: {fmt(fuelSpend)} in fuel spend invisible to consolidated category management</span>
+                  <button onClick={() => switchTab("reconcile")} style={{ fontSize: 12, color: C.maerskStar, fontFamily: font.sans, background: "none", border: "none", cursor: "pointer", fontWeight: 700 }}>View in Reconcile tab {"\u2192"}</button>
+                </div>
+              </div>
+
+              {/* Opportunity */}
+              <div style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderLeft: `3px solid ${C.success}`, borderRadius: 10, padding: "16px 20px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.success }} />
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.success, fontFamily: font.sans }}>OPPORTUNITY</span>
+                </div>
+                <p style={{ fontSize: 14, color: C.maerskNavy, lineHeight: 1.6, margin: "0 0 12px", fontFamily: font.sans }}>Hull coating and antifouling services from 3 entities use 3 different suppliers for identical work. Consolidating to a preferred supplier across Maersk Supply Svc, Hamburg S{"\u00fc"}d, and Fleet Mgmt could reduce unit costs.</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                  <span style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans }}>Impact: {fmt(hullSavings)} estimated savings from supplier consolidation in this category alone</span>
+                  <button onClick={() => switchTab("consolidate")} style={{ fontSize: 12, color: C.maerskStar, fontFamily: font.sans, background: "none", border: "none", cursor: "pointer", fontWeight: 700 }}>View in Consolidate tab {"\u2192"}</button>
+                </div>
+              </div>
+
+              {/* Pattern */}
+              <div style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderLeft: `3px solid ${C.maerskStar}`, borderRadius: 10, padding: "16px 20px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.maerskStar }} />
+                  <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.maerskStar, fontFamily: font.sans }}>PATTERN</span>
+                </div>
+                <p style={{ fontSize: 14, color: C.maerskNavy, lineHeight: 1.6, margin: "0 0 12px", fontFamily: font.sans }}>Reefer compressor maintenance shows consistent classification confidence (82{"\u2013"}95%) but complete payment-code divergence across MCI, Star Cool, and Sealand. This suggests the work is standardised but the financial coding was never harmonised post-acquisition.</p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                  <span style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans }}>Impact: 3 entities, 3 payment codes, 2 material codes for identical maintenance work</span>
+                  <button onClick={() => switchTab("classify")} style={{ fontSize: 12, color: C.maerskStar, fontFamily: font.sans, background: "none", border: "none", cursor: "pointer", fontWeight: 700 }}>View in Classify tab {"\u2192"}</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Summary strip */}
+            <div style={{ background: C.maerskLight, borderRadius: 10, padding: "14px 18px", display: "flex", alignItems: "flex-start", gap: 12 }}>
+              <div style={{ width: 4, minHeight: 20, background: C.maerskStar, borderRadius: 2, flexShrink: 0, marginTop: 2 }} />
+              <p style={{ fontSize: 13, color: C.maerskNavy, lineHeight: 1.6, margin: 0, fontFamily: font.sans }}>
+                Across {SPEND.length} spend items from {entityCount} acquired entities, the Spend Intelligence engine identified {catCount} unified categories from {SPEND.length} unique descriptions, flagged {mismatchCount} code mismatches requiring reconciliation, and surfaced {fmt(totalSavings)} in consolidation savings. The three tabs below show the full classification, reconciliation, and consolidation detail.
+              </p>
+            </div>
+          </>
+        )}
+
+        {/* ── CLASSIFY TAB ── */}
         {tab === "classify" && (
           <>
             <Body style={{ marginBottom: 12 }}>Each spend description is semantically matched to a standardised category taxonomy aligned to UNSPSC (United Nations Standard Products and Services Code), the global classification standard used by procurement organisations worldwide. This ensures interoperability with existing benchmarking tools and category management systems.</Body>
@@ -265,6 +373,8 @@ export default function Demo() {
             <AIInsight stage="classify" />
           </>
         )}
+
+        {/* ── RECONCILE TAB ── */}
         {tab === "reconcile" && (
           <>
             <Body style={{ marginBottom: 12 }}>Items within the same category are checked for payment-code and material-code consistency. Mismatches highlight where acquired entities use different codes for identical items.</Body>
@@ -285,7 +395,7 @@ export default function Demo() {
                     <td style={{ padding: "8px" }}><Badge color={r.reconStatus === "matched" ? "green" : r.reconStatus === "partial" ? "amber" : "red"}>{r.reconStatus}</Badge></td>
                     <td style={{ padding: "8px", fontSize: 10, color: C.valtechGray, fontFamily: font.sans }}>
                       {r.payMismatch ? `Standardise to ${r.suggestedPayCode} (${r.suggestedPayCount} of ${r.suggestedPayTotal})` : ""}
-                      {r.payMismatch && r.matMismatch ? " · " : ""}
+                      {r.payMismatch && r.matMismatch ? " \u00b7 " : ""}
                       {r.matMismatch ? `Standardise to ${r.suggestedMatCode} (${r.suggestedMatCount} of ${r.suggestedMatTotal})` : ""}
                       {!r.payMismatch && !r.matMismatch ? "\u2014" : ""}
                     </td>
@@ -296,9 +406,46 @@ export default function Demo() {
             <AIInsight stage="reconcile" />
           </>
         )}
+
+        {/* ── CONSOLIDATE TAB ── */}
         {tab === "consolidate" && (
           <>
             <Body style={{ marginBottom: 12 }}>Spend is consolidated across all acquired entities to surface savings from supplier rationalisation and code standardisation.</Body>
+
+            {/* Vendor consolidation simulator */}
+            <div style={{ background: C.valtechLight, borderRadius: 10, padding: "16px 20px", marginBottom: 20 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                <div style={{ width: 20, height: 2, background: C.maerskStar }} />
+                <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: C.maerskStar, fontFamily: font.sans }}>Vendor Consolidation Simulator</span>
+              </div>
+              <p style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans, margin: "0 0 12px" }}>Toggle categories to model the impact of supplier rationalisation across acquired entities.</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {top3.map((g: any) => {
+                  const key = g.cat + "|" + g.sub;
+                  const on = simToggles[key];
+                  return (
+                    <div key={key} style={{ background: C.white, border: `1px solid ${C.valtechBorder}`, borderRadius: 8, padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                      <div>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{g.cat} {"\u00b7"} {g.sub}</div>
+                        <div style={{ fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>Current: {g.sources.length} entities, {g.sources.length} suppliers. Total: {fmt(g.totalSpend)}</div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, color: on ? C.success : C.valtechGray, fontFamily: font.sans }}>{on ? `Save ${fmt(g.savingsEst)} (${(g.savingsEst / g.totalSpend * 100).toFixed(1)}%)` : "\u2014"}</span>
+                        <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer" }}>
+                          <input type="checkbox" checked={on} onChange={() => setSimToggles(prev => ({ ...prev, [key]: !prev[key] }))} style={{ width: 16, height: 16, accentColor: C.maerskStar }} />
+                          <span style={{ fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>Consolidate</span>
+                        </label>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ background: C.maerskLight, borderRadius: 8, padding: "10px 16px", marginTop: 12, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>Simulated savings: {fmt(simSavings)} from {simCount} {simCount === 1 ? "category" : "categories"}</span>
+                <span style={{ fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>{simSpend > 0 ? `${(simSavings / simSpend * 100).toFixed(1)}% of addressable spend in selected categories` : ""}</span>
+              </div>
+            </div>
+
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead><tr>{["Category", "Sub-category", "Total Spend", "Entities", "Pay Codes", "Mat Codes", "Est. Savings"].map(h => <th key={h} style={thStyle}>{h}</th>)}</tr></thead>
               <tbody>
@@ -318,7 +465,7 @@ export default function Demo() {
             <div style={{ marginTop: 16, background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 10, padding: "14px 18px" }}>
               <div style={{ fontWeight: 700, color: "#166534", fontSize: 13, marginBottom: 4, fontFamily: font.sans }}>Consolidation Opportunity</div>
               <p style={{ fontSize: 13, color: "#166534", margin: 0, lineHeight: 1.6, fontFamily: font.sans }}>
-                Across {SPEND.length} line items from {new Set(SPEND.map(d => d.source)).size} entities, AI identified {consolidated.length} sub-categories with <b>{fmt(totalSavings)}</b> in estimated consolidation savings ({(totalSavings / totalSpend * 100).toFixed(1)}% of addressable spend).
+                Across {SPEND.length} line items from {entityCount} entities, AI identified {consolidated.length} sub-categories with <b>{fmt(totalSavings)}</b> in estimated consolidation savings ({(totalSavings / totalSpend * 100).toFixed(1)}% of addressable spend).
               </p>
             </div>
             <AIInsight stage="consolidate" />
@@ -328,6 +475,3 @@ export default function Demo() {
     </div>
   );
 }
-
-// Need React import for Fragment
-import React from "react";
