@@ -55,27 +55,20 @@ export default function Overview() {
         ))}
       </div>
 
-      {/* What this workspace contains */}
+      {/* Workspace */}
       <SectionLabel text="Workspace" />
-      <div style={{ display: "flex", gap: 28, marginBottom: 40 }}>
-        {/* Left column */}
-        <div style={{ flex: "0 0 58%", minWidth: 0, display: "flex", alignItems: "center" }}>
-          <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Each section in the sidebar builds on the last. Start with <Link href="/demo" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 700 }}>the demo</Link> if you want evidence first, or <Link href="/problem" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 700 }}>the problem space</Link> if you want context.</p>
-        </div>
-
-        {/* Right column */}
-        <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 16 }}>
-          <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
-            <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>We already tested the hypothesis</h3>
-            <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.6)", margin: "0 0 12px" }}>21 items from 10 M{"\u00e6"}rsk entities, classified and reconciled by the AI engine. It found 9.2% in consolidation savings that were invisible until the taxonomies were unified. The question isn{"\u2019"}t whether $274K matters at M{"\u00e6"}rsk{"\u2019"}s scale. It{"\u2019"}s what 9.2% means across $48.5 billion in procurement.</p>
-            <Link href="/demo" style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the demo {"\u2192"}</Link>
-          </Card>
-          <Card style={{ borderColor: C.maerskStar, borderWidth: 1 }}>
-            <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 700, color: C.maerskNavy, margin: "0 0 6px" }}>Model your own numbers</h3>
-            <p style={{ fontFamily: font.sans, fontSize: 12, lineHeight: 1.6, color: C.valtechGray, margin: "0 0 8px" }}>The ROI calculator lets you estimate consolidation savings, efficiency gains, and onboarding speed using your own procurement data.</p>
-            <Link href="/calculator" style={{ fontFamily: font.sans, fontSize: 12, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the calculator {"\u2192"}</Link>
-          </Card>
-        </div>
+      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 24px", maxWidth: 700 }}>Each section in the sidebar builds on the last. Start with <Link href="/demo" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 700 }}>the demo</Link> if you want evidence first, or <Link href="/problem" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 700 }}>the problem space</Link> if you want context.</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 40 }}>
+        <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
+          <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>We already tested the hypothesis</h3>
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.6)", margin: "0 0 12px" }}>21 items from 10 M{"\u00e6"}rsk entities, classified and reconciled by the AI engine. It found 9.2% in consolidation savings that were invisible until the taxonomies were unified. The question is not whether $274K matters at M{"\u00e6"}rsk{"\u2019"}s scale. It is what 9.2% means across $48.5 billion in procurement.</p>
+          <Link href="/demo" style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the demo {"\u2192"}</Link>
+        </Card>
+        <Card style={{ borderColor: C.maerskStar, borderWidth: 1 }}>
+          <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 700, color: C.maerskNavy, margin: "0 0 6px" }}>Model your own numbers</h3>
+          <p style={{ fontFamily: font.sans, fontSize: 12, lineHeight: 1.6, color: C.valtechGray, margin: "0 0 8px" }}>The ROI calculator lets you estimate consolidation savings, efficiency gains, and onboarding speed using your own procurement data.</p>
+          <Link href="/calculator" style={{ fontFamily: font.sans, fontSize: 12, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the calculator {"\u2192"}</Link>
+        </Card>
       </div>
 
       {/* The ask */}
