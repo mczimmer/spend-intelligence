@@ -7,34 +7,34 @@ const valueCards = [
   {
     title: "Spend Visibility",
     tagline: "From fragmented to unified",
-    desc: "Cross-entity spend visibility enables category managers to see consolidated demand for the first time. Volume leverage becomes actionable, not theoretical.",
-    metric: "100% addressable spend mapped within 5 days per entity",
+    desc: "With procurement spread across systems inherited from Hamburg Sud, Sealand, Safmarine, APM Terminals, and recent acquisitions like LF Logistics and Senator, category managers have no unified view of demand. Cross-entity spend visibility turns fragmented data into consolidated, actionable intelligence — for the first time across the full portfolio.",
+    metric: "Unified view across 10+ entity procurement systems within weeks, not years",
   },
   {
     title: "Consolidation Savings",
     tagline: "Supplier rationalisation at scale",
-    desc: "Duplicate suppliers across acquired entities are surfaced automatically. Consolidation opportunities are quantified by category, enabling data-driven sourcing decisions.",
+    desc: "Duplicate suppliers exist across every major acquisition boundary. A hull coating supplier serving former Hamburg Sud routes and a different supplier serving Maersk Line routes — for the same service, in the same ports. AI-powered classification surfaces these overlaps automatically, quantified by category and prioritised by spend impact. At Maersk's scale, even single-digit consolidation percentages translate to hundreds of millions in addressable savings.",
     metric: "6-10% estimated savings on addressable consolidation spend",
   },
   {
     title: "Operational Efficiency",
     tagline: "From manual reconciliation to automated flow",
-    desc: "Payment-code and material-code mismatches are flagged and corrected programmatically. Finance teams shift from reactive reconciliation to proactive exception management.",
-    metric: "80% reduction in manual reconciliation FTE",
+    desc: "The current corporate overhead reduction programme is targeting $180 million in annual savings and closing approximately 1,000 corporate positions. Automated reconciliation directly supports this initiative — replacing manual payment-code and material-code matching with programmatic alignment. Finance teams shift from reactive reconciliation to proactive exception management, with AI handling the volume and humans handling the judgement.",
+    metric: "Directly aligned with Maersk's 2026 corporate efficiency programme",
   },
   {
     title: "Acquisition Speed",
     tagline: "New entities onboarded in days, not months",
-    desc: "Each acquisition currently requires 3-6 months of manual taxonomy mapping before spend is visible. The AI engine reduces this to days — making post-merger integration faster and cheaper.",
+    desc: "The Panama Canal Railway Company was acquired in April 2025. LF Logistics and Senator International were acquired in 2022. Each integration required months of manual taxonomy mapping before spend became visible. The AI classification engine reduces entity onboarding from months to days — making post-acquisition procurement integration faster, cheaper, and repeatable.",
     metric: "5-day entity onboarding vs. 3-6 months today",
   },
 ];
 
 const impactStats = [
-  { label: "Addressable Spend (POC)", value: "$3.0M" },
-  { label: "Est. Savings Identified", value: "$274K" },
-  { label: "Savings Rate", value: "9.2%" },
-  { label: "Full Portfolio", value: "Significant" },
+  { label: "Cost of Revenue (2024)", value: "$48.5B" },
+  { label: "Addressable Procurement (est.)", value: "$15-25B" },
+  { label: "Consolidation Savings Potential", value: "4-10%" },
+  { label: "Corporate Efficiency Target", value: "$180M/yr" },
 ];
 
 export default function ValueCase() {
@@ -43,7 +43,7 @@ export default function ValueCase() {
       <PageHeader
         label="Analysis"
         title="The Business Impact of Unified Spend Intelligence"
-        subtitle="Taxonomy fragmentation isn't just a data problem — it's a cost problem. Every misaligned code, every invisible consolidation opportunity, every manual reconciliation hour has a measurable financial impact."
+        subtitle="At $48.5 billion in cost of revenue, Maersk's procurement landscape is one of the largest in the logistics industry. Every misaligned category code, every invisible consolidation opportunity, every manual reconciliation hour has a measurable financial impact — compounded across 10+ acquired entity systems and 130 countries of operation."
       />
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 32 }}>
@@ -76,7 +76,7 @@ export default function ValueCase() {
           <div style={{ width: 4, minHeight: 40, background: C.maerskStar, borderRadius: 2, flexShrink: 0, marginTop: 2 }} />
           <div>
             <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskBlue, margin: "0 0 8px" }}>Cost of Inaction</h3>
-            <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Every quarter without unified spend visibility is a quarter of missed consolidation, duplicate contracts, and manual reconciliation. The compounding cost is not the AI investment — it's the procurement value left on the table.</p>
+            <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Every quarter without unified spend visibility is a quarter of missed consolidation across the Hamburg Sud, Sealand, and APM Terminals procurement boundaries that have existed since those acquisitions closed. The corporate efficiency programme creates urgency — the $180 million target requires automation, not additional manual processes. Meanwhile, the next acquisition is already adding another taxonomy to reconcile. The compounding cost is not the AI investment — it's the procurement value left on the table while the fragmentation persists.</p>
           </div>
         </div>
       </Card>
