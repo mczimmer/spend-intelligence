@@ -4,6 +4,7 @@ export const navigation = [
   { label: "Hypothesis", href: "/solution", section: "Analysis" },
   { label: "Value Case", href: "/value-case", section: "Analysis" },
   { label: "Interactive Demo", href: "/demo", section: "Proof of Concept" },
+  { label: "ROI Calculator", href: "/calculator", section: "Proof of Concept" },
   { label: "Architecture", href: "/architecture", section: "Proof of Concept" },
   { label: "Governance", href: "/governance", section: "Engagement" },
   { label: "Approach & Investment", href: "/approach", section: "Engagement" },

@@ -1,8 +1,22 @@
 import { C, font } from "@/lib/constants";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
+import SectionLabel from "@/components/SectionLabel";
 import PageHeader from "@/components/PageHeader";
 import DiagramTimeline from "@/components/diagrams/DiagramTimeline";
+
+const teamCards = [
+  {
+    title: "Category complexity is our pattern",
+    badge: "Cross-Industry",
+    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services — industries where structural fragmentation runs as deep as maritime logistics. The AI approach here is informed by what works at scale across category-heavy enterprises. This isn't a first attempt at the problem.",
+  },
+  {
+    title: "Built for the people who use it",
+    badge: "Experience Design",
+    desc: "Spend intelligence only delivers value if category managers, finance teams, and procurement leads actually use it. Valtech's experience design discipline ensures the solution is built around real workflows and real decision points — not just technically correct, but operationally adopted. The interactive demo in this workspace is an example of that thinking.",
+  },
+];
 
 const phases = [
   { phase: "Phase 1: Validate", weeks: "Weeks 1-3", desc: "Ingest a sample of real Maersk spend data. Build and benchmark the AI classification engine against a manually-verified baseline. Deliver an accuracy report and refined taxonomy mapping.", deliverable: "Accuracy benchmark + taxonomy", gate: ">=85% accuracy on sample" },
@@ -19,6 +33,25 @@ export default function Approach() {
         title="How We Get There"
         subtitle="A phased approach designed to demonstrate value early and scale with confidence. Each phase has a clear deliverable and go/no-go gate."
       />
+
+      {/* Why This Team */}
+      <div style={{ marginBottom: 40 }}>
+        <SectionLabel text="Why This Team" />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+          {teamCards.map(c => (
+            <Card key={c.title}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
+                <h3 style={{ fontFamily: font.sans, fontSize: 18, fontWeight: 700, color: C.maerskNavy, margin: 0 }}>{c.title}</h3>
+                <Badge color="blue">{c.badge}</Badge>
+              </div>
+              <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>{c.desc}</p>
+            </Card>
+          ))}
+        </div>
+        <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", padding: "14px 20px" }}>
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 500 }}>We don't just build the engine — we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
+        </Card>
+      </div>
 
       <Card style={{ marginBottom: 32 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
