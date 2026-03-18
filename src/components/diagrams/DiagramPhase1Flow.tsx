@@ -71,10 +71,10 @@ export default function DiagramPhase1Flow() {
       <rect x={csCenterX - 44} y={mainY + bh + 8} width={40} height={12} rx={2} fill={C.white} opacity={0.9} />
       <text x={csCenterX - 8} y={mainY + bh + 17} textAnchor="end" style={{ fontSize: 8, fill: C.warning, fontFamily: font.sans }}>Below threshold</text>
 
-      {/* Human Review -> Classified Output: "Validated" (L-shape: right from HR top, then up) */}
-      <path d={`M ${humanX + bw + 2} ${splitY + bh / 2} L ${humanX + bw + 20} ${splitY + bh / 2} L ${humanX + bw + 20} ${mainY + bh + 2}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
-      <rect x={humanX + bw + 24} y={(splitY + mainY + bh) / 2 - 4} width={42} height={12} rx={2} fill={C.white} opacity={0.9} />
-      <text x={humanX + bw + 28} y={(splitY + mainY + bh) / 2 + 5} textAnchor="start" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>Validated</text>
+      {/* Human Review -> Classified Output: "Validated" (vertical, HR top to CO bottom) */}
+      <path d={`M ${classifiedX + bw / 2 + 10} ${splitY - 2} L ${classifiedX + bw / 2 + 10} ${mainY + bh + 2}`} fill="none" stroke={C.success} strokeWidth={1.5} markerEnd="url(#arrowPh1g)" />
+      <rect x={classifiedX + bw / 2 + 16} y={(splitY + mainY + bh) / 2 - 4} width={42} height={12} rx={2} fill={C.white} opacity={0.9} />
+      <text x={classifiedX + bw / 2 + 20} y={(splitY + mainY + bh) / 2 + 5} textAnchor="start" style={{ fontSize: 8, fill: C.success, fontFamily: font.sans }}>Validated</text>
     </svg>
   );
 }
