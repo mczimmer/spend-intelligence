@@ -7,7 +7,7 @@ export default function DiagramPaceLayered() {
   const layers = [
     {
       label: "DIFFERENTIATION",
-      subtitle: "New capabilities — what this engagement delivers",
+      subtitle: "New capabilities: what this engagement delivers",
       y: 10, h: 100,
       fill: "rgba(66,176,213,0.10)",
       stroke: C.maerskStar,
@@ -22,7 +22,7 @@ export default function DiagramPaceLayered() {
     },
     {
       label: "RECORD",
-      subtitle: "Stable foundation — what Maersk already operates",
+      subtitle: "Stable foundation: what Maersk already operates",
       y: 134, h: 100,
       fill: C.valtechLight,
       stroke: C.valtechBorder,
@@ -37,7 +37,7 @@ export default function DiagramPaceLayered() {
     },
     {
       label: "INNOVATION",
-      subtitle: "Future capabilities — what becomes possible",
+      subtitle: "Future capabilities: what becomes possible",
       y: 258, h: 94,
       fill: "rgba(34,197,94,0.08)",
       stroke: C.success,

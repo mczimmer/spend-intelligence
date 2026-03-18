@@ -33,11 +33,11 @@ function fmt(n: number) { return "$" + n.toLocaleString(); }
 
 // ── UNSPSC mappings ──
 const UNSPSC: Record<string, { code: string; label: string }> = {
-  "Marine Fuels & Lubricants": { code: "15101500", label: "Segment 15 — Fuels" },
-  "Reefer & Container Maintenance": { code: "72154000", label: "Segment 72 — Maintenance" },
-  "Port & Terminal Services": { code: "78141500", label: "Segment 78 — Transport" },
-  "Vessel Maintenance & Drydock": { code: "72141100", label: "Segment 72 — Maintenance" },
-  "Cargo Securing Equipment": { code: "24101500", label: "Segment 24 — Material Handling" },
+  "Marine Fuels & Lubricants": { code: "15101500", label: "Segment 15: Fuels" },
+  "Reefer & Container Maintenance": { code: "72154000", label: "Segment 72: Maintenance" },
+  "Port & Terminal Services": { code: "78141500", label: "Segment 78: Transport" },
+  "Vessel Maintenance & Drydock": { code: "72141100", label: "Segment 72: Maintenance" },
+  "Cargo Securing Equipment": { code: "24101500", label: "Segment 24: Material Handling" },
 };
 
 function classifyItem(item: any) {
@@ -46,7 +46,7 @@ function classifyItem(item: any) {
 
   if (d.includes("lubricant") || d.includes("lube oil")) {
     const cat = "Marine Fuels & Lubricants";
-    return { cat, sub: "Marine Lubricants", conf: 92, unspsc: "15121500", unspscLabel: "Segment 15 — Fuels", reasoning: "Matched on: 'lubricant' \u2192 Marine lubricant supply. Cross-referenced with vessel engine room context." };
+    return { cat, sub: "Marine Lubricants", conf: 92, unspsc: "15121500", unspscLabel: "Segment 15: Fuels", reasoning: "Matched on: 'lubricant' \u2192 Marine lubricant supply. Cross-referenced with vessel engine room context." };
   }
   if (d.includes("hfo") || d.includes("bunker") || d.includes("heavy") || (d.includes("fuel") && d.includes("oil") && !d.includes("sulphur") && !d.includes("mgo") && !d.includes("vlsfo") && !d.includes("low"))) {
     const cat = "Marine Fuels & Lubricants";
@@ -133,9 +133,9 @@ function consolidateItems(reconItems: any[]) {
 // ── AI Insight (pre-written, no API) ──
 function AIInsight({ stage }: { stage: string }) {
   const insights: Record<string, string> = {
-    classify: "Classification identified 6 distinct sub-categories across 21 items from 11 entities. The highest fragmentation is in Marine Fuels \u2014 the same HFO 380cst appears under 3 different natural-language descriptions across Svitzer, Hamburg S\u00fcd, and APM Terminals. All items classified above the 79% confidence threshold, with exact specification matches (e.g. 'HFO 380cst') achieving 96% confidence. One item flagged for human review where VLSFO descriptors conflicted with the HFO classification path \u2014 demonstrating the system's ability to detect its own uncertainty rather than silently misclassify.",
-    reconcile: "Payment-code fragmentation is most severe in Marine Fuels, where 3 different pay codes (PAY-4401, PAY-4410, PAY-4460) are used for identical products across Svitzer, Hamburg S\u00fcd, and APM Terminals. Material-code misalignment follows the same entity boundaries \u2014 codes diverge at acquisition boundaries, not at product boundaries. Port & Terminal Services shows a mix of matched and mismatched codes, indicating partial standardisation already exists where APM Terminals entities share infrastructure. At current volumes, manual reconciliation of these 21 items alone would require approximately 15 FTE-hours per month; across the full procurement portfolio, this scales linearly with each entity integration.",
-    consolidate: "The largest consolidation opportunity is in Marine Fuels & Lubricants \u2014 $1.87M across 6 entities representing over 60% of total addressable spend in this sample. Hull Coating & Antifouling shows the second-highest savings potential with 3 entities and $553K in spend. Recommended first action for category managers: consolidate HFO suppliers across the Svitzer, Hamburg S\u00fcd, and APM Terminals boundary, where 3 separate suppliers serve overlapping routes for an identical product specification. This single consolidation could capture an estimated $130K\u2013$170K in annual volume leverage.",
+    classify: "Classification identified 6 distinct sub-categories across 21 items from 11 entities. The highest fragmentation is in Marine Fuels: the same HFO 380cst appears under 3 different natural-language descriptions across Svitzer, Hamburg S\u00fcd, and APM Terminals. All items classified above the 79% confidence threshold, with exact specification matches (e.g. 'HFO 380cst') achieving 96% confidence. One item flagged for human review where VLSFO descriptors conflicted with the HFO classification path, demonstrating the system's ability to detect its own uncertainty rather than silently misclassify.",
+    reconcile: "Payment-code fragmentation is most severe in Marine Fuels, where 3 different pay codes (PAY-4401, PAY-4410, PAY-4460) are used for identical products across Svitzer, Hamburg S\u00fcd, and APM Terminals. Material-code misalignment follows the same entity boundaries; codes diverge at acquisition boundaries, not at product boundaries. Port & Terminal Services shows a mix of matched and mismatched codes, indicating partial standardisation already exists where APM Terminals entities share infrastructure. At current volumes, manual reconciliation of these 21 items alone would require approximately 15 FTE-hours per month; across the full procurement portfolio, this scales linearly with each entity integration.",
+    consolidate: "The largest consolidation opportunity is in Marine Fuels & Lubricants, $1.87M across 6 entities representing over 60% of total addressable spend in this sample. Hull Coating & Antifouling shows the second-highest savings potential with 3 entities and $553K in spend. Recommended first action for category managers: consolidate HFO suppliers across the Svitzer, Hamburg S\u00fcd, and APM Terminals boundary, where 3 separate suppliers serve overlapping routes for an identical product specification. This single consolidation could capture an estimated $130K\u2013$170K in annual volume leverage.",
   };
   return (
     <div style={{ background: "linear-gradient(135deg, #EBF5FF 0%, #f0fdf4 100%)", border: "1px solid rgba(66,176,213,0.2)", borderRadius: 10, padding: "14px 18px", marginTop: 16 }}>
@@ -218,7 +218,7 @@ export default function Demo() {
       <div style={{ padding: "20px 24px", overflowX: "auto" }}>
         {tab === "classify" && (
           <>
-            <Body style={{ marginBottom: 12 }}>Each spend description is semantically matched to a standardised category taxonomy aligned to UNSPSC (United Nations Standard Products and Services Code) — the global classification standard used by procurement organisations worldwide. This ensures interoperability with existing benchmarking tools and category management systems.</Body>
+            <Body style={{ marginBottom: 12 }}>Each spend description is semantically matched to a standardised category taxonomy aligned to UNSPSC (United Nations Standard Products and Services Code), the global classification standard used by procurement organisations worldwide. This ensures interoperability with existing benchmarking tools and category management systems.</Body>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead><tr>{["", "Description", "Entity", "Category", "Sub-category", "UNSPSC", "Confidence"].map(h => <th key={h} style={{ ...thStyle, width: h === "" ? 24 : undefined }}>{h}</th>)}</tr></thead>
               <tbody>
@@ -248,7 +248,7 @@ export default function Demo() {
                         <tr style={{ borderBottom: "1px solid #f5f5f5" }}>
                           <td colSpan={7} style={{ padding: "4px 8px 10px 36px", background: C.valtechLight }}>
                             <div style={{ fontSize: 11, color: C.valtechGray, fontFamily: font.sans, lineHeight: 1.6 }}>{r.reasoning}</div>
-                            {edge && <div style={{ fontSize: 10, color: C.warning, fontFamily: font.sans, fontStyle: "italic", marginTop: 4 }}>VLSFO descriptor conflicts with HFO classification — routes to human review queue</div>}
+                            {edge && <div style={{ fontSize: 10, color: C.warning, fontFamily: font.sans, fontStyle: "italic", marginTop: 4 }}>VLSFO descriptor conflicts with HFO classification; routes to human review queue</div>}
                           </td>
                         </tr>
                       )}
@@ -259,7 +259,7 @@ export default function Demo() {
             </table>
             {edgeCaseCount > 0 && (
               <div style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans, marginTop: 12, padding: "8px 12px", background: "#fef9c3", border: "1px solid #fde68a", borderRadius: 8, lineHeight: 1.6 }}>
-                {edgeCaseCount} item flagged for human review — confidence score is above threshold but keyword conflict detected. In production, this routes to the human review queue for manual validation.
+                {edgeCaseCount} item flagged for human review: confidence score is above threshold but keyword conflict detected. In production, this routes to the human review queue for manual validation.
               </div>
             )}
             <AIInsight stage="classify" />

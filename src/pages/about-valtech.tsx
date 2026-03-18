@@ -13,15 +13,15 @@ const stats = [
 const whyCards = [
   {
     title: "Category-heavy industries",
-    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services \u2014 industries where structural data fragmentation runs as deep as maritime logistics.",
+    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services, industries where structural data fragmentation runs as deep as maritime logistics.",
   },
   {
     title: "AI and data engineering",
-    desc: "Our AI practice delivers production-grade machine learning and NLP solutions \u2014 not proof-of-concept demos that never scale. We build the infrastructure, the governance, and the operational model around the model.",
+    desc: "Our AI practice delivers production-grade machine learning and NLP solutions, not proof-of-concept demos that never scale. We build the infrastructure, the governance, and the operational model around the model.",
   },
   {
     title: "Experience-led delivery",
-    desc: "Spend intelligence only delivers value if the people who use it \u2014 category managers, finance teams, procurement leads \u2014 actually adopt it. Our experience design discipline ensures the solution is built around real workflows and real decision points.",
+    desc: "Spend intelligence only delivers value if the people who use it, category managers, finance teams, procurement leads, actually adopt it. Our experience design discipline ensures the solution is built around real workflows and real decision points.",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function AboutValtech() {
 
       {/* Company overview */}
       <Card style={{ marginBottom: 32 }}>
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Valtech is a global digital transformation agency operating across 50+ offices in 20+ countries with over 6,000 employees. We work at the intersection of experience design, technology, and business strategy \u2014 helping enterprises modernise their platforms, processes, and customer experiences. Our clients include global logistics, automotive, healthcare, pharma, FMCG, and financial services organisations navigating complex transformation programmes.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>Valtech is a global digital transformation agency operating across 50+ offices in 20+ countries with over 6,000 employees. We work at the intersection of experience design, technology, and business strategy, helping enterprises modernise their platforms, processes, and customer experiences. Our clients include global logistics, automotive, healthcare, pharma, FMCG, and financial services organisations navigating complex transformation programmes.</p>
       </Card>
 
       {/* Stats bar */}
@@ -107,7 +107,7 @@ export default function AboutValtech() {
 
       {/* Footer */}
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8" }}>
-        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.maerskBlue, margin: 0 }}>This workspace \u2014 the research, the architecture, the interactive demo, the governance framework \u2014 is itself a demonstration of how Valtech works: technically grounded, business-literate, and built for the people who will use it.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.maerskBlue, margin: 0 }}>This workspace, the research, the architecture, the interactive demo, the governance framework, is itself a demonstration of how Valtech works: technically grounded, business-literate, and built for the people who will use it.</p>
       </Card>
     </div>
   );

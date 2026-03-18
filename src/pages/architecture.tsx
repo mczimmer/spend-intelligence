@@ -9,7 +9,7 @@ import DiagramC4Container from "@/components/diagrams/DiagramC4Container";
 import DiagramAIPipeline from "@/components/diagrams/DiagramAIPipeline";
 
 const paceExplanations = [
-  { title: "Differentiation", desc: "What you're getting. AI-powered classification, reconciliation, and consolidation — delivered as an API-first service." },
+  { title: "Differentiation", desc: "What you're getting. AI-powered classification, reconciliation, and consolidation, delivered as an API-first service." },
   { title: "Record", desc: "What it sits on. Your existing SAP, Oracle, and procurement systems remain the source of truth. No migration required." },
   { title: "Innovation", desc: "Where it goes next. Once the classification engine is trained, continuous learning and predictive capabilities become possible." },
 ];
@@ -20,13 +20,13 @@ export default function Architecture() {
       <PageHeader
         label="Proof of Concept"
         title="Architecture"
-        subtitle="How the Spend Intelligence engine fits into Maersk's existing systems landscape — what it delivers, what it builds on, and how it's constructed."
+        subtitle="How the Spend Intelligence engine fits into Maersk's existing systems landscape: what it delivers, what it builds on, and how it's constructed."
       />
 
       {/* Section 1: Pace-Layered Architecture */}
       <div style={{ marginBottom: 48 }}>
         <SectionLabel text="Strategic Architecture View" />
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>The architecture is organised by rate of change. Differentiation — the new capabilities — sits on top of stable systems of record that Maersk already operates. Innovation extends the platform over time.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>The architecture is organised by rate of change. Differentiation, the new capabilities, sits on top of stable systems of record that Maersk already operates. Innovation extends the platform over time.</p>
         <Card style={{ marginBottom: 20 }}>
           <DiagramPaceLayered />
         </Card>
@@ -43,7 +43,7 @@ export default function Architecture() {
       {/* Section 2: C4 Context Diagram */}
       <div style={{ marginBottom: 48 }}>
         <SectionLabel text="System Context" />
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>The Spend Intelligence engine as a bounded system — who uses it, what feeds it, and what consumes its outputs.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>The Spend Intelligence engine as a bounded system: who uses it, what feeds it, and what consumes its outputs.</p>
         <Card style={{ marginBottom: 12 }}>
           <DiagramC4Context />
         </Card>
@@ -53,7 +53,7 @@ export default function Architecture() {
       {/* Section 3: C4 Container Diagram */}
       <div style={{ marginBottom: 48 }}>
         <SectionLabel text="Inside the Engine" />
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>Zooming in — the internal containers that make up the Spend Intelligence engine and how they communicate.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 20px", maxWidth: 700 }}>Zooming in: the internal containers that make up the Spend Intelligence engine and how they communicate.</p>
         <Card style={{ marginBottom: 12 }}>
           <DiagramC4Container />
         </Card>

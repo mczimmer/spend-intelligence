@@ -89,7 +89,7 @@ export default function Shell({ children }: { children: ReactNode }) {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ width: 6, height: 6, borderRadius: 3, background: C.maerskStar }} />
-            <span style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans }}>Phase 0 — Hypothesis</span>
+            <span style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans }}>Phase 0: Hypothesis</span>
           </div>
         </div>
 

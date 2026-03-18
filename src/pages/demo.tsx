@@ -16,7 +16,7 @@ export default function DemoPage() {
       <PageHeader
         label="Proof of Concept"
         title="See It Working"
-        subtitle="This interactive demo uses synthetic data modelled on Maersk's maritime logistics procurement landscape — 18 spend items across 8 acquired entities. Walk through the three-stage pipeline: categorise, reconcile, and consolidate. Each stage includes live AI analysis."
+        subtitle="This interactive demo uses synthetic data modelled on Maersk's maritime logistics procurement landscape: 18 spend items across 8 acquired entities. Walk through the three-stage pipeline: categorise, reconcile, and consolidate. Each stage includes live AI analysis."
       />
 
       <Demo />

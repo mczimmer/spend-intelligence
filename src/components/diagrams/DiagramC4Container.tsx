@@ -31,7 +31,7 @@ export default function DiagramC4Container() {
   // Row 3: Storage & Output (3 boxes)
   const r3y = r2y + ch + 100;
   const r3boxes = [
-    { label: "Taxonomy Store", sub: "PostgreSQL \u2014 unified", sub2: "category hierarchy", x: bx + 30 },
+    { label: "Taxonomy Store", sub: "PostgreSQL, unified", sub2: "category hierarchy", x: bx + 30 },
     { label: "Vector DB", sub: "Embeddings for", sub2: "similarity matching", x: bx + 30 + cw + 40 },
     { label: "Reconciliation Engine", sub: "Payment / material", sub2: "code alignment", x: bx + 30 + (cw + 40) * 2 },
   ];

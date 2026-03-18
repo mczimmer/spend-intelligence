@@ -26,7 +26,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Spend Intelligence — M{"\u00e6"}rsk {"\u00d7"} Valtech</title>
+        <title>Spend Intelligence: M{"\u00e6"}rsk {"\u00d7"} Valtech</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="noindex, nofollow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

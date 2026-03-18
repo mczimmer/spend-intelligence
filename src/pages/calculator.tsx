@@ -232,7 +232,7 @@ export default function Calculator() {
               title="Entity Onboarding Acceleration"
               headline={acquisitions > 0 ? `${currentMonths} months → ${aiDays} days` : "Future-ready"}
               secondary={acquisitions > 0 ? `${daysSavedPerYear} days saved annually` : undefined}
-              detail={acquisitions > 0 ? "Per-entity taxonomy integration time with AI-powered classification" : "No acquisitions planned — but when the next one happens, onboarding drops from months to days"}
+              detail={acquisitions > 0 ? "Per-entity taxonomy integration time with AI-powered classification" : "No acquisitions planned, but when the next one happens, onboarding drops from months to days"}
             />
             <OutputPanel
               num="4"

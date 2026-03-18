@@ -9,12 +9,12 @@ const teamCards = [
   {
     title: "Category complexity is our pattern",
     badge: "Cross-Industry",
-    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services — industries where structural fragmentation runs as deep as maritime logistics. The AI approach here is informed by what works at scale across category-heavy enterprises. This isn't a first attempt at the problem.",
+    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services, industries where structural fragmentation runs as deep as maritime logistics. The AI approach here is informed by what works at scale across category-heavy enterprises. This isn't a first attempt at the problem.",
   },
   {
     title: "Built for the people who use it",
     badge: "Experience Design",
-    desc: "Spend intelligence only delivers value if category managers, finance teams, and procurement leads actually use it. Valtech's experience design discipline ensures the solution is built around real workflows and real decision points — not just technically correct, but operationally adopted. The interactive demo in this workspace is an example of that thinking.",
+    desc: "Spend intelligence only delivers value if category managers, finance teams, and procurement leads actually use it. Valtech's experience design discipline ensures the solution is built around real workflows and real decision points, not just technically correct, but operationally adopted. The interactive demo in this workspace is an example of that thinking.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Approach() {
           ))}
         </div>
         <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", padding: "14px 20px" }}>
-          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 500 }}>We don't just build the engine — we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 500 }}>We don't just build the engine; we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
         </Card>
       </div>
 
@@ -85,12 +85,12 @@ export default function Approach() {
 
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", marginBottom: 24 }}>
         <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskBlue, margin: "0 0 8px" }}>Investment & Next Step</h3>
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>Phase 1 (Validate) requires minimal commitment: a sample dataset from 2-3 entities and 3 weeks of elapsed time. There is no infrastructure build required — the POC runs on cloud-native AI services. If the accuracy benchmark meets the gate criteria, we proceed to Pilot. If not, we stop with full transparency on what was learned.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>Phase 1 (Validate) requires minimal commitment: a sample dataset from 2-3 entities and 3 weeks of elapsed time. There is no infrastructure build required; the POC runs on cloud-native AI services. If the accuracy benchmark meets the gate criteria, we proceed to Pilot. If not, we stop with full transparency on what was learned.</p>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0, fontWeight: 600 }}>We'd welcome 30 minutes to walk through this hypothesis and demo together, and to discuss what a representative data sample for Phase 1 would look like.</p>
       </Card>
 
       <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
-        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>Phase 1 requires a sample dataset, 3 weeks, and a decision. The gate criteria are explicit: {"\u2265"}85% classification accuracy on the sample. If it doesn't meet the bar, we stop — with full transparency on what was learned and what it would take to get there.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>Phase 1 requires a sample dataset, 3 weeks, and a decision. The gate criteria are explicit: {"\u2265"}85% classification accuracy on the sample. If it doesn't meet the bar, we stop, with full transparency on what was learned and what it would take to get there.</p>
       </Card>
     </div>
   );
