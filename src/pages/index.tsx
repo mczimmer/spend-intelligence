@@ -4,21 +4,22 @@ import Card from "@/components/Card";
 import SectionLabel from "@/components/SectionLabel";
 
 const stats = [
-  { label: "Acquired Entities", value: "8+", sub: "In scope" },
-  { label: "Spend Items", value: "18", sub: "POC sample" },
-  { label: "Est. Savings", value: "$274K", sub: "Consolidation" },
-  { label: "Target Accuracy", value: "92%+", sub: "Classification" },
-  { label: "Timeline", value: "18 wks", sub: "Full engagement" },
+  { label: "Cost of revenue (2024)", value: "$48.5B", sub: "Annual procurement base" },
+  { label: "Acquired entities", value: "10+", sub: "Independent procurement systems" },
+  { label: "POC sample", value: "21 items", sub: "Across 10 entities, 6 categories" },
+  { label: "Consolidation identified", value: "$274K", sub: "9.2% of sample spend" },
+  { label: "Efficiency target", value: "$180M", sub: "Corporate overhead programme" },
 ];
 
-const pages = [
-  { title: "Problem Space", href: "/problem", desc: "Why taxonomy fragmentation costs more than you think" },
-  { title: "Hypothesis", href: "/solution", desc: "How semantic AI resolves structural spend fragmentation" },
-  { title: "Value Case", href: "/value-case", desc: "The measurable business impact" },
-  { title: "Interactive Demo", href: "/demo", desc: "See the AI classification engine working on synthetic Maersk data", featured: true },
-  { title: "Architecture", href: "/architecture", desc: "How it connects to existing systems" },
-  { title: "Governance", href: "/governance", desc: "Data handling, security, and compliance" },
-  { title: "Approach & Investment", href: "/approach", desc: "Phased engagement with clear gates" },
+const workspacePages = [
+  { num: "1", title: "Problem Space", href: "/problem", desc: "Why taxonomy fragmentation is structural, not incidental" },
+  { num: "2", title: "Hypothesis", href: "/solution", desc: "The three-stage AI method: classify, reconcile, consolidate" },
+  { num: "3", title: "Value Case", href: "/value-case", desc: "What unified spend intelligence is worth at M\u00e6rsk\u2019s scale" },
+  { num: "4", title: "Interactive Demo", href: "/demo", desc: "The classification engine running on synthetic M\u00e6rsk data" },
+  { num: "5", title: "ROI Calculator", href: "/calculator", desc: "Model the impact using your own numbers" },
+  { num: "6", title: "Architecture", href: "/architecture", desc: "Pace-layered design, C4 system views, integration model" },
+  { num: "7", title: "Governance", href: "/governance", desc: "Data handling, AI transparency, commercial terms" },
+  { num: "8", title: "Approach", href: "/approach", desc: "Four phases with explicit gates and a low-commitment entry point" },
 ];
 
 export default function Overview() {
@@ -27,10 +28,10 @@ export default function Overview() {
       {/* Hero */}
       <div style={{ background: `linear-gradient(135deg, ${C.maerskNavy} 0%, ${C.maerskBlue} 100%)`, borderRadius: 14, padding: "48px 40px", marginBottom: 32 }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(66,176,213,0.15)", border: "1px solid rgba(66,176,213,0.3)", borderRadius: 9999, padding: "4px 14px", marginBottom: 20 }}>
-          <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskStar, letterSpacing: "0.06em" }}>MAERSK x VALTECH</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskStar, letterSpacing: "0.06em" }}>M{"\u00c6"}RSK {"\u00d7"} VALTECH</span>
         </div>
         <h1 style={{ fontFamily: font.sans, fontSize: 34, fontWeight: 800, color: C.white, margin: "0 0 12px", lineHeight: 1.2 }}>Spend Intelligence</h1>
-        <p style={{ fontFamily: font.sans, fontSize: 17, color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.65, margin: "0 0 28px" }}>AI-powered category standardisation and payment-code reconciliation for Maersk's post-acquisition procurement landscape.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 17, color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.65, margin: "0 0 28px" }}>A hypothesis for resolving the procurement taxonomy fragmentation that M{"\u00e6"}rsk{"\u2019"}s acquisition history created {"\u2014"} and a proof of concept demonstrating that AI classification can do in weeks what manual harmonisation takes months to achieve.</p>
         <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
           <div style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "14px 20px" }}>
             <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em", fontWeight: 600, fontFamily: font.sans }}>PREPARED FOR</div>
@@ -45,6 +46,11 @@ export default function Overview() {
         </div>
       </div>
 
+      {/* The opportunity in one paragraph */}
+      <Card style={{ borderLeft: `3px solid ${C.maerskStar}`, marginBottom: 32 }}>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0 }}>M{"\u00e6"}rsk{"\u2019"}s growth through acquisition {"\u2014"} Hamburg S{"\u00fc"}d, Safmarine, Sealand, APM Terminals, LF Logistics, Senator International, and others {"\u2014"} created a procurement landscape where the same goods are described, coded, and categorised differently across every entity. With $48.5 billion in annual cost of revenue and a corporate efficiency programme targeting $180 million in savings, the cost of this fragmentation is no longer theoretical. This workspace presents a hypothesis: semantic AI can unify M{"\u00e6"}rsk{"\u2019"}s procurement taxonomy, reconcile payment and material codes across entity boundaries, and surface consolidation opportunities that have been structurally invisible since the first acquisition closed.</p>
+      </Card>
+
       {/* Executive summary stats */}
       <SectionLabel text="Executive Summary" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16, marginBottom: 40 }}>
@@ -57,27 +63,49 @@ export default function Overview() {
         ))}
       </div>
 
-      {/* Workspace contents */}
-      <SectionLabel text="What This Workspace Contains" />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 40 }}>
-        {pages.map(p => (
-          <Link key={p.href} href={p.href} style={{ textDecoration: "none", color: "inherit" }}>
-            <Card style={{ cursor: "pointer", transition: "border-color 0.15s, box-shadow 0.15s", ...(p.featured ? { borderColor: C.maerskStar, borderWidth: 2 } : {}) }}>
-              <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskNavy, margin: "0 0 6px" }}>{p.title}</h3>
-              <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: C.valtechGray, margin: 0 }}>{p.desc}</p>
-              {p.featured && (
-                <div style={{ marginTop: 8 }}>
-                  <span style={{ display: "inline-block", background: C.maerskLight, color: C.maerskBlue, border: "1px solid #b3dce8", borderRadius: 9999, padding: "2px 10px", fontSize: 11, fontWeight: 600 }}>Centrepiece</span>
-                </div>
-              )}
-            </Card>
-          </Link>
-        ))}
+      {/* What this workspace contains */}
+      <SectionLabel text="Workspace" />
+      <div style={{ display: "flex", gap: 28, marginBottom: 40 }}>
+        {/* Left column — page map */}
+        <div style={{ flex: "0 0 58%", minWidth: 0 }}>
+          <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 16px" }}>This workspace builds a complete case {"\u2014"} from problem diagnosis through hypothesis, value quantification, live proof of concept, technical architecture, governance framework, and engagement approach. Each section builds on the previous one.</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            {workspacePages.map(p => (
+              <Link key={p.href} href={p.href} style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: 10, padding: "6px 0", borderBottom: "1px solid #f5f5f5" }}>
+                <span style={{ fontSize: 13, fontWeight: 800, color: C.maerskStar, fontFamily: font.sans, width: 18, flexShrink: 0 }}>{p.num}</span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{p.title}</span>
+                <span style={{ fontSize: 13, color: C.valtechGray, fontFamily: font.sans }}>{"\u2014"} {p.desc}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Right column — start here */}
+        <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 16 }}>
+          <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
+            <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>See the proof of concept</h3>
+            <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.6)", margin: "0 0 12px" }}>The interactive demo classifies 21 maritime procurement items from 10 M{"\u00e6"}rsk entities in real-time {"\u2014"} categorising, reconciling payment codes, and surfacing consolidation opportunities.</p>
+            <Link href="/demo" style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 600, color: C.maerskStar, textDecoration: "none" }}>Open the demo {"\u2192"}</Link>
+          </Card>
+          <Card style={{ borderColor: C.maerskStar, borderWidth: 1 }}>
+            <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 600, color: C.maerskNavy, margin: "0 0 6px" }}>Model your own numbers</h3>
+            <p style={{ fontFamily: font.sans, fontSize: 12, lineHeight: 1.6, color: C.valtechGray, margin: "0 0 8px" }}>The ROI calculator lets you estimate consolidation savings, efficiency gains, and onboarding speed using your own procurement data.</p>
+            <Link href="/calculator" style={{ fontFamily: font.sans, fontSize: 12, fontWeight: 600, color: C.maerskStar, textDecoration: "none" }}>Open the calculator {"\u2192"}</Link>
+          </Card>
+        </div>
       </div>
+
+      {/* The ask */}
+      <SectionLabel text="Next Step" />
+      <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", marginBottom: 32 }}>
+        <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskBlue, margin: "0 0 8px" }}>30 minutes and a sample dataset</h3>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.maerskNavy, margin: "0 0 12px" }}>Phase 1 requires minimal commitment: a representative spend data sample from 2{"\u2013"}3 entities, 3 weeks of elapsed time, and no infrastructure build. The go/no-go gate is explicit {"\u2014"} {"\u2265"}85% classification accuracy on the sample. If it doesn{"\u2019"}t meet the bar, we stop with full transparency on what was learned and what it would take to get there.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>This workspace is itself a demonstration of how we work: technically grounded, M{"\u00e6"}rsk-specific, and built to support a decision {"\u2014"} not to sell a platform.</p>
+      </Card>
 
       {/* Footer callout */}
       <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
-        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>This workspace presents a hypothesis and proof of concept. It is designed to support a 30-minute discussion on the opportunity and a concrete next step.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: "rgba(255,255,255,0.7)", margin: 0 }}>This workspace was prepared by Valtech for the Asset Strategy Platform team at M{"\u00e6"}rsk. All data referenced is from public sources or synthetic models. The interactive demo runs entirely in-browser {"\u2014"} no M{"\u00e6"}rsk data has been used.</p>
       </Card>
     </div>
   );
