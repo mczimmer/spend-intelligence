@@ -42,13 +42,13 @@ export default function Architecture() {
       <div style={{ marginBottom: 48 }}>
         <SectionLabel text="Positioning" />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <Card style={{ borderLeft: `3px solid ${C.success}` }}>
-            <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskNavy, margin: "0 0 10px" }}>What this is</h3>
+          <Card style={{ background: C.maerskBlue, borderColor: C.maerskBlue }}>
+            <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 10px" }}>What this is</h3>
             {["A governed classification and reconciliation service", "Sits between source procurement data and existing reporting tools", "Consumes data extracts, produces unified coded outputs", "Replaces manual taxonomy mapping, not infrastructure", "Designed to be embedded into Maersk's operating estate"].map(line => (
-              <p key={line} style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.5, color: C.valtechGray, margin: "0 0 4px" }}>{line}</p>
+              <p key={line} style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.5, color: "rgba(255,255,255,0.8)", margin: "0 0 4px" }}>{line}</p>
             ))}
           </Card>
-          <Card style={{ borderLeft: `3px solid ${C.valtechBorder}` }}>
+          <Card style={{ borderLeft: `3px solid ${C.maerskStar}` }}>
             <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskNavy, margin: "0 0 10px" }}>What this is not</h3>
             {["Not a replacement for SAP, Oracle, or existing ERP systems", "Not a new data lake or analytics platform", "Not a big-bang platform rollout requiring months of integration", "Not a vendor-hosted black box with opaque decision logic", "Not another system that requires a dedicated ops team"].map(line => (
               <p key={line} style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.5, color: C.valtechGray, margin: "0 0 4px" }}>{line}</p>
