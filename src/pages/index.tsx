@@ -30,16 +30,16 @@ export default function Overview() {
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(66,176,213,0.15)", border: "1px solid rgba(66,176,213,0.3)", borderRadius: 9999, padding: "4px 14px", marginBottom: 20 }}>
           <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskStar, letterSpacing: "0.06em" }}>M{"\u00c6"}RSK {"\u00d7"} VALTECH</span>
         </div>
-        <h1 style={{ fontFamily: font.sans, fontSize: 34, fontWeight: 800, color: C.white, margin: "0 0 12px", lineHeight: 1.2 }}>Spend Intelligence</h1>
-        <p style={{ fontFamily: font.sans, fontSize: 17, color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.65, margin: "0 0 28px" }}>A hypothesis for resolving the procurement taxonomy fragmentation that M{"\u00e6"}rsk{"\u2019"}s acquisition history created, and a proof of concept demonstrating that AI classification can do in weeks what manual harmonisation takes months to achieve.</p>
+        <h1 style={{ fontFamily: font.sans, fontSize: 34, fontWeight: 700, color: C.white, margin: "0 0 12px", lineHeight: 1.2 }}>Spend Intelligence</h1>
+        <p style={{ fontFamily: font.sans, fontSize: 17, fontWeight: 300, color: "rgba(255,255,255,0.7)", maxWidth: 640, lineHeight: 1.65, margin: "0 0 28px" }}>A hypothesis for resolving the procurement taxonomy fragmentation that M{"\u00e6"}rsk{"\u2019"}s acquisition history created, and a proof of concept demonstrating that AI classification can do in weeks what manual harmonisation takes months to achieve.</p>
         <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
           <div style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "14px 20px" }}>
-            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em", fontWeight: 600, fontFamily: font.sans }}>PREPARED FOR</div>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em", fontWeight: 700, fontFamily: font.sans }}>PREPARED FOR</div>
             <div style={{ fontSize: 14, color: C.white, fontWeight: 700, marginTop: 4, fontFamily: font.sans }}>Navneet S. Rainu</div>
             <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: font.sans }}>Asset Strategy Platform</div>
           </div>
           <div style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 10, padding: "14px 20px" }}>
-            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em", fontWeight: 600, fontFamily: font.sans }}>CONTEXT</div>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: "0.06em", fontWeight: 700, fontFamily: font.sans }}>CONTEXT</div>
             <div style={{ fontSize: 14, color: C.white, fontWeight: 700, marginTop: 4, fontFamily: font.sans }}>February 2026 Discovery</div>
             <div style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", fontFamily: font.sans }}>Follow-up: Hypothesis & POC</div>
           </div>
@@ -48,7 +48,7 @@ export default function Overview() {
 
       {/* The opportunity in one paragraph */}
       <Card style={{ borderLeft: `3px solid ${C.maerskStar}`, marginBottom: 32 }}>
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0 }}>M{"\u00e6"}rsk{"\u2019"}s growth through acquisition, Hamburg S{"\u00fc"}d, Safmarine, Sealand, APM Terminals, LF Logistics, Senator International, and others, created a procurement landscape where the same goods are described, coded, and categorised differently across every entity. With $48.5 billion in annual cost of revenue and a corporate efficiency programme targeting $180 million in savings, the cost of this fragmentation is no longer theoretical. This workspace presents a hypothesis: semantic AI can unify M{"\u00e6"}rsk{"\u2019"}s procurement taxonomy, reconcile payment and material codes across entity boundaries, and surface consolidation opportunities that have been structurally invisible since the first acquisition closed.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, fontWeight: 300, lineHeight: 1.7, color: C.maerskNavy, margin: 0 }}>M{"\u00e6"}rsk{"\u2019"}s growth through acquisition, Hamburg S{"\u00fc"}d, Safmarine, Sealand, APM Terminals, LF Logistics, Senator International, and others, created a procurement landscape where the same goods are described, coded, and categorised differently across every entity. With $48.5 billion in annual cost of revenue and a corporate efficiency programme targeting $180 million in savings, the cost of this fragmentation is no longer theoretical. This workspace presents a hypothesis: semantic AI can unify M{"\u00e6"}rsk{"\u2019"}s procurement taxonomy, reconcile payment and material codes across entity boundaries, and surface consolidation opportunities that have been structurally invisible since the first acquisition closed.</p>
       </Card>
 
       {/* Executive summary stats */}
@@ -56,8 +56,8 @@ export default function Overview() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16, marginBottom: 40 }}>
         {stats.map(s => (
           <Card key={s.label} style={{ padding: "16px 20px", textAlign: "center" }}>
-            <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", color: C.valtechGray, fontFamily: font.sans, fontWeight: 600, marginBottom: 4 }}>{s.label}</div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: C.maerskNavy, fontFamily: font.sans }}>{s.value}</div>
+            <div style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", color: C.valtechGray, fontFamily: font.sans, fontWeight: 700, marginBottom: 4 }}>{s.label}</div>
+            <div style={{ fontSize: 24, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{s.value}</div>
             <div style={{ fontSize: 11, color: C.valtechGray, marginTop: 2, fontFamily: font.sans }}>{s.sub}</div>
           </Card>
         ))}
@@ -72,7 +72,7 @@ export default function Overview() {
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {workspacePages.map(p => (
               <Link key={p.href} href={p.href} style={{ textDecoration: "none", display: "flex", alignItems: "baseline", gap: 10, padding: "6px 0", borderBottom: "1px solid #f5f5f5" }}>
-                <span style={{ fontSize: 13, fontWeight: 800, color: C.maerskStar, fontFamily: font.sans, width: 18, flexShrink: 0 }}>{p.num}</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans, width: 18, flexShrink: 0 }}>{p.num}</span>
                 <span style={{ fontSize: 14, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{p.title}</span>
                 <span style={{ fontSize: 13, color: C.valtechGray, fontFamily: font.sans }}>: {p.desc}</span>
               </Link>
@@ -85,12 +85,12 @@ export default function Overview() {
           <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
             <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>See the proof of concept</h3>
             <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.6, color: "rgba(255,255,255,0.6)", margin: "0 0 12px" }}>The interactive demo classifies 21 maritime procurement items from 10 M{"\u00e6"}rsk entities in real-time, categorising, reconciling payment codes, and surfacing consolidation opportunities.</p>
-            <Link href="/demo" style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 600, color: C.maerskStar, textDecoration: "none" }}>Open the demo {"\u2192"}</Link>
+            <Link href="/demo" style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the demo {"\u2192"}</Link>
           </Card>
           <Card style={{ borderColor: C.maerskStar, borderWidth: 1 }}>
-            <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 600, color: C.maerskNavy, margin: "0 0 6px" }}>Model your own numbers</h3>
+            <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 700, color: C.maerskNavy, margin: "0 0 6px" }}>Model your own numbers</h3>
             <p style={{ fontFamily: font.sans, fontSize: 12, lineHeight: 1.6, color: C.valtechGray, margin: "0 0 8px" }}>The ROI calculator lets you estimate consolidation savings, efficiency gains, and onboarding speed using your own procurement data.</p>
-            <Link href="/calculator" style={{ fontFamily: font.sans, fontSize: 12, fontWeight: 600, color: C.maerskStar, textDecoration: "none" }}>Open the calculator {"\u2192"}</Link>
+            <Link href="/calculator" style={{ fontFamily: font.sans, fontSize: 12, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>Open the calculator {"\u2192"}</Link>
           </Card>
         </div>
       </div>

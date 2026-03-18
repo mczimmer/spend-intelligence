@@ -11,7 +11,7 @@ export default function DiagramDataFlow() {
       <g key={t + i}>
         <rect x={x} y={y} width={boxW} height={boxH} rx={8} fill={color} stroke={C.maerskStar} strokeWidth={1.5} />
         {t.split("\n").map((line, li) => (
-          <text key={li} x={x + boxW / 2} y={y + (t.split("\n").length > 1 ? 18 + li * 16 : 30)} textAnchor="middle" style={{ fontSize: 11, fontWeight: 600, fill: C.maerskNavy, fontFamily: font.sans }}>{line}</text>
+          <text key={li} x={x + boxW / 2} y={y + (t.split("\n").length > 1 ? 18 + li * 16 : 30)} textAnchor="middle" style={{ fontSize: 11, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{line}</text>
         ))}
       </g>
     );

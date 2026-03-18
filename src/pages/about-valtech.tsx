@@ -67,8 +67,8 @@ export default function AboutValtech() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 24 }}>
           {stats.map(s => (
             <div key={s.label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 28, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{s.value}</div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 600, letterSpacing: "0.06em", marginTop: 4, fontFamily: font.sans }}>{s.label}</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{s.value}</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 700, letterSpacing: "0.06em", marginTop: 4, fontFamily: font.sans }}>{s.label}</div>
             </div>
           ))}
         </div>

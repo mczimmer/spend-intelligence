@@ -72,13 +72,13 @@ function OutputPanel({ num, title, headline, secondary, range, detail }: {
     <Card>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
         <div style={{ width: 24, height: 24, borderRadius: 6, background: C.maerskLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ fontSize: 11, fontWeight: 800, color: C.maerskStar, fontFamily: font.sans }}>{num}</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans }}>{num}</span>
         </div>
         <span style={{ fontSize: 15, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans }}>{title}</span>
       </div>
-      <div style={{ fontSize: 30, fontWeight: 800, color: C.maerskNavy, fontFamily: font.sans, lineHeight: 1.2 }}>{headline}</div>
+      <div style={{ fontSize: 30, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans, lineHeight: 1.2 }}>{headline}</div>
       {range && <div style={{ fontSize: 13, color: C.valtechGray, fontFamily: font.sans, marginTop: 4 }}>{range}</div>}
-      {secondary && <div style={{ fontSize: 14, fontWeight: 600, color: C.maerskBlue, fontFamily: font.sans, marginTop: 4 }}>{secondary}</div>}
+      {secondary && <div style={{ fontSize: 14, fontWeight: 700, color: C.maerskBlue, fontFamily: font.sans, marginTop: 4 }}>{secondary}</div>}
       <p style={{ fontSize: 12, color: C.valtechGray, fontFamily: font.sans, margin: "8px 0 0", lineHeight: 1.6 }}>{detail}</p>
     </Card>
   );
@@ -250,7 +250,7 @@ export default function Calculator() {
         <div className="calc-summary" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 32, alignItems: "start" }}>
           <div>
             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: C.maerskStar, fontFamily: font.sans, marginBottom: 6 }}>TOTAL ESTIMATED ANNUAL VALUE</div>
-            <div style={{ fontSize: 28, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{fmtCurrency(totalValueMid)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{fmtCurrency(totalValueMid)}</div>
             <div style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: font.sans, marginTop: 4 }}>Range: {fmtCurrency(totalValueLow)} – {fmtCurrency(totalValueHigh)}</div>
           </div>
           <div>
@@ -274,7 +274,7 @@ export default function Calculator() {
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8" }}>
         <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: C.maerskBlue, margin: 0 }}>
           Ready to validate these numbers? Phase 1 uses a real data sample to benchmark accuracy and confirm the savings hypothesis. The investment is a sample dataset, 3 weeks, and a decision.{" "}
-          <Link href="/approach" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 600 }}>View the engagement approach</Link>
+          <Link href="/approach" style={{ color: C.maerskStar, textDecoration: "none", fontWeight: 700 }}>View the engagement approach</Link>
         </p>
       </Card>
 

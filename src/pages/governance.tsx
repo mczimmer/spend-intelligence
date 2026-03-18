@@ -77,7 +77,7 @@ function GovernanceCard({ title, tagline, desc }: { title: string; tagline: stri
   return (
     <Card>
       <h3 style={{ fontFamily: font.sans, fontSize: 18, fontWeight: 700, color: C.maerskNavy, margin: "0 0 2px" }}>{title}</h3>
-      <div style={{ fontSize: 13, fontWeight: 600, color: C.maerskStar, fontFamily: font.sans, marginBottom: 8 }}>{tagline}</div>
+      <div style={{ fontSize: 13, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans, marginBottom: 8 }}>{tagline}</div>
       <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>{desc}</p>
     </Card>
   );
@@ -117,7 +117,7 @@ export default function Governance() {
                 <tr key={l.phase} style={{ borderBottom: "1px solid #f5f5f5" }}>
                   <td style={{ ...tdStyle, padding: "10px 12px" }}>
                     <Badge color="navy">{l.phase}</Badge>
-                    <span style={{ fontSize: 12, fontWeight: 600, color: C.maerskNavy, fontFamily: font.sans, marginLeft: 8 }}>{l.label}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: C.maerskNavy, fontFamily: font.sans, marginLeft: 8 }}>{l.label}</span>
                   </td>
                   <td style={tdStyle}>{l.data}</td>
                   <td style={tdStyle}>{l.env}</td>

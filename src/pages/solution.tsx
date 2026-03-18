@@ -79,7 +79,7 @@ export default function Solution() {
           <div key={s.num} style={{ display: "flex", gap: 0 }}>
             {/* Step indicator column */}
             <div style={{ width: 48, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 24 }}>
-              <div style={{ fontSize: 24, fontWeight: 800, color: C.maerskStar, fontFamily: font.sans, lineHeight: 1 }}>{s.num}</div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans, lineHeight: 1 }}>{s.num}</div>
               {i < stages.length - 1 && (
                 <div style={{ width: 2, flex: 1, background: C.valtechBorder, marginTop: 12 }} />
               )}
@@ -115,8 +115,8 @@ export default function Solution() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 24 }}>
             {metrics.map(s => (
               <div key={s.label}>
-                <div style={{ fontSize: 10, color: C.maerskStar, fontWeight: 600, letterSpacing: "0.06em", marginBottom: 4, fontFamily: font.sans }}>{s.label}</div>
-                <div style={{ fontSize: 24, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{s.value}</div>
+                <div style={{ fontSize: 10, color: C.maerskStar, fontWeight: 700, letterSpacing: "0.06em", marginBottom: 4, fontFamily: font.sans }}>{s.label}</div>
+                <div style={{ fontSize: 24, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{s.value}</div>
                 <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginTop: 2, fontFamily: font.sans }}>{s.sub}</div>
               </div>
             ))}
@@ -131,7 +131,7 @@ export default function Solution() {
             <div key={col.title}>
               <h4 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 700, color: C.white, margin: "0 0 8px" }}>{col.title}</h4>
               <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: "rgba(255,255,255,0.6)", margin: "0 0 8px" }}>{col.body}</p>
-              <Link href={col.link} style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 600, color: C.maerskStar, textDecoration: "none" }}>{col.linkText}</Link>
+              <Link href={col.link} style={{ fontFamily: font.sans, fontSize: 13, fontWeight: 700, color: C.maerskStar, textDecoration: "none" }}>{col.linkText}</Link>
             </div>
           ))}
         </div>

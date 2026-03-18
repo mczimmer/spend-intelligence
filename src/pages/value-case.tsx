@@ -50,9 +50,9 @@ export default function ValueCase() {
         {valueCards.map(c => (
           <Card key={c.title}>
             <h3 style={{ fontFamily: font.sans, fontSize: 18, fontWeight: 700, color: C.maerskNavy, margin: "0 0 2px" }}>{c.title}</h3>
-            <div style={{ fontSize: 13, fontWeight: 600, color: C.maerskStar, fontFamily: font.sans, marginBottom: 8 }}>{c.tagline}</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans, marginBottom: 8 }}>{c.tagline}</div>
             <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>{c.desc}</p>
-            <div style={{ background: C.maerskLight, borderRadius: 8, padding: "8px 12px", fontSize: 12, fontWeight: 600, color: C.maerskBlue, fontFamily: font.sans }}>{c.metric}</div>
+            <div style={{ background: C.maerskLight, borderRadius: 8, padding: "8px 12px", fontSize: 12, fontWeight: 700, color: C.maerskBlue, fontFamily: font.sans }}>{c.metric}</div>
           </Card>
         ))}
       </div>
@@ -63,8 +63,8 @@ export default function ValueCase() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 24 }}>
           {impactStats.map(s => (
             <div key={s.label}>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 600, letterSpacing: "0.06em", marginBottom: 4, fontFamily: font.sans }}>{s.label}</div>
-              <div style={{ fontSize: 24, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{s.value}</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 700, letterSpacing: "0.06em", marginBottom: 4, fontFamily: font.sans }}>{s.label}</div>
+              <div style={{ fontSize: 24, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{s.value}</div>
             </div>
           ))}
         </div>

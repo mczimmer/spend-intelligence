@@ -1,3 +1,51 @@
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-Book.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-BookItalic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ValtechNeue';
+  src: url('/fonts/ValtechNeue-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @keyframes spin { to { transform: rotate(360deg); } }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }

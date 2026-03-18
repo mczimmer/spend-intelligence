@@ -21,7 +21,7 @@ export default function Shell({ children }: { children: ReactNode }) {
       {/* Branding */}
       <div style={{ padding: "0 20px", marginBottom: 8 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-          <span style={{ fontFamily: font.sans, fontWeight: 800, fontSize: 16, color: C.white, letterSpacing: "0.04em" }}>M{"\u00e6"}rsk</span>
+          <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 16, color: C.white, letterSpacing: "0.04em" }}>M{"\u00e6"}rsk</span>
           <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 12 }}>{"\u00d7"}</span>
           <span style={{ fontFamily: font.sans, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.9)" }}>Valtech</span>
         </div>
@@ -34,11 +34,11 @@ export default function Shell({ children }: { children: ReactNode }) {
       <nav style={{ flex: 1, padding: "0 12px" }}>
         {sections.map(section => (
           <div key={section} style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: 9, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", padding: "0 8px", marginBottom: 6, fontFamily: font.sans }}>{section}</div>
+            <div style={{ fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", padding: "0 8px", marginBottom: 6, fontFamily: font.sans }}>{section}</div>
             {navigation.filter(n => n.section === section).map(item => {
               const isActive = router.pathname === item.href;
               return (
-                <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 8px", borderRadius: 6, textDecoration: "none", fontSize: 13, fontFamily: font.sans, fontWeight: 500, color: isActive ? C.white : "rgba(255,255,255,0.4)", background: isActive ? "rgba(255,255,255,0.08)" : "transparent", transition: "all 0.15s", marginBottom: 1 }}>
+                <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "7px 8px", borderRadius: 6, textDecoration: "none", fontSize: 13, fontFamily: font.sans, fontWeight: 400, color: isActive ? C.white : "rgba(255,255,255,0.4)", background: isActive ? "rgba(255,255,255,0.08)" : "transparent", transition: "all 0.15s", marginBottom: 1 }}>
                   {isActive && <span style={{ width: 4, height: 4, borderRadius: 2, background: C.maerskStar, flexShrink: 0 }} />}
                   {item.label}
                 </Link>

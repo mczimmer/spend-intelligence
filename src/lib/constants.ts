@@ -15,6 +15,6 @@ export const C = {
 };
 
 export const font = {
-  sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  sans: "'ValtechNeue', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   mono: "'JetBrains Mono', 'SF Mono', 'Fira Code', monospace",
 };

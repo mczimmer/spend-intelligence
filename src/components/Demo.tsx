@@ -200,12 +200,12 @@ export default function Demo() {
       <div style={{ background: C.maerskNavy, padding: "16px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: C.maerskStar, fontFamily: font.sans }}>INTERACTIVE PROOF OF CONCEPT</div>
-          <div style={{ fontSize: 16, fontWeight: 800, color: C.white, fontFamily: font.sans, marginTop: 2 }}>Spend Intelligence Engine</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: C.white, fontFamily: font.sans, marginTop: 2 }}>Spend Intelligence Engine</div>
         </div>
         <div style={{ display: "flex", gap: 20 }}>
-          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>ITEMS</div><div style={{ fontSize: 18, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{animItems}</div></div>
-          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>SPEND</div><div style={{ fontSize: 18, fontWeight: 800, color: C.white, fontFamily: font.sans }}>{fmt(animSpend)}</div></div>
-          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>EST. SAVINGS</div><div style={{ fontSize: 18, fontWeight: 800, color: C.success, fontFamily: font.sans }}>{fmt(animSavings)}</div></div>
+          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>ITEMS</div><div style={{ fontSize: 18, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{animItems}</div></div>
+          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>SPEND</div><div style={{ fontSize: 18, fontWeight: 700, color: C.white, fontFamily: font.sans }}>{fmt(animSpend)}</div></div>
+          <div><div style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>EST. SAVINGS</div><div style={{ fontSize: 18, fontWeight: 700, color: C.success, fontFamily: font.sans }}>{fmt(animSavings)}</div></div>
         </div>
       </div>
       {/* tabs */}
@@ -231,7 +231,7 @@ export default function Demo() {
                         <td style={{ padding: "8px 4px 8px 8px", fontSize: 11, color: C.valtechGray, fontFamily: font.sans }}>{expanded ? "\u2304" : "\u203a"}</td>
                         <td style={{ padding: "8px", fontSize: 12, maxWidth: 200, fontFamily: font.sans }}>{r.desc}</td>
                         <td style={{ padding: "8px" }}><Badge color="gray">{r.source}</Badge></td>
-                        <td style={{ padding: "8px", fontSize: 12, fontWeight: 600, fontFamily: font.sans, color: C.maerskNavy }}>{r.cat}</td>
+                        <td style={{ padding: "8px", fontSize: 12, fontWeight: 700, fontFamily: font.sans, color: C.maerskNavy }}>{r.cat}</td>
                         <td style={{ padding: "8px", fontSize: 12, fontFamily: font.sans }}>{r.sub}</td>
                         <td style={{ padding: "8px" }}>
                           <div style={{ fontFamily: font.mono, fontSize: 11, color: C.valtechGray }}>{r.unspsc}</div>
@@ -280,8 +280,8 @@ export default function Demo() {
                   <tr key={i} style={{ borderBottom: "1px solid #f5f5f5" }}>
                     <td style={{ padding: "8px", fontSize: 12, maxWidth: 180, fontFamily: font.sans }}>{r.desc}</td>
                     <td style={{ padding: "8px", fontSize: 11, fontFamily: font.sans }}>{r.sub}</td>
-                    <td style={{ padding: "8px" }}><span style={{ fontFamily: font.mono, fontSize: 11, color: r.payMismatch ? C.danger : C.success, fontWeight: 600 }}>{r.payCode}</span></td>
-                    <td style={{ padding: "8px" }}><span style={{ fontFamily: font.mono, fontSize: 11, color: r.matMismatch ? C.danger : C.success, fontWeight: 600 }}>{r.matCode}</span></td>
+                    <td style={{ padding: "8px" }}><span style={{ fontFamily: font.mono, fontSize: 11, color: r.payMismatch ? C.danger : C.success, fontWeight: 700 }}>{r.payCode}</span></td>
+                    <td style={{ padding: "8px" }}><span style={{ fontFamily: font.mono, fontSize: 11, color: r.matMismatch ? C.danger : C.success, fontWeight: 700 }}>{r.matCode}</span></td>
                     <td style={{ padding: "8px" }}><Badge color={r.reconStatus === "matched" ? "green" : r.reconStatus === "partial" ? "amber" : "red"}>{r.reconStatus}</Badge></td>
                     <td style={{ padding: "8px", fontSize: 10, color: C.valtechGray, fontFamily: font.sans }}>
                       {r.payMismatch ? `Standardise to ${r.suggestedPayCode} (${r.suggestedPayCount} of ${r.suggestedPayTotal})` : ""}
@@ -304,7 +304,7 @@ export default function Demo() {
               <tbody>
                 {consolidated.map((g: any, i: number) => (
                   <tr key={i} style={{ borderBottom: "1px solid #f5f5f5" }}>
-                    <td style={{ padding: "8px", fontSize: 12, fontWeight: 600, fontFamily: font.sans, color: C.maerskNavy }}>{g.cat}</td>
+                    <td style={{ padding: "8px", fontSize: 12, fontWeight: 700, fontFamily: font.sans, color: C.maerskNavy }}>{g.cat}</td>
                     <td style={{ padding: "8px", fontSize: 12, fontFamily: font.sans }}>{g.sub}</td>
                     <td style={{ padding: "8px", fontSize: 13, fontWeight: 700, fontFamily: font.sans }}>{fmt(g.totalSpend)}</td>
                     <td style={{ padding: "8px" }}><div style={{ display: "flex", flexWrap: "wrap", gap: 3 }}>{g.sources.map((s: string, j: number) => <Badge key={j} color="gray">{s}</Badge>)}</div></td>

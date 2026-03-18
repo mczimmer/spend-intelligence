@@ -21,7 +21,7 @@ export default function ProblemSpace() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, marginBottom: 32 }}>
         {problems.map(c => (
           <Card key={c.num}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: C.maerskStar, fontFamily: font.sans, marginBottom: 10 }}>{c.num}</div>
+            <div style={{ fontSize: 20, fontWeight: 700, color: C.maerskStar, fontFamily: font.sans, marginBottom: 10 }}>{c.num}</div>
             <h3 style={{ fontFamily: font.sans, fontSize: 18, fontWeight: 700, color: C.maerskNavy, margin: "0 0 6px" }}>{c.title}</h3>
             <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>{c.desc}</p>
           </Card>

@@ -14,7 +14,7 @@ export default function DiagramIntegration() {
         </g>
       ))}
       <rect x={280} y={80} width={240} height={80} rx={12} fill={C.maerskNavy} />
-      <text x={400} y={110} textAnchor="middle" style={{ fontSize: 13, fontWeight: 800, fill: C.white, fontFamily: font.sans }}>Spend Intelligence</text>
+      <text x={400} y={110} textAnchor="middle" style={{ fontSize: 13, fontWeight: 700, fill: C.white, fontFamily: font.sans }}>Spend Intelligence</text>
       <text x={400} y={128} textAnchor="middle" style={{ fontSize: 10, fill: C.maerskStar, fontFamily: font.sans }}>AI Classification Engine</text>
       <text x={400} y={144} textAnchor="middle" style={{ fontSize: 9, fill: "rgba(255,255,255,0.6)", fontFamily: font.sans }}>API-first · Cloud-native</text>
       {right.map((item, i) => (

@@ -13,7 +13,7 @@ const colors: Record<string, { bg: string; text: string; border: string }> = {
 export default function Badge({ color, children }: { color: string; children: ReactNode }) {
   const c = colors[color] || colors.gray;
   return (
-    <span style={{ display: "inline-block", background: c.bg, color: c.text, border: `1px solid ${c.border}`, borderRadius: 9999, padding: "2px 10px", fontSize: 11, fontWeight: 600, whiteSpace: "nowrap" }}>
+    <span style={{ display: "inline-block", background: c.bg, color: c.text, border: `1px solid ${c.border}`, borderRadius: 9999, padding: "2px 10px", fontSize: 11, fontWeight: 700, whiteSpace: "nowrap" }}>
       {children}
     </span>
   );

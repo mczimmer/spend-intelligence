@@ -49,7 +49,7 @@ export default function Approach() {
           ))}
         </div>
         <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", padding: "14px 20px" }}>
-          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 500 }}>We don't just build the engine; we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 400 }}>We don't just build the engine; we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
         </Card>
       </div>
 
@@ -72,11 +72,11 @@ export default function Approach() {
             <div style={{ display: "flex", gap: 16 }}>
               <div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans }}>DELIVERABLE</div>
-                <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 600, marginTop: 2, fontFamily: font.sans }}>{p.deliverable}</div>
+                <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 700, marginTop: 2, fontFamily: font.sans }}>{p.deliverable}</div>
               </div>
               <div>
                 <div style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans }}>GO/NO-GO</div>
-                <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 600, marginTop: 2, fontFamily: font.sans }}>{p.gate}</div>
+                <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 700, marginTop: 2, fontFamily: font.sans }}>{p.gate}</div>
               </div>
             </div>
           </Card>
@@ -86,7 +86,7 @@ export default function Approach() {
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", marginBottom: 24 }}>
         <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskBlue, margin: "0 0 8px" }}>Investment & Next Step</h3>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>Phase 1 (Validate) requires minimal commitment: a sample dataset from 2-3 entities and 3 weeks of elapsed time. There is no infrastructure build required; the POC runs on cloud-native AI services. If the accuracy benchmark meets the gate criteria, we proceed to Pilot. If not, we stop with full transparency on what was learned.</p>
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0, fontWeight: 600 }}>We'd welcome 30 minutes to walk through this hypothesis and demo together, and to discuss what a representative data sample for Phase 1 would look like.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0, fontWeight: 700 }}>We'd welcome 30 minutes to walk through this hypothesis and demo together, and to discuss what a representative data sample for Phase 1 would look like.</p>
       </Card>
 
       <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>

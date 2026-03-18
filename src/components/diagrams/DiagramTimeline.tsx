@@ -19,7 +19,7 @@ export default function DiagramTimeline() {
             <circle cx={x + phaseW / 2} cy={14} r={7} fill={p.color} />
             <rect x={x} y={34} width={phaseW} height={116} rx={10} fill={C.white} stroke={p.color} strokeWidth={1.5} />
             <text x={x + 14} y={54} style={{ fontSize: 9, fontWeight: 700, fill: p.color, letterSpacing: "0.08em", fontFamily: font.sans }}>{p.label}</text>
-            <text x={x + 14} y={70} style={{ fontSize: 13, fontWeight: 800, fill: C.maerskNavy, fontFamily: font.sans }}>{p.title}</text>
+            <text x={x + 14} y={70} style={{ fontSize: 13, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{p.title}</text>
             <text x={x + 14} y={84} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>{p.weeks}</text>
             {p.items.map((item, j) => (
               <text key={j} x={x + 14} y={104 + j * 14} style={{ fontSize: 10, fill: C.valtechGray, fontFamily: font.sans }}>{"\u2022"} {item}</text>

@@ -68,7 +68,7 @@ export default function DiagramC4Context() {
 
       {/* Center system */}
       <rect x={centerX} y={centerY} width={centerW} height={centerH} rx={12} fill={C.maerskNavy} />
-      <text x={centerX + centerW / 2} y={centerY + 26} textAnchor="middle" style={{ fontSize: 13, fontWeight: 800, fill: C.white, fontFamily: font.sans }}>Spend Intelligence</text>
+      <text x={centerX + centerW / 2} y={centerY + 26} textAnchor="middle" style={{ fontSize: 13, fontWeight: 700, fill: C.white, fontFamily: font.sans }}>Spend Intelligence</text>
       <text x={centerX + centerW / 2} y={centerY + 44} textAnchor="middle" style={{ fontSize: 10, fill: C.maerskStar, fontFamily: font.sans }}>AI Classification &</text>
       <text x={centerX + centerW / 2} y={centerY + 57} textAnchor="middle" style={{ fontSize: 10, fill: C.maerskStar, fontFamily: font.sans }}>Reconciliation Engine</text>
       <text x={centerX + centerW / 2} y={centerY + 72} textAnchor="middle" style={{ fontSize: 9, fill: "rgba(255,255,255,0.5)", fontFamily: font.sans }}>API-first · Cloud-native</text>
