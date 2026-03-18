@@ -159,8 +159,13 @@ export default function DiagramTargetState() {
       {drawBox("Vector DB", "Embeddings for", "similarity matching", csX, storeY, storageFill, "#b3dce8")}
       {drawBox("Reconciliation Engine", "Payment / material", "code alignment", hrX, storeY, storageFill, "#b3dce8")}
 
-      {/* Taxonomy Store -> Reconciliation Engine */}
-      <path d={`M ${procX + cw + 2} ${storeY + ch / 2} L ${hrX - 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      {/* Taxonomy Store -> Reconciliation Engine (U-shape routing below Vector DB) */}
+      {(() => {
+        const belowY = storeY + ch + 20;
+        return (
+          <path d={`M ${procX + cw / 2} ${storeY + ch + 2} L ${procX + cw / 2} ${belowY} L ${hrX + cw / 2} ${belowY} L ${hrX + cw / 2} ${storeY + ch + 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+        );
+      })()}
 
       {/* AI Classifier <-> Vector DB (L-shape in gap) */}
       {(() => {
