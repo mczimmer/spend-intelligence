@@ -10,9 +10,9 @@ import DiagramC4Context from "@/components/diagrams/DiagramC4Context";
 import DiagramAIPipeline from "@/components/diagrams/DiagramAIPipeline";
 
 const paceExplanations = [
+  { title: "Innovation", desc: "Where it goes next. Once the classification engine is trained, continuous learning and predictive capabilities become possible." },
   { title: "Differentiation", desc: "What you are getting. AI-powered classification, reconciliation, and consolidation delivered as an API-first service." },
   { title: "Record", desc: "What it sits on. Your existing SAP, Oracle, and procurement systems remain the source of truth. No migration required." },
-  { title: "Innovation", desc: "Where it goes next. Once the classification engine is trained, continuous learning and predictive capabilities become possible." },
 ];
 
 const govCards = [
@@ -132,19 +132,19 @@ export default function Architecture() {
                 <h3 style={{ fontFamily: font.sans, fontSize: 15, fontWeight: 700, color: C.maerskNavy, margin: 0 }}>{p.phase}: {p.title}</h3>
                 <Badge color="navy">{p.weeks}</Badge>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <table style={{ width: "100%", borderCollapse: "collapse" }}>
+                <tbody>
                 {[
                   { label: "Input", value: p.input },
-                  { label: "Integration effort", value: p.effort },
+                  { label: "Effort", value: p.effort },
                   { label: "Environment", value: p.env },
                   { label: "Timeline", value: p.time },
                 ].map(row => (
-                  <div key={row.label} style={{ display: "flex", gap: 8 }}>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans, minWidth: 100, flexShrink: 0 }}>{row.label.toUpperCase()}</span>
-                    <span style={{ fontSize: 12, color: C.maerskNavy, fontFamily: font.sans }}>{row.value}</span>
-                  </div>
-                ))}
-              </div>
+                  <tr key={row.label}>
+                    <td style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans, padding: "3px 12px 3px 0", verticalAlign: "top", whiteSpace: "nowrap", width: 80 }}>{row.label.toUpperCase()}</td>
+                    <td style={{ fontSize: 12, color: C.maerskNavy, fontFamily: font.sans, padding: "3px 0", verticalAlign: "top" }}>{row.value}</td>
+                  </tr>
+                ))}</tbody></table>
             </Card>
           ))}
         </div>

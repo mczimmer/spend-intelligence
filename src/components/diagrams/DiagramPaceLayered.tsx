@@ -4,11 +4,26 @@ export default function DiagramPaceLayered() {
   const W = 920, layerX = 20, layerW = 880;
   const boxW = 152, boxH = 38, boxGap = 14, boxRx = 8;
 
+  // Order: Innovation (top), Differentiation (middle), Record (bottom)
   const layers = [
+    {
+      label: "INNOVATION",
+      subtitle: "Future capabilities: what becomes possible",
+      y: 10, h: 94,
+      fill: "rgba(34,197,94,0.08)",
+      stroke: C.success,
+      labelColor: C.success,
+      boxes: [
+        { text: "Continuous Learning" },
+        { text: "Acquisition Auto-Onboard" },
+        { text: "Predictive Category Mgmt" },
+        { text: "Anomaly Detection" },
+      ],
+    },
     {
       label: "DIFFERENTIATION",
       subtitle: "New capabilities: what this engagement delivers",
-      y: 10, h: 100,
+      y: 128, h: 100,
       fill: "rgba(66,176,213,0.10)",
       stroke: C.maerskStar,
       labelColor: C.maerskStar,
@@ -23,7 +38,7 @@ export default function DiagramPaceLayered() {
     {
       label: "RECORD",
       subtitle: "Stable foundation: what Maersk already operates",
-      y: 134, h: 100,
+      y: 252, h: 100,
       fill: C.valtechLight,
       stroke: C.valtechBorder,
       labelColor: C.valtechGray,
@@ -33,20 +48,6 @@ export default function DiagramPaceLayered() {
         { text: "Coupa / Ariba" },
         { text: "General Ledger" },
         { text: "Entity Master Data" },
-      ],
-    },
-    {
-      label: "INNOVATION",
-      subtitle: "Future capabilities: what becomes possible",
-      y: 258, h: 94,
-      fill: "rgba(34,197,94,0.08)",
-      stroke: C.success,
-      labelColor: C.success,
-      boxes: [
-        { text: "Continuous Learning" },
-        { text: "Acquisition Auto-Onboard" },
-        { text: "Predictive Category Mgmt" },
-        { text: "Anomaly Detection" },
       ],
     },
   ];
@@ -61,7 +62,7 @@ export default function DiagramPaceLayered() {
       return (
         <g key={b.text}>
           <rect x={x} y={boxY} width={boxW} height={boxH} rx={boxRx} fill={C.white} stroke={accent} strokeWidth={b.bold ? 2 : 1.5} />
-          <text x={x + boxW / 2} y={boxY + boxH / 2 + 4} textAnchor="middle" style={{ fontSize: b.bold ? 11 : 10, fontWeight: b.bold ? 800 : 600, fill: C.maerskNavy, fontFamily: font.sans }}>{b.text}</text>
+          <text x={x + boxW / 2} y={boxY + boxH / 2 + 4} textAnchor="middle" style={{ fontSize: b.bold ? 11 : 10, fontWeight: b.bold ? 700 : 700, fill: C.maerskNavy, fontFamily: font.sans }}>{b.text}</text>
         </g>
       );
     });
@@ -77,25 +78,21 @@ export default function DiagramPaceLayered() {
 
       {layers.map(layer => (
         <g key={layer.label}>
-          {/* Layer background */}
           <rect x={layerX} y={layer.y} width={layerW} height={layer.h} rx={10} fill={layer.fill} stroke={layer.stroke} strokeWidth={1.5} />
-          {/* Label */}
           <text x={layerX + 16} y={layer.y + 22} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", fill: layer.labelColor, fontFamily: font.sans }}>{layer.label}</text>
-          {/* Subtitle */}
           <text x={layerX + 16} y={layer.y + 38} style={{ fontSize: 10, fill: C.valtechGray, fontFamily: font.sans }}>{layer.subtitle}</text>
-          {/* Boxes */}
           {renderBoxes(layer.boxes, layer.y, layer.h, layer.stroke)}
         </g>
       ))}
 
-      {/* Dashed connectors: Record → Differentiation */}
+      {/* Dashed connectors: Differentiation up to Innovation */}
       {[280, 460, 640].map(cx => (
-        <line key={`up-${cx}`} x1={cx} y1={layers[1].y - 1} x2={cx} y2={layers[0].y + layers[0].h + 1} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowPL)" />
+        <line key={`up-${cx}`} x1={cx} y1={layers[0].y + layers[0].h + 1} x2={cx} y2={layers[1].y - 1} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowPL)" />
       ))}
 
-      {/* Dashed connectors: Differentiation → Innovation */}
+      {/* Dashed connectors: Record up to Differentiation */}
       {[320, 500, 680].map(cx => (
-        <line key={`down-${cx}`} x1={cx} y1={layers[1].y + layers[1].h + 1} x2={cx} y2={layers[2].y - 1} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowPL)" />
+        <line key={`down-${cx}`} x1={cx} y1={layers[2].y - 1} x2={cx} y2={layers[1].y + layers[1].h + 1} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowPL)" />
       ))}
     </svg>
   );

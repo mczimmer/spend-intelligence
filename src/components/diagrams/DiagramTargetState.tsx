@@ -1,69 +1,59 @@
 import { C, font } from "@/lib/constants";
 
 export default function DiagramTargetState() {
-  const W = 920, H = 580;
-  const bx = 10, by = 10, bw = 900, bh = 500;
+  const W = 920, H = 600;
   const cw = 130, ch = 44, rx = 8;
   const processingFill = "rgba(66,176,213,0.10)";
   const storageFill = "#EBF5FF";
   const govFill = "rgba(0,36,61,0.06)";
 
-  // Ingestion column (left, stacked vertically)
-  const ingX = bx + 40;
-  const ingY = by + 36;
+  // Boundary with generous padding
+  const bx = 30, by = 10, bw = 860;
+
+  // Ingestion column (left side, inside boundary)
+  const ingX = bx + 24;
+  const ingY = by + 40;
+  const ingGap = 14;
   const ingBoxes = [
-    { label: "Source Extract Adapter", sub: "Connects to SAP, Oracle,", sub2: "entity systems", y: ingY },
-    { label: "Normalisation", sub: "Currency, encoding, units,", sub2: "naming resolution", y: ingY + ch + 12 },
-    { label: "Data Quality", sub: "Missing fields, duplicates,", sub2: "provenance tagging", y: ingY + (ch + 12) * 2 },
+    { label: "Source Extract Adapter", sub: "Connects to SAP, Oracle,", sub2: "entity systems" },
+    { label: "Normalisation", sub: "Currency, encoding, units,", sub2: "naming resolution" },
+    { label: "Data Quality", sub: "Missing fields, duplicates,", sub2: "provenance tagging" },
   ];
 
-  // Processing row
-  const procY = ingY + 20;
-  const procX = ingX + cw + 50;
-  const procBoxes = [
-    { label: "AI Classifier", sub: "Semantic embedding +", sub2: "taxonomy mapping", x: procX, y: procY },
-    { label: "Model Router", sub: "Provider-agnostic", sub2: "inference routing", x: procX, y: procY + ch + 16 },
-    { label: "Confidence Scoring", sub: "Threshold-based routing", x: procX + cw + 40, y: procY },
-  ];
+  // Processing column (center)
+  const procX = ingX + cw + 60;
+  const procY = ingY + 10;
+  const procGap = 16;
 
-  // Human review (expanded)
-  const hrX = procX + (cw + 40) * 2;
-  const hrY = procY;
-  const hrBoxes = [
-    { label: "Priority Router", sub: "Routes by spend impact", sub2: "and criticality", x: hrX, y: hrY },
-    { label: "Reviewer Workbench", sub: "Validate, correct,", sub2: "escalate", x: hrX, y: hrY + ch + 16 },
-  ];
+  // Confidence Scoring (right of AI Classifier)
+  const csX = procX + cw + 50;
+
+  // Human Review (right of Confidence Scoring)
+  const hrX = csX + cw + 50;
 
   // Storage row
-  const storeY = ingY + (ch + 12) * 2 + ch + 30;
-  const storeBoxes = [
-    { label: "Taxonomy Store", sub: "Unified category hierarchy", x: procX, y: storeY },
-    { label: "Vector DB", sub: "Embeddings for matching", x: procX + cw + 40, y: storeY },
-    { label: "Reconciliation Engine", sub: "Payment / material codes", x: procX + (cw + 40) * 2, y: storeY },
-  ];
+  const storeY = ingY + (ch + ingGap) * 2 + ch + 36;
 
   // Governance layer
-  const govY = storeY + ch + 30;
-  const govH = ch + 20;
-  const govBoxes = [
-    { label: "Taxonomy Versioning", sub: "Every hierarchy change versioned", x: bx + 30 },
-    { label: "Audit & Decision Log", sub: "All decisions logged with provenance", x: bx + 30 + cw + 20 },
-    { label: "Calibration Monitor", sub: "Drift detection, threshold validation", x: bx + 30 + (cw + 20) * 2 },
-    { label: "Override Workflow", sub: "Human corrections captured, approved", x: bx + 30 + (cw + 20) * 3 },
-  ];
+  const govY = storeY + ch + 36;
+  const govH = ch + 24;
+  const bh = govY + govH - by + 16;
 
-  // External systems
-  const extLeftX = bx - 10;
-  const extRightX = W - 10;
-
-  const drawBox = (b: { label: string; sub: string; sub2?: string; x: number; y: number }, fill: string, stroke: string) => (
-    <g key={b.label + b.x}>
-      <rect x={b.x} y={b.y} width={cw} height={ch} rx={rx} fill={fill} stroke={stroke} strokeWidth={1.5} />
-      <text x={b.x + cw / 2} y={b.y + (b.sub2 ? 14 : 18)} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{b.label}</text>
-      <text x={b.x + cw / 2} y={b.y + (b.sub2 ? 26 : 30)} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>{b.sub}</text>
-      {b.sub2 && <text x={b.x + cw / 2} y={b.y + 36} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>{b.sub2}</text>}
+  const drawBox = (label: string, sub: string, sub2: string | undefined, x: number, y: number, fill: string, stroke: string) => (
+    <g key={label + x + y}>
+      <rect x={x} y={y} width={cw} height={ch} rx={rx} fill={fill} stroke={stroke} strokeWidth={1.5} />
+      <text x={x + cw / 2} y={y + (sub2 ? 14 : 18)} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{label}</text>
+      <text x={x + cw / 2} y={y + (sub2 ? 26 : 30)} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>{sub}</text>
+      {sub2 && <text x={x + cw / 2} y={y + 36} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>{sub2}</text>}
     </g>
   );
+
+  // Computed positions
+  const ing1Y = ingY;
+  const ing2Y = ingY + ch + ingGap;
+  const ing3Y = ingY + (ch + ingGap) * 2;
+  const modelRouterY = procY + ch + procGap;
+  const hrReviewY = procY + ch + procGap;
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%" }} xmlns="http://www.w3.org/2000/svg">
@@ -78,83 +68,134 @@ export default function DiagramTargetState() {
 
       {/* System boundary */}
       <rect x={bx} y={by} width={bw} height={bh} rx={12} fill="none" stroke={C.maerskNavy} strokeWidth={2} strokeDasharray="8 4" />
-      <text x={bx + 16} y={by + 22} style={{ fontSize: 10, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Spend Intelligence Engine</text>
+      <text x={bx + 16} y={by + 24} style={{ fontSize: 10, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Spend Intelligence Engine</text>
 
       {/* Ingestion column */}
-      {ingBoxes.map(b => drawBox(b as any, processingFill, C.maerskStar))}
-      {/* Vertical arrows between ingestion boxes */}
-      <path d={`M ${ingX + cw / 2} ${ingY + ch + 2} L ${ingX + cw / 2} ${ingY + ch + 10}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-      <path d={`M ${ingX + cw / 2} ${ingY + (ch + 12) + ch + 2} L ${ingX + cw / 2} ${ingY + (ch + 12) * 2 - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      {drawBox(ingBoxes[0].label, ingBoxes[0].sub, ingBoxes[0].sub2, ingX, ing1Y, processingFill, C.maerskStar)}
+      {drawBox(ingBoxes[1].label, ingBoxes[1].sub, ingBoxes[1].sub2, ingX, ing2Y, processingFill, C.maerskStar)}
+      {drawBox(ingBoxes[2].label, ingBoxes[2].sub, ingBoxes[2].sub2, ingX, ing3Y, processingFill, C.maerskStar)}
 
-      {/* Data Quality -> AI Classifier */}
-      <path d={`M ${ingX + cw + 2} ${ingY + (ch + 12) * 2 + ch / 2} L ${procX - 15} ${ingY + (ch + 12) * 2 + ch / 2} L ${procX - 15} ${procY + ch / 2} L ${procX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-      <text x={procX - 20} y={procY + ch / 2 + 14} textAnchor="end" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Source entity + record ID</text>
+      {/* Ingestion vertical arrows */}
+      <path d={`M ${ingX + cw / 2} ${ing1Y + ch + 2} L ${ingX + cw / 2} ${ing2Y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      <path d={`M ${ingX + cw / 2} ${ing2Y + ch + 2} L ${ingX + cw / 2} ${ing3Y - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* Processing boxes */}
-      {procBoxes.map(b => drawBox(b as any, processingFill, C.maerskStar))}
+      {/* Data Quality -> AI Classifier (L-shape: right then up) */}
+      {(() => {
+        const midX = ingX + cw + 30;
+        return (
+          <>
+            <path d={`M ${ingX + cw + 2} ${ing3Y + ch / 2} L ${midX} ${ing3Y + ch / 2} L ${midX} ${procY + ch / 2} L ${procX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+            <text x={midX + 6} y={procY + ch / 2 + 14} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Source entity + record ID</text>
+          </>
+        );
+      })()}
 
-      {/* AI Classifier -> Model Router (vertical) */}
-      <path d={`M ${procX + cw / 2} ${procY + ch + 2} L ${procX + cw / 2} ${procY + ch + 14}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      {/* Processing: AI Classifier */}
+      {drawBox("AI Classifier", "Semantic embedding +", "taxonomy mapping", procX, procY, processingFill, C.maerskStar)}
+
+      {/* Model Router (below AI Classifier) */}
+      {drawBox("Model Router", "Provider-agnostic", "inference routing", procX, modelRouterY, processingFill, C.maerskStar)}
+
+      {/* AI Classifier -> Model Router */}
+      <path d={`M ${procX + cw / 2} ${procY + ch + 2} L ${procX + cw / 2} ${modelRouterY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+
+      {/* Model Router -> Inference (left, dashed) */}
+      <path d={`M ${procX - 2} ${modelRouterY + ch / 2} L ${ingX + cw + 10} ${modelRouterY + ch / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" />
+      <text x={(procX + ingX + cw) / 2} y={modelRouterY + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Inference</text>
+
+      {/* Confidence Scoring */}
+      {drawBox("Confidence Scoring", "Threshold-based", "routing", csX, procY, processingFill, C.maerskStar)}
 
       {/* AI Classifier -> Confidence Scoring (horizontal) */}
-      <path d={`M ${procX + cw + 2} ${procY + ch / 2} L ${procBoxes[2].x - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      <path d={`M ${procX + cw + 2} ${procY + ch / 2} L ${csX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* Confidence Scoring -> Priority Router (low confidence) */}
-      <path d={`M ${procBoxes[2].x + cw + 2} ${procY + ch / 2} L ${hrX - 2} ${hrY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-      <text x={(procBoxes[2].x + cw + hrX) / 2} y={procY + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
+      {/* Priority Router */}
+      {drawBox("Priority Router", "Routes by spend", "impact and criticality", hrX, procY, "rgba(234,179,8,0.08)", C.warning)}
 
-      {/* Confidence Scoring -> Taxonomy Store (high confidence) */}
-      <path d={`M ${procBoxes[2].x + cw / 2} ${procY + ch + 2} L ${procBoxes[2].x + cw / 2} ${storeY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-      <text x={procBoxes[2].x + cw / 2 + 10} y={(procY + ch + storeY) / 2} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Classification + confidence</text>
+      {/* Reviewer Workbench */}
+      {drawBox("Reviewer Workbench", "Validate, correct,", "escalate", hrX, hrReviewY, "rgba(234,179,8,0.08)", C.warning)}
+
+      {/* Confidence Scoring -> Priority Router (horizontal) */}
+      <path d={`M ${csX + cw + 2} ${procY + ch / 2} L ${hrX - 2} ${procY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      <text x={(csX + cw + hrX) / 2} y={procY + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
 
       {/* Priority Router -> Reviewer Workbench */}
-      <path d={`M ${hrX + cw / 2} ${hrY + ch + 2} L ${hrX + cw / 2} ${hrY + ch + 14}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      <path d={`M ${hrX + cw / 2} ${procY + ch + 2} L ${hrX + cw / 2} ${hrReviewY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* Human review boxes */}
-      {hrBoxes.map(b => drawBox(b as any, "rgba(234,179,8,0.08)", C.warning))}
+      {/* Confidence Scoring -> Taxonomy Store (L-shape: down then left) */}
+      {(() => {
+        const midY = storeY - 16;
+        const tsX = procX;
+        return (
+          <>
+            <path d={`M ${csX + cw / 2} ${procY + ch + 2} L ${csX + cw / 2} ${midY} L ${tsX + cw / 2} ${midY} L ${tsX + cw / 2} ${storeY - 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+            <text x={csX + cw / 2 + 8} y={(procY + ch + midY) / 2} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
+          </>
+        );
+      })()}
 
-      {/* Reviewer Workbench -> Taxonomy Store (validated output) */}
-      <path d={`M ${hrX + cw / 2} ${hrY + ch + 16 + ch + 2} L ${hrX + cw / 2} ${storeY + ch / 2} L ${storeBoxes[2].x + cw + 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} />
-      <text x={hrX + cw / 2 + 10} y={hrY + ch + 16 + ch + 16} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>+ reviewer ID + override reason</text>
+      {/* Reviewer Workbench -> Reconciliation Engine (L-shape: down then left) */}
+      {(() => {
+        const reX = csX;
+        return (
+          <path d={`M ${hrX + cw / 2} ${hrReviewY + ch + 2} L ${hrX + cw / 2} ${storeY + ch / 2} L ${reX + cw + 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+        );
+      })()}
+      <text x={hrX + cw / 2 + 8} y={hrReviewY + ch + 16} textAnchor="start" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>+ reviewer ID + reason</text>
 
-      {/* Reviewer Workbench -> Governance (corrections feed calibration) */}
-      <path d={`M ${hrX} ${hrY + ch + 16 + ch / 2} L ${hrX - 15} ${hrY + ch + 16 + ch / 2} L ${hrX - 15} ${govY + govH / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowTSg)" />
-      <text x={hrX - 20} y={govY - 4} textAnchor="end" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Corrections feed calibration</text>
+      {/* Reviewer Workbench -> Governance (dashed, L-shape: left then down) */}
+      {(() => {
+        const gx = hrX - 16;
+        return (
+          <path d={`M ${hrX - 2} ${hrReviewY + ch / 2} L ${gx} ${hrReviewY + ch / 2} L ${gx} ${govY + 10}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowTSg)" />
+        );
+      })()}
+      <text x={hrX - 20} y={govY} textAnchor="end" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Corrections feed calibration</text>
 
-      {/* Storage boxes */}
-      {storeBoxes.map(b => drawBox(b as any, storageFill, "#b3dce8"))}
+      {/* Storage row */}
+      {drawBox("Taxonomy Store", "Unified category", "hierarchy", procX, storeY, storageFill, "#b3dce8")}
+      {drawBox("Vector DB", "Embeddings for", "similarity matching", csX, storeY, storageFill, "#b3dce8")}
+      {drawBox("Reconciliation Engine", "Payment / material", "code alignment", hrX, storeY, storageFill, "#b3dce8")}
 
-      {/* Taxonomy Store -> Reconciliation Engine */}
-      <path d={`M ${storeBoxes[0].x + cw + 2} ${storeY + ch / 2} L ${storeBoxes[2].x - 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+      {/* Taxonomy Store -> Reconciliation Engine (horizontal) */}
+      <path d={`M ${procX + cw + 2} ${storeY + ch / 2} L ${hrX - 2} ${storeY + ch / 2}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
 
-      {/* AI Classifier <-> Vector DB */}
-      <path d={`M ${procX + cw + 15} ${procY + ch + 2} L ${procX + cw + 15} ${storeY + ch / 2 - 10} L ${storeBoxes[1].x - 2} ${storeY + ch / 2 - 10}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
-
-      {/* Model Router -> External LLM (left, through boundary) */}
-      <path d={`M ${procX} ${procY + ch + 16 + ch / 2} L ${ingX + cw / 2} ${procY + ch + 16 + ch / 2}`} fill="none" stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" />
-      <text x={(procX + ingX + cw / 2) / 2} y={procY + ch + 16 + ch / 2 - 7} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>Inference</text>
+      {/* AI Classifier <-> Vector DB (L-shape in gap between columns) */}
+      {(() => {
+        const chX = procX + cw + 14;
+        return (
+          <path d={`M ${procX + cw + 2} ${procY + ch / 2 + 10} L ${chX} ${procY + ch / 2 + 10} L ${chX} ${storeY + ch / 2 - 8} L ${csX - 2} ${storeY + ch / 2 - 8}`} fill="none" stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowTS)" />
+        );
+      })()}
 
       {/* Governance layer band */}
       <rect x={bx + 10} y={govY} width={bw - 20} height={govH} rx={8} fill={govFill} stroke={C.maerskNavy} strokeWidth={1} strokeDasharray="4 2" opacity={0.6} />
-      <text x={bx + 20} y={govY + 12} style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.1em", fill: C.maerskNavy, fontFamily: font.sans, opacity: 0.5 }}>GOVERNANCE LAYER</text>
-      {govBoxes.map(b => (
+      <text x={bx + 20} y={govY + 14} style={{ fontSize: 8, fontWeight: 700, letterSpacing: "0.1em", fill: C.maerskNavy, fontFamily: font.sans, opacity: 0.5 }}>GOVERNANCE LAYER</text>
+
+      {/* Governance boxes */}
+      {[
+        { label: "Taxonomy Versioning", sub: "Hierarchy changes versioned", x: bx + 24 },
+        { label: "Audit & Decision Log", sub: "All decisions with provenance", x: bx + 24 + (cw + 14) },
+        { label: "Calibration Monitor", sub: "Drift detection, validation", x: bx + 24 + (cw + 14) * 2 },
+        { label: "Override Workflow", sub: "Corrections captured, approved", x: bx + 24 + (cw + 14) * 3 },
+      ].map(b => (
         <g key={b.label}>
-          <rect x={b.x} y={govY + 18} width={cw + 20} height={ch - 8} rx={6} fill={C.white} stroke={C.maerskNavy} strokeWidth={1} opacity={0.7} />
-          <text x={b.x + (cw + 20) / 2} y={govY + 18 + 14} textAnchor="middle" style={{ fontSize: 8, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{b.label}</text>
-          <text x={b.x + (cw + 20) / 2} y={govY + 18 + 26} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>{b.sub}</text>
+          <rect x={b.x} y={govY + 20} width={cw} height={ch - 10} rx={6} fill={C.white} stroke={C.maerskNavy} strokeWidth={1} opacity={0.7} />
+          <text x={b.x + cw / 2} y={govY + 20 + 13} textAnchor="middle" style={{ fontSize: 8, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>{b.label}</text>
+          <text x={b.x + cw / 2} y={govY + 20 + 25} textAnchor="middle" style={{ fontSize: 7, fill: C.valtechGray, fontFamily: font.sans }}>{b.sub}</text>
         </g>
       ))}
 
       {/* Legend */}
       <g>
-        <rect x={bx + 10} y={H - 30} width={10} height={10} rx={3} fill={processingFill} stroke={C.maerskStar} strokeWidth={1} />
-        <text x={bx + 26} y={H - 22} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Processing</text>
-        <rect x={bx + 100} y={H - 30} width={10} height={10} rx={3} fill={storageFill} stroke="#b3dce8" strokeWidth={1} />
-        <text x={bx + 116} y={H - 22} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Storage</text>
-        <rect x={bx + 180} y={H - 30} width={10} height={10} rx={3} fill="rgba(234,179,8,0.08)" stroke={C.warning} strokeWidth={1} />
-        <text x={bx + 196} y={H - 22} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Human Review</text>
-        <rect x={bx + 290} y={H - 30} width={10} height={10} rx={3} fill={govFill} stroke={C.maerskNavy} strokeWidth={1} opacity={0.6} />
-        <text x={bx + 306} y={H - 22} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Governance</text>
+        <rect x={bx + 10} y={H - 28} width={10} height={10} rx={3} fill={processingFill} stroke={C.maerskStar} strokeWidth={1} />
+        <text x={bx + 26} y={H - 20} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Processing</text>
+        <rect x={bx + 100} y={H - 28} width={10} height={10} rx={3} fill={storageFill} stroke="#b3dce8" strokeWidth={1} />
+        <text x={bx + 116} y={H - 20} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Storage</text>
+        <rect x={bx + 180} y={H - 28} width={10} height={10} rx={3} fill="rgba(234,179,8,0.08)" stroke={C.warning} strokeWidth={1} />
+        <text x={bx + 196} y={H - 20} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Human Review</text>
+        <rect x={bx + 290} y={H - 28} width={10} height={10} rx={3} fill={govFill} stroke={C.maerskNavy} strokeWidth={1} opacity={0.6} />
+        <text x={bx + 306} y={H - 20} style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Governance</text>
       </g>
     </svg>
   );
