@@ -9,7 +9,7 @@ const teamCards = [
   {
     title: "Category complexity is our pattern",
     badge: "Cross-Industry",
-    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services, industries where structural fragmentation runs as deep as maritime logistics. The AI approach here is informed by what works at scale across category-heavy enterprises. This isn't a first attempt at the problem.",
+    desc: "We've built classification, taxonomy harmonisation, and data standardisation solutions across healthcare, pharma, automotive, and financial services, industries where structural fragmentation runs as deep as maritime logistics. The AI approach here is informed by what works at scale across category-heavy enterprises. This is not a first attempt at the problem.",
   },
   {
     title: "Built for the people who use it",
@@ -19,11 +19,45 @@ const teamCards = [
 ];
 
 const phases = [
-  { phase: "Phase 1: Validate", weeks: "Weeks 1-3", desc: "Ingest a sample of real Maersk spend data. Build and benchmark the AI classification engine against a manually-verified baseline. Deliver an accuracy report and refined taxonomy mapping.", deliverable: "Accuracy benchmark + taxonomy", gate: ">=85% accuracy on sample" },
-  { phase: "Phase 2: Pilot", weeks: "Weeks 4-8", desc: "Go live with 2 category groups (e.g. Marine Fuels, Reefer Maintenance). Connect to SAP for payment/material code extraction. Run reconciliation engine with human review loop.", deliverable: "Working pilot + reconciliation report", gate: "Category manager sign-off" },
-  { phase: "Phase 3: Scale", weeks: "Weeks 9-14", desc: "Extend to all spend categories. Roll out across additional acquired entities. Build executive dashboard with consolidated spend view and savings tracking.", deliverable: "Full deployment + spend dashboard", gate: "Finance team validation" },
-  { phase: "Phase 4: Embed", weeks: "Weeks 15-18", desc: "Transfer ownership to internal teams. Deploy self-service tools for ongoing taxonomy management. Establish continuous learning pipeline for new data and acquisitions.", deliverable: "Handover + training complete", gate: "Self-sustaining operation" },
+  {
+    phase: "Phase 1: Validate", weeks: "Weeks 1-3",
+    desc: "Ingest a sample of real Maersk spend data. Build and benchmark the AI classification engine against a manually-verified baseline. Deliver an accuracy report and refined taxonomy mapping.",
+    deliverable: "Classification accuracy report on real Maersk data (target: 85%+), draft unified taxonomy for tested categories, go/no-go recommendation with supporting evidence",
+    gate: ">=85% accuracy on sample",
+    exclusion: "Phase 1 does not include: SAP integration, production deployment, reconciliation engine, dashboard, or multi-entity rollout. These are Phase 2-3 deliverables.",
+  },
+  {
+    phase: "Phase 2: Pilot", weeks: "Weeks 4-8",
+    desc: "Go live with 2 category groups (e.g. Marine Fuels, Reefer Maintenance). Connect to SAP for payment/material code extraction. Run reconciliation engine with human review loop.",
+    deliverable: "Working pilot + reconciliation report",
+    gate: "Category managers confirm pilot classification accuracy meets operational standards. Reconciliation report reviewed by finance.",
+    exclusion: "",
+  },
+  {
+    phase: "Phase 3: Scale", weeks: "Weeks 9-14",
+    desc: "Extend to all spend categories. Roll out across additional acquired entities. Build executive dashboard with consolidated spend view and savings tracking.",
+    deliverable: "Full deployment + spend dashboard",
+    gate: "Finance confirms reconciled codes match GL expectations. Category managers confirm consolidated spend view is actionable.",
+    exclusion: "",
+  },
+  {
+    phase: "Phase 4: Embed", weeks: "Weeks 15-18",
+    desc: "Transfer ownership to internal teams. Deploy self-service tools for ongoing taxonomy management. Establish continuous learning pipeline for new data and acquisitions.",
+    deliverable: "Handover + training complete",
+    gate: "Self-sustaining operation",
+    exclusion: "",
+  },
 ];
+
+const maerskEffort = [
+  { phase: "Phase 1", from: "CSV/Excel spend extract from 2-3 entities. One category manager to review accuracy benchmark. One decision-maker for go/no-go.", effort: "Roughly 5 person-days across 3 weeks" },
+  { phase: "Phase 2", from: "SAP data extract (scheduled, not integrated). Two category managers for pilot validation.", effort: "2-3 hours/week for pilot duration" },
+  { phase: "Phase 3", from: "Infosec approval for production deployment. Finance team for reconciliation validation.", effort: "Standard enterprise onboarding" },
+  { phase: "Phase 4", from: "Internal team nominated for handover.", effort: "Training + transition support" },
+];
+
+const thStyle: React.CSSProperties = { textAlign: "left", fontSize: 10, textTransform: "uppercase", letterSpacing: "0.06em", color: C.valtechGray, padding: "8px 10px", borderBottom: `2px solid ${C.valtechBorder}`, fontFamily: font.sans, fontWeight: 700 };
+const tdStyle: React.CSSProperties = { padding: "8px 10px", fontSize: 12, fontFamily: font.sans, color: C.valtechGray, lineHeight: 1.5, verticalAlign: "top" };
 
 export default function Approach() {
   return (
@@ -31,7 +65,7 @@ export default function Approach() {
       <PageHeader
         label="Engagement"
         title="How We Get There"
-        subtitle="A phased approach designed to demonstrate value early and scale with confidence. Each phase has a clear deliverable and go/no-go gate."
+        subtitle="First classified results on real Maersk data in 3 weeks. First live pilot with category managers in 8 weeks. Full deployment in 14 weeks. Each phase has a measurable gate. You can stop at any boundary."
       />
 
       {/* Why This Team */}
@@ -49,9 +83,33 @@ export default function Approach() {
           ))}
         </div>
         <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", padding: "14px 20px" }}>
-          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 400 }}>We don't just build the engine; we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
+          <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.maerskBlue, margin: 0, fontWeight: 400 }}>We do not just build the engine; we build the product around it. From data ingestion to the dashboard a category manager opens on Monday morning, every touchpoint is designed for adoption.</p>
         </Card>
       </div>
+
+      {/* What Maersk provides */}
+      <Card style={{ borderLeft: `3px solid ${C.maerskStar}`, marginBottom: 32 }}>
+        <h3 style={{ fontFamily: font.sans, fontSize: 14, fontWeight: 700, color: C.maerskNavy, margin: "0 0 12px" }}>What we need from you</h3>
+        <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 12 }}>
+          <thead>
+            <tr>
+              <th style={{ ...thStyle, width: 80 }}>Phase</th>
+              <th style={thStyle}>From Maersk</th>
+              <th style={{ ...thStyle, width: 180 }}>Effort</th>
+            </tr>
+          </thead>
+          <tbody>
+            {maerskEffort.map(r => (
+              <tr key={r.phase} style={{ borderBottom: "1px solid #f5f5f5" }}>
+                <td style={{ ...tdStyle, fontWeight: 700, color: C.maerskNavy }}>{r.phase}</td>
+                <td style={tdStyle}>{r.from}</td>
+                <td style={{ ...tdStyle, fontFamily: font.mono, fontSize: 11 }}>{r.effort}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p style={{ fontFamily: font.sans, fontSize: 12, color: C.valtechGray, margin: 0 }}>Phase 1 requires minimal internal coordination. We do the engineering. You provide the data and validate the output.</p>
+      </Card>
 
       <Card style={{ marginBottom: 32 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
@@ -69,16 +127,17 @@ export default function Approach() {
               <Badge color="navy">{p.weeks}</Badge>
             </div>
             <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>{p.desc}</p>
-            <div style={{ display: "flex", gap: 16 }}>
-              <div>
+            <div style={{ display: "flex", gap: 16, marginBottom: p.exclusion ? 8 : 0 }}>
+              <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans }}>DELIVERABLE</div>
                 <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 700, marginTop: 2, fontFamily: font.sans }}>{p.deliverable}</div>
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 10, fontWeight: 700, color: C.valtechGray, letterSpacing: "0.05em", fontFamily: font.sans }}>GO/NO-GO</div>
                 <div style={{ fontSize: 12, color: C.maerskNavy, fontWeight: 700, marginTop: 2, fontFamily: font.sans }}>{p.gate}</div>
               </div>
             </div>
+            {p.exclusion && <p style={{ fontFamily: font.sans, fontSize: 12, lineHeight: 1.6, color: C.valtechGray, fontStyle: "italic", margin: 0 }}>{p.exclusion}</p>}
           </Card>
         ))}
       </div>
@@ -86,11 +145,14 @@ export default function Approach() {
       <Card style={{ background: C.maerskLight, borderColor: "#b3dce8", marginBottom: 24 }}>
         <h3 style={{ fontFamily: font.sans, fontSize: 16, fontWeight: 700, color: C.maerskBlue, margin: "0 0 8px" }}>Investment & Next Step</h3>
         <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>Phase 1 (Validate) requires minimal commitment: a sample dataset from 2-3 entities and 3 weeks of elapsed time. There is no infrastructure build required; the POC runs on cloud-native AI services. If the accuracy benchmark meets the gate criteria, we proceed to Pilot. If not, we stop with full transparency on what was learned.</p>
-        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0, fontWeight: 700 }}>We'd welcome 30 minutes to walk through this hypothesis and demo together, and to discuss what a representative data sample for Phase 1 would look like.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 12px" }}>If Phase 1 does not meet the accuracy gate: Maersk keeps the taxonomy draft, the accuracy analysis, and the data quality assessment. All Maersk data is deleted from Valtech environments. The investment is bounded. Nothing is lost.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.maerskNavy, margin: 0, fontWeight: 700 }}>We would welcome 30 minutes to walk through this hypothesis and demo together, and to discuss what a representative data sample for Phase 1 would look like.</p>
       </Card>
 
+      <p style={{ fontFamily: font.sans, fontSize: 15, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 24px", maxWidth: 700 }}>A traditional consultant-led harmonisation project takes 6-12 months and produces a static mapping that degrades with every new supplier, contract, and acquisition. Phase 1 takes 3 weeks and produces a classification system that improves with use. The speed difference is not about working harder. It is about AI doing in seconds what manual matching does in hours.</p>
+
       <Card style={{ background: C.maerskNavy, borderColor: C.maerskNavy }}>
-        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>Phase 1 requires a sample dataset, 3 weeks, and a decision. The gate criteria are explicit: {"\u2265"}85% classification accuracy on the sample. If it doesn't meet the bar, we stop, with full transparency on what was learned and what it would take to get there.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.8)", margin: 0 }}>Phase 1 requires a sample dataset, 3 weeks, and a decision. The gate criteria are explicit: {"\u2265"}85% classification accuracy on the sample. If it does not meet the bar, we stop, with full transparency on what was learned and what it would take to get there.</p>
       </Card>
     </div>
   );
