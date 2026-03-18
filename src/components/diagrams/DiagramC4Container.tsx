@@ -1,10 +1,10 @@
 import { C, font } from "@/lib/constants";
 
 export default function DiagramC4Container() {
-  const W = 920, H = 460;
+  const W = 920, H = 510;
 
   // Boundary
-  const bx = 120, by = 10, bw = 680, bh = 380;
+  const bx = 120, by = 10, bw = 680, bh = 420;
 
   // Container box dimensions
   const cw = 150, ch = 50, rx = 8;
@@ -24,8 +24,12 @@ export default function DiagramC4Container() {
     { label: "Human Review Queue", sub: "Low-confidence triage", x: bx + 30 + (cw + 40) * 2 },
   ];
 
-  // Row 3: Storage & Output (3 boxes)
-  const r3y = r2y + ch + 50;
+  // Model Router: between row 2 and row 3, aligned with AI Classifier
+  const mrX = bx + 30;
+  const mrY = r2y + ch + 26;
+
+  // Row 3: Storage & Output (3 boxes) — shifted down to make room for Model Router
+  const r3y = r2y + ch + 100;
   const r3boxes = [
     { label: "Taxonomy Store", sub: "PostgreSQL — unified", sub2: "category hierarchy", x: bx + 30 },
     { label: "Vector DB", sub: "Embeddings for", sub2: "similarity matching", x: bx + 30 + cw + 40 },
@@ -34,7 +38,8 @@ export default function DiagramC4Container() {
 
   // External systems
   const extLeftX = 10, extRightX = W - 10 - 90;
-  const extY = r2y + 10;
+  const extSrcY = r1y + 10;
+  const extLlmY = mrY;
 
   const processingFill = "rgba(66,176,213,0.10)";
   const storageFill = "#EBF5FF";
@@ -73,6 +78,12 @@ export default function DiagramC4Container() {
         </g>
       ))}
 
+      {/* Model Router (between row 2 and row 3) */}
+      <rect x={mrX} y={mrY} width={cw} height={ch} rx={rx} fill={processingFill} stroke={C.maerskStar} strokeWidth={1.5} />
+      <text x={mrX + cw / 2} y={mrY + 20} textAnchor="middle" style={{ fontSize: 10, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Model Router</text>
+      <text x={mrX + cw / 2} y={mrY + 34} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Provider-agnostic</text>
+      <text x={mrX + cw / 2} y={mrY + 45} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>inference routing</text>
+
       {/* Row 3: Storage & Output */}
       {r3boxes.map(b => (
         <g key={b.label}>
@@ -92,43 +103,58 @@ export default function DiagramC4Container() {
       {/* AI Classifier → Confidence Scoring */}
       <line x1={r2boxes[0].x + cw + 2} y1={r2y + ch / 2} x2={r2boxes[1].x - 2} y2={r2y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
+      {/* AI Classifier → Model Router */}
+      <line x1={mrX + cw / 2} y1={r2y + ch + 2} x2={mrX + cw / 2} y2={mrY - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <text x={mrX + cw / 2 + 10} y={r2y + ch + 14} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Classification request</text>
+
+      {/* Model Router → LLM Provider (external) */}
+      <line x1={mrX - 2} y1={mrY + ch / 2} x2={bx - 2} y2={mrY + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      <line x1={bx - 2} y1={mrY + ch / 2} x2={extLeftX + 90 + 2} y2={extLlmY + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      <text x={(mrX + bx) / 2} y={mrY + ch / 2 - 8} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Inference</text>
+
       {/* Confidence Scoring → Human Review Queue (low conf) */}
       <line x1={r2boxes[1].x + cw + 2} y1={r2y + ch / 2} x2={r2boxes[2].x - 2} y2={r2y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
       <text x={r2boxes[1].x + cw + (r2boxes[2].x - r2boxes[1].x - cw) / 2} y={r2y + ch / 2 - 8} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Low confidence</text>
 
       {/* Confidence Scoring → Taxonomy Store (high conf) */}
-      <line x1={r2boxes[1].x + cw / 2} y1={r2y + ch + 2} x2={r3boxes[0].x + cw / 2} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <text x={(r2boxes[1].x + cw / 2 + r3boxes[0].x + cw / 2) / 2 + 30} y={(r2y + ch + r3y) / 2 + 4} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
+      <line x1={r2boxes[1].x + cw / 2} y1={r2y + ch + 2} x2={r3boxes[0].x + cw / 2 + 40} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <text x={(r2boxes[1].x + cw / 2 + r3boxes[0].x + cw / 2 + 40) / 2 + 20} y={(r2y + ch + r3y) / 2 + 4} textAnchor="start" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>High confidence</text>
 
       {/* AI Classifier ↔ Vector DB */}
-      <line x1={r2boxes[0].x + cw / 2 + 20} y1={r2y + ch + 2} x2={r3boxes[1].x + cw / 2} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
-      <line x1={r3boxes[1].x + cw / 2 - 10} y1={r3y - 2} x2={r2boxes[0].x + cw / 2 + 10} y2={r2y + ch + 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <line x1={r2boxes[0].x + cw / 2 + 40} y1={r2y + ch + 2} x2={r3boxes[1].x + cw / 2} y2={r3y - 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
+      <line x1={r3boxes[1].x + cw / 2 - 10} y1={r3y - 2} x2={r2boxes[0].x + cw / 2 + 30} y2={r2y + ch + 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
       {/* Taxonomy Store → Reconciliation Engine */}
       <line x1={r3boxes[0].x + cw + 2} y1={r3y + ch / 2} x2={r3boxes[2].x - 2} y2={r3y + ch / 2} stroke={C.maerskStar} strokeWidth={1.5} markerEnd="url(#arrowCC)" />
 
-      {/* External: SAP / Oracle / Entity DBs (left) */}
-      <rect x={extLeftX} y={extY} width={90} height={48} rx={8} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1.5} />
-      <text x={extLeftX + 45} y={extY + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>SAP / Oracle /</text>
-      <text x={extLeftX + 45} y={extY + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Entity DBs</text>
-      <text x={extLeftX + 45} y={extY + 42} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Source systems</text>
-      <line x1={extLeftX + 90 + 2} y1={extY + 24} x2={bx - 2} y2={r1y + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      {/* External: SAP / Oracle / Entity DBs (left, top) */}
+      <rect x={extLeftX} y={extSrcY} width={90} height={48} rx={8} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1.5} />
+      <text x={extLeftX + 45} y={extSrcY + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>SAP / Oracle /</text>
+      <text x={extLeftX + 45} y={extSrcY + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>Entity DBs</text>
+      <text x={extLeftX + 45} y={extSrcY + 42} textAnchor="middle" style={{ fontSize: 8, fill: C.valtechGray, fontFamily: font.sans }}>Source systems</text>
+      <line x1={extLeftX + 90 + 2} y1={extSrcY + 24} x2={bx - 2} y2={r1y + ch / 2} stroke={C.valtechBorder} strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+
+      {/* External: LLM Provider (left, lower) */}
+      <rect x={extLeftX} y={extLlmY} width={90} height={48} rx={8} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1.5} />
+      <text x={extLeftX + 45} y={extLlmY + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: C.maerskNavy, fontFamily: font.sans }}>LLM Provider</text>
+      <text x={extLeftX + 45} y={extLlmY + 30} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>OpenAI / Azure /</text>
+      <text x={extLeftX + 45} y={extLlmY + 42} textAnchor="middle" style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Open-source</text>
 
       {/* External: Power BI / Category Tools (right) */}
-      <rect x={extRightX} y={extY} width={90} height={48} rx={8} fill="#dcfce7" stroke="#bbf7d0" strokeWidth={1.5} />
-      <text x={extRightX + 45} y={extY + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Power BI /</text>
-      <text x={extRightX + 45} y={extY + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Category Tools</text>
-      <text x={extRightX + 45} y={extY + 42} textAnchor="middle" style={{ fontSize: 8, fill: "#15803d", fontFamily: font.sans }}>Consumers</text>
-      <line x1={bx + bw + 2} y1={r3y + ch / 2} x2={extRightX - 2} y2={extY + 24} stroke="#bbf7d0" strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
+      <rect x={extRightX} y={extSrcY + 50} width={90} height={48} rx={8} fill="#dcfce7" stroke="#bbf7d0" strokeWidth={1.5} />
+      <text x={extRightX + 45} y={extSrcY + 50 + 18} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Power BI /</text>
+      <text x={extRightX + 45} y={extSrcY + 50 + 30} textAnchor="middle" style={{ fontSize: 9, fontWeight: 700, fill: "#166534", fontFamily: font.sans }}>Category Tools</text>
+      <text x={extRightX + 45} y={extSrcY + 50 + 42} textAnchor="middle" style={{ fontSize: 8, fill: "#15803d", fontFamily: font.sans }}>Consumers</text>
+      <line x1={bx + bw + 2} y1={r3y + ch / 2} x2={extRightX - 2} y2={extSrcY + 50 + 24} stroke="#bbf7d0" strokeWidth={1.5} strokeDasharray="4 3" markerEnd="url(#arrowCCgray)" />
 
       {/* Legend */}
       <g>
-        <rect x={bx} y={H - 40} width={12} height={12} rx={3} fill={processingFill} stroke={C.maerskStar} strokeWidth={1} />
-        <text x={bx + 18} y={H - 31} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Processing</text>
-        <rect x={bx + 100} y={H - 40} width={12} height={12} rx={3} fill={storageFill} stroke="#b3dce8" strokeWidth={1} />
-        <text x={bx + 118} y={H - 31} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Storage</text>
-        <rect x={bx + 200} y={H - 40} width={12} height={12} rx={3} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1} />
-        <text x={bx + 218} y={H - 31} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>External</text>
+        <rect x={bx} y={H - 50} width={12} height={12} rx={3} fill={processingFill} stroke={C.maerskStar} strokeWidth={1} />
+        <text x={bx + 18} y={H - 41} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Processing</text>
+        <rect x={bx + 100} y={H - 50} width={12} height={12} rx={3} fill={storageFill} stroke="#b3dce8" strokeWidth={1} />
+        <text x={bx + 118} y={H - 41} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>Storage</text>
+        <rect x={bx + 200} y={H - 50} width={12} height={12} rx={3} fill={C.valtechLight} stroke={C.valtechBorder} strokeWidth={1} />
+        <text x={bx + 218} y={H - 41} style={{ fontSize: 9, fill: C.valtechGray, fontFamily: font.sans }}>External</text>
       </g>
     </svg>
   );

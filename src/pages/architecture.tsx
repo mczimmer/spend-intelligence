@@ -57,7 +57,8 @@ export default function Architecture() {
         <Card style={{ marginBottom: 12 }}>
           <DiagramC4Container />
         </Card>
-        <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>All containers run as cloud-native services. No on-premise infrastructure required for Phase 1. The API Gateway provides the integration surface for SAP and other source systems.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: "0 0 8px" }}>All containers run as cloud-native services. No on-premise infrastructure required for Phase 1. The API Gateway provides the integration surface for SAP and other source systems.</p>
+        <p style={{ fontFamily: font.sans, fontSize: 13, lineHeight: 1.7, color: C.valtechGray, margin: 0 }}>The Model Router abstracts the inference layer from the classification logic. Today it routes to cloud LLM APIs. As open-source models mature or Maersk's infrastructure preferences evolve, the model layer can be swapped without re-engineering the pipeline.</p>
       </div>
 
       {/* Section 4: AI Classification Pipeline */}
