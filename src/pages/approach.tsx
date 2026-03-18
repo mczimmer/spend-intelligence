@@ -2,6 +2,7 @@ import { C, font } from "@/lib/constants";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
 import PageHeader from "@/components/PageHeader";
+import DiagramTimeline from "@/components/diagrams/DiagramTimeline";
 
 const phases = [
   { phase: "Phase 1: Validate", weeks: "Weeks 1-3", desc: "Ingest a sample of real Maersk spend data. Build and benchmark the AI classification engine against a manually-verified baseline. Deliver an accuracy report and refined taxonomy mapping.", deliverable: "Accuracy benchmark + taxonomy", gate: ">=85% accuracy on sample" },
@@ -18,6 +19,14 @@ export default function Approach() {
         title="How We Get There"
         subtitle="A phased approach designed to demonstrate value early and scale with confidence. Each phase has a clear deliverable and go/no-go gate."
       />
+
+      <Card style={{ marginBottom: 32 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <h3 style={{ fontFamily: font.sans, fontSize: 18, fontWeight: 700, color: C.maerskNavy, margin: 0 }}>Delivery Timeline</h3>
+          <Badge color="blue">Roadmap</Badge>
+        </div>
+        <DiagramTimeline />
+      </Card>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 32 }}>
         {phases.map(p => (
